@@ -1,0 +1,96 @@
+{
+ "autoname": "naming_series:CR-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "waste_record",
+  "compliance_date",
+  "regulation_type",
+  "authority_name",
+  "certificate_number",
+  "valid_until",
+  "status",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CR-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_record",
+   "fieldtype": "Link",
+   "label": "Waste Record",
+   "options": "Waste Record"
+  },
+  {
+   "fieldname": "compliance_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Compliance Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "regulation_type",
+   "fieldtype": "Select",
+   "label": "Regulation Type",
+   "options": "Environmental\nSafety\nTransport\nDisposal\nRecycling"
+  },
+  {
+   "fieldname": "authority_name",
+   "fieldtype": "Data",
+   "label": "Authority Name"
+  },
+  {
+   "fieldname": "certificate_number",
+   "fieldtype": "Data",
+   "label": "Certificate Reference"
+  },
+  {
+   "fieldname": "valid_until",
+   "fieldtype": "Date",
+   "label": "Valid Until"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Compliant\nNon-Compliant\nPending\nExpired",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Compliance Record",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

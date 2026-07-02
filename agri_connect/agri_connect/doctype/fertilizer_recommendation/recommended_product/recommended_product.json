@@ -1,0 +1,60 @@
+{
+ "autoname": "format:RP-{fertilizer_recommendation}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "product",
+  "nutrient",
+  "gap_to_fill",
+  "product_quantity_kg",
+  "estimated_cost"
+ ],
+ "fields": [
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fertilizer Product",
+   "options": "Fertilizer Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nutrient",
+   "fieldtype": "Select",
+   "label": "Target Nutrient",
+   "options": "Nitrogen (N)\nPhosphorus (P)\nPotassium (K)\nMixed"
+  },
+  {
+   "fieldname": "gap_to_fill",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gap to Fill (kg)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "product_quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Product Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Recommended Product",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

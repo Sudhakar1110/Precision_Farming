@@ -1,0 +1,78 @@
+{
+ "autoname": "format:NG-{nutrient_analysis}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "nutrient",
+  "crop_requirement",
+  "soil_available",
+  "compost_contribution",
+  "gap",
+  "recommended_product",
+  "product_quantity_kg"
+ ],
+ "fields": [
+  {
+   "fieldname": "nutrient",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Nutrient",
+   "options": "Nitrogen (N)\nPhosphorus (P)\nPotassium (K)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crop_requirement",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Crop Requirement (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "soil_available",
+   "fieldtype": "Float",
+   "label": "Soil Available (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "compost_contribution",
+   "fieldtype": "Float",
+   "label": "From Compost (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "gap",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Gap to Fill (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "recommended_product",
+   "fieldtype": "Link",
+   "label": "Recommended Product",
+   "options": "Fertilizer Product"
+  },
+  {
+   "fieldname": "product_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Product Quantity (kg)",
+   "precision": "2"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Nutrient Gap",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

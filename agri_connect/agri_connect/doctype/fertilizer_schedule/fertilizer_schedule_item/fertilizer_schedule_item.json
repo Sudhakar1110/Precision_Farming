@@ -1,0 +1,67 @@
+{
+ "autoname": "format:SI-{fertilizer_schedule}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "planned_date",
+  "product",
+  "quantity_kg",
+  "application_method",
+  "status",
+  "actual_application"
+ ],
+ "fields": [
+  {
+   "fieldname": "planned_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Planned Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Product",
+   "options": "Fertilizer Product"
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "application_method",
+   "fieldtype": "Link",
+   "label": "Application Method",
+   "options": "Application Method"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nCompleted\nSkipped"
+  },
+  {
+   "fieldname": "actual_application",
+   "fieldtype": "Link",
+   "label": "Actual Application",
+   "options": "Fertilizer Application"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Fertilizer Schedule Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

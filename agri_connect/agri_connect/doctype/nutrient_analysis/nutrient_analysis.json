@@ -1,0 +1,245 @@
+{
+ "autoname": "naming_series:NA-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "land_unit",
+  "crop",
+  "growth_stage",
+  "area_hectare",
+  "soil_analysis",
+  "section_break_requirement",
+  "crop_nutrient_standard",
+  "total_n_required",
+  "total_p_required",
+  "total_k_required",
+  "section_break_soil_available",
+  "soil_n_available",
+  "soil_p_available",
+  "soil_k_available",
+  "section_break_compost",
+  "compost_n_contribution",
+  "compost_p_contribution",
+  "compost_k_contribution",
+  "section_break_gap",
+  "nutrient_gap",
+  "section_break_result",
+  "n_gap_kg",
+  "p_gap_kg",
+  "k_gap_kg",
+  "analysis_date",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "NA-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crop",
+   "fieldtype": "Link",
+   "label": "Crop",
+   "options": "Crop"
+  },
+  {
+   "fieldname": "growth_stage",
+   "fieldtype": "Select",
+   "label": "Growth Stage",
+   "options": "Seedling\nVegetative\nFlowering\nFruiting\nMaturity"
+  },
+  {
+   "fieldname": "area_hectare",
+   "fieldtype": "Float",
+   "label": "Area (hectare)",
+   "precision": "3",
+   "reqd": 1
+  },
+  {
+   "fieldname": "soil_analysis",
+   "fieldtype": "Link",
+   "label": "Soil Analysis Reference",
+   "options": "Soil Analysis"
+  },
+  {
+   "fieldname": "section_break_requirement",
+   "fieldtype": "Section Break",
+   "label": "Crop Nutrient Requirement"
+  },
+  {
+   "fieldname": "crop_nutrient_standard",
+   "fieldtype": "Link",
+   "label": "Crop Nutrient Standard",
+   "options": "Crop Nutrient Standard",
+   "reqd": 1
+  },
+  {
+   "fieldname": "total_n_required",
+   "fieldtype": "Float",
+   "label": "Total N Required (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_p_required",
+   "fieldtype": "Float",
+   "label": "Total P Required (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_k_required",
+   "fieldtype": "Float",
+   "label": "Total K Required (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_soil_available",
+   "fieldtype": "Section Break",
+   "label": "Soil Available Nutrients"
+  },
+  {
+   "fieldname": "soil_n_available",
+   "fieldtype": "Float",
+   "label": "Soil N Available (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "soil_p_available",
+   "fieldtype": "Float",
+   "label": "Soil P Available (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "soil_k_available",
+   "fieldtype": "Float",
+   "label": "Soil K Available (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_compost",
+   "fieldtype": "Section Break",
+   "label": "Compost Contribution"
+  },
+  {
+   "fieldname": "compost_n_contribution",
+   "fieldtype": "Float",
+   "label": "N from Compost (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "compost_p_contribution",
+   "fieldtype": "Float",
+   "label": "P from Compost (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "compost_k_contribution",
+   "fieldtype": "Float",
+   "label": "K from Compost (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_gap",
+   "fieldtype": "Section Break",
+   "label": "Nutrient Gap Analysis"
+  },
+  {
+   "fieldname": "nutrient_gap",
+   "fieldtype": "Table",
+   "label": "Nutrient Gap Details",
+   "options": "Nutrient Gap"
+  },
+  {
+   "fieldname": "section_break_result",
+   "fieldtype": "Section Break",
+   "label": "Result"
+  },
+  {
+   "fieldname": "n_gap_kg",
+   "fieldtype": "Float",
+   "label": "N Gap (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "p_gap_kg",
+   "fieldtype": "Float",
+   "label": "P Gap (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "k_gap_kg",
+   "fieldtype": "Float",
+   "label": "K Gap (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "analysis_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Analysis Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Nutrient Analysis",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

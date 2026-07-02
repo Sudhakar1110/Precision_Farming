@@ -1,0 +1,71 @@
+{
+ "autoname": "format:AI-{fertilizer_application}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "product",
+  "nutrient",
+  "quantity_kg",
+  "nitrogen_kg",
+  "phosphorus_kg",
+  "potassium_kg"
+ ],
+ "fields": [
+  {
+   "fieldname": "product",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fertilizer Product",
+   "options": "Fertilizer Product",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nutrient",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Target Nutrient",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nitrogen_kg",
+   "fieldtype": "Float",
+   "label": "N Applied (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "phosphorus_kg",
+   "fieldtype": "Float",
+   "label": "P Applied (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "potassium_kg",
+   "fieldtype": "Float",
+   "label": "K Applied (kg)",
+   "precision": "2",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Fertilizer Application Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

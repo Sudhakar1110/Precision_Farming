@@ -1,0 +1,32 @@
+[
+ {
+  "doctype": "Application Method",
+  "method_name": "Broadcasting",
+  "description": "Evenly spreading fertilizer over the entire field surface",
+  "application_efficiency": 70
+ },
+ {
+  "doctype": "Application Method",
+  "method_name": "Banding",
+  "description": "Applying fertilizer in bands near the seed or plant row",
+  "application_efficiency": 85
+ },
+ {
+  "doctype": "Application Method",
+  "method_name": "Foliar Spray",
+  "description": "Applying liquid fertilizer directly to plant leaves",
+  "application_efficiency": 90
+ },
+ {
+  "doctype": "Application Method",
+  "method_name": "Drip Irrigation",
+  "description": "Applying fertilizer through drip irrigation system (fertigation)",
+  "application_efficiency": 95
+ },
+ {
+  "doctype": "Application Method",
+  "method_name": "Side Dressing",
+  "description": "Applying fertilizer alongside growing plants",
+  "application_efficiency": 80
+ }
+]

@@ -1,0 +1,50 @@
+[
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "Urea (46% N)",
+  "fertilizer_type": "Chemical",
+  "nitrogen_n_percentage": 46.0,
+  "phosphorus_p_percentage": 0,
+  "potassium_k_percentage": 0
+ },
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "DAP (18-46-0)",
+  "fertilizer_type": "Chemical",
+  "nitrogen_n_percentage": 18.0,
+  "phosphorus_p_percentage": 46.0,
+  "potassium_k_percentage": 0
+ },
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "MOP (0-0-60)",
+  "fertilizer_type": "Chemical",
+  "nitrogen_n_percentage": 0,
+  "phosphorus_p_percentage": 0,
+  "potassium_k_percentage": 60.0
+ },
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "NPK 10-26-26",
+  "fertilizer_type": "Chemical",
+  "nitrogen_n_percentage": 10.0,
+  "phosphorus_p_percentage": 26.0,
+  "potassium_k_percentage": 26.0
+ },
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "NPK 20-20-0",
+  "fertilizer_type": "Chemical",
+  "nitrogen_n_percentage": 20.0,
+  "phosphorus_p_percentage": 20.0,
+  "potassium_k_percentage": 0
+ },
+ {
+  "doctype": "Fertilizer Product",
+  "product_name": "Compost (Farm-made)",
+  "fertilizer_type": "Organic",
+  "nitrogen_n_percentage": 1.5,
+  "phosphorus_p_percentage": 0.5,
+  "potassium_k_percentage": 1.0
+ }
+]

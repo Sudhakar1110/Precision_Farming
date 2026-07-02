@@ -1,0 +1,103 @@
+{
+ "autoname": "naming_series:DR-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "waste_record",
+  "disposal_date",
+  "disposal_method",
+  "disposal_facility",
+  "quantity_kg",
+  "hazardous",
+  "compliance_status",
+  "disposal_cost",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "DR-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_record",
+   "fieldtype": "Link",
+   "label": "Source Waste Record",
+   "options": "Waste Record"
+  },
+  {
+   "fieldname": "disposal_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Disposal Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "disposal_method",
+   "fieldtype": "Select",
+   "label": "Disposal Method",
+   "options": "Landfill\nIncineration\nTreatment\nOther"
+  },
+  {
+   "fieldname": "disposal_facility",
+   "fieldtype": "Data",
+   "label": "Disposal Facility"
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "hazardous",
+   "fieldtype": "Check",
+   "label": "Hazardous Waste"
+  },
+  {
+   "fieldname": "compliance_status",
+   "fieldtype": "Select",
+   "label": "Compliance Status",
+   "options": "Compliant\nNon-Compliant\nPending Review"
+  },
+  {
+   "fieldname": "disposal_cost",
+   "fieldtype": "Currency",
+   "label": "Disposal Cost"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Disposal Record",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

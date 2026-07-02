@@ -1,0 +1,101 @@
+[
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Crop Residue",
+  "waste_category": "Organic Waste",
+  "description": "Stalks, stems, and leaves left after harvesting",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Straw",
+  "waste_category": "Organic Waste",
+  "description": "Dry stalks of cereal plants after grain removal",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Weeds",
+  "waste_category": "Organic Waste",
+  "description": "Unwanted plants removed during weeding operations",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Dry Leaves",
+  "waste_category": "Organic Waste",
+  "description": "Dried leaves collected from the farm",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Fruit & Vegetable Waste",
+  "waste_category": "Organic Waste",
+  "description": "Discarded fruits and vegetables from processing",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Animal Manure",
+  "waste_category": "Organic Waste",
+  "description": "Livestock manure collected from farm animals",
+  "is_biodegradable": 1,
+  "recyclable": 0,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Empty Fertilizer Bags",
+  "waste_category": "Inorganic Waste",
+  "description": "Empty plastic or jute bags from fertilizer usage",
+  "is_biodegradable": 0,
+  "recyclable": 1,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Pesticide Containers",
+  "waste_category": "Inorganic Waste",
+  "description": "Empty pesticide and chemical containers",
+  "is_biodegradable": 0,
+  "recyclable": 1,
+  "hazardous": 1
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Plastic Mulch Sheets",
+  "waste_category": "Inorganic Waste",
+  "description": "Used plastic mulching sheets",
+  "is_biodegradable": 0,
+  "recyclable": 1,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Irrigation Pipes",
+  "waste_category": "Inorganic Waste",
+  "description": "Damaged or replaced irrigation pipes and drippers",
+  "is_biodegradable": 0,
+  "recyclable": 1,
+  "hazardous": 0
+ },
+ {
+  "doctype": "Waste Type",
+  "waste_type_name": "Packaging Materials",
+  "waste_category": "Inorganic Waste",
+  "description": "Cardboard, plastic wraps, and other packaging",
+  "is_biodegradable": 0,
+  "recyclable": 1,
+  "hazardous": 0
+ }
+]

@@ -1,0 +1,56 @@
+[
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Paddy (Rice)",
+  "nitrogen_n": 120,
+  "phosphorus_p": 60,
+  "potassium_k": 60,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ },
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Wheat",
+  "nitrogen_n": 140,
+  "phosphorus_p": 60,
+  "potassium_k": 50,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ },
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Cotton",
+  "nitrogen_n": 100,
+  "phosphorus_p": 50,
+  "potassium_k": 50,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ },
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Corn (Maize)",
+  "nitrogen_n": 150,
+  "phosphorus_p": 70,
+  "potassium_k": 80,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ },
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Sugarcane",
+  "nitrogen_n": 200,
+  "phosphorus_p": 100,
+  "potassium_k": 120,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ },
+ {
+  "doctype": "Crop Nutrient Standard",
+  "crop_name": "Groundnut",
+  "nitrogen_n": 30,
+  "phosphorus_p": 60,
+  "potassium_k": 50,
+  "unit": "kg/ha",
+  "growth_stage": "All Stages"
+ }
+]

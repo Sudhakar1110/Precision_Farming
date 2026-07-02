@@ -1,0 +1,71 @@
+{
+ "autoname": "format:QR-{compost_quality_check}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "parameter",
+  "measured_value",
+  "acceptable_min",
+  "acceptable_max",
+  "unit",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "parameter",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Parameter",
+   "options": "Compost Quality Parameter",
+   "reqd": 1
+  },
+  {
+   "fieldname": "measured_value",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Measured Value",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "acceptable_min",
+   "fieldtype": "Float",
+   "label": "Acceptable Min",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "acceptable_max",
+   "fieldtype": "Float",
+   "label": "Acceptable Max",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "unit",
+   "fieldtype": "Data",
+   "label": "Unit",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pass\nFail",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Quality Check Result",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

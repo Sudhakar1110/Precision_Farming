@@ -1,0 +1,170 @@
+{
+ "autoname": "naming_series:FR-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "land_unit",
+  "crop",
+  "nutrient_analysis",
+  "area_hectare",
+  "section_break_recommendation",
+  "recommended_products",
+  "section_break_summary",
+  "total_n_fertilizer",
+  "total_p_fertilizer",
+  "total_k_fertilizer",
+  "estimated_cost",
+  "recommendation_date",
+  "status",
+  "approved_by",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FR-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crop",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Crop",
+   "options": "Crop"
+  },
+  {
+   "fieldname": "nutrient_analysis",
+   "fieldtype": "Link",
+   "label": "Nutrient Analysis",
+   "options": "Nutrient Analysis",
+   "reqd": 1
+  },
+  {
+   "fieldname": "area_hectare",
+   "fieldtype": "Float",
+   "label": "Area (hectare)",
+   "precision": "3",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_recommendation",
+   "fieldtype": "Section Break",
+   "label": "Recommended Products"
+  },
+  {
+   "fieldname": "recommended_products",
+   "fieldtype": "Table",
+   "label": "Recommended Products",
+   "options": "Recommended Product"
+  },
+  {
+   "fieldname": "section_break_summary",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "total_n_fertilizer",
+   "fieldtype": "Float",
+   "label": "Total N to Apply (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_p_fertilizer",
+   "fieldtype": "Float",
+   "label": "Total P to Apply (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_k_fertilizer",
+   "fieldtype": "Float",
+   "label": "Total K to Apply (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "estimated_cost",
+   "fieldtype": "Currency",
+   "label": "Estimated Cost",
+   "read_only": 1
+  },
+  {
+   "fieldname": "recommendation_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Recommendation Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nApproved\nApplied\nCancelled",
+   "reqd": 1
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved By",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Fertilizer Recommendation",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

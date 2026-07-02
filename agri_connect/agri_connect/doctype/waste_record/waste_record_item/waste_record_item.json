@@ -1,0 +1,68 @@
+{
+ "autoname": "format:WR-{waste_record}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "waste_type",
+  "waste_category",
+  "category_type",
+  "quantity_kg",
+  "description",
+  "source"
+ ],
+ "fields": [
+  {
+   "fieldname": "waste_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Type",
+   "options": "Waste Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_category",
+   "fieldtype": "Link",
+   "label": "Waste Category",
+   "options": "Waste Category",
+   "read_only": 1
+  },
+  {
+   "fetch_from": "waste_type.waste_category.category_type",
+   "fieldname": "category_type",
+   "fieldtype": "Data",
+   "label": "Category Type",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Select",
+   "label": "Source",
+   "options": "Crop Residue\nWeeding\nPruning\nCleaning\nPackaging\nOther"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Waste Record Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

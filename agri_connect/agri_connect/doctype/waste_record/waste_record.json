@@ -1,0 +1,193 @@
+{
+ "autoname": "naming_series:WR-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "land_unit",
+  "crop_cycle",
+  "collection_date",
+  "collected_by",
+  "location",
+  "section_break_waste_items",
+  "waste_items",
+  "section_break_classification",
+  "total_organic_weight",
+  "total_inorganic_weight",
+  "total_weight",
+  "classification_status",
+  "section_break_processing",
+  "waste_category_type",
+  "composting_batch",
+  "recycling_record",
+  "disposal_record",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "WR-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crop_cycle",
+   "fieldtype": "Link",
+   "label": "Crop Cycle",
+   "options": "Crop Cycle"
+  },
+  {
+   "fieldname": "collection_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Collection Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "collected_by",
+   "fieldtype": "Link",
+   "label": "Collected By",
+   "options": "User"
+  },
+  {
+   "fieldname": "location",
+   "fieldtype": "Small Text",
+   "label": "Location"
+  },
+  {
+   "fieldname": "section_break_waste_items",
+   "fieldtype": "Section Break",
+   "label": "Waste Items"
+  },
+  {
+   "fieldname": "waste_items",
+   "fieldtype": "Table",
+   "label": "Waste Items",
+   "options": "Waste Record Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_classification",
+   "fieldtype": "Section Break",
+   "label": "Classification Summary"
+  },
+  {
+   "fieldname": "total_organic_weight",
+   "fieldtype": "Float",
+   "label": "Total Organic Weight (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_inorganic_weight",
+   "fieldtype": "Float",
+   "label": "Total Inorganic Weight (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_weight",
+   "fieldtype": "Float",
+   "label": "Total Weight (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "classification_status",
+   "fieldtype": "Select",
+   "label": "Classification Status",
+   "options": "Pending\nClassified\nProcessing\nCompleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_processing",
+   "fieldtype": "Section Break",
+   "label": "Processing Details"
+  },
+  {
+   "fieldname": "waste_category_type",
+   "fieldtype": "Select",
+   "label": "Waste Category Type",
+   "options": "Organic\nInorganic\nMixed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "composting_batch",
+   "fieldtype": "Link",
+   "label": "Composting Batch",
+   "options": "Composting Batch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "recycling_record",
+   "fieldtype": "Link",
+   "label": "Recycling Record",
+   "options": "Recycling Record",
+   "read_only": 1
+  },
+  {
+   "fieldname": "disposal_record",
+   "fieldtype": "Link",
+   "label": "Disposal Record",
+   "options": "Disposal Record",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Waste Record",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Waste Record",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

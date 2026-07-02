@@ -1,0 +1,103 @@
+{
+ "autoname": "field:product_name",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "product_name",
+  "fertilizer_type",
+  "nitrogen_n_percentage",
+  "phosphorus_p_percentage",
+  "potassium_k_percentage",
+  "item",
+  "uom",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "product_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Product Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "fertilizer_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Fertilizer Type",
+   "options": "Chemical\nOrganic\nBio-fertilizer",
+   "reqd": 1
+  },
+  {
+   "fieldname": "nitrogen_n_percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Nitrogen (N) %",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "phosphorus_p_percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Phosphorus (P) %",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "potassium_k_percentage",
+   "fieldtype": "Percent",
+   "in_list_view": 1,
+   "label": "Potassium (K) %",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "ERPNext Item",
+   "options": "Item"
+  },
+  {
+   "fieldname": "uom",
+   "fieldtype": "Link",
+   "label": "UOM",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Fertilizer Product",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Agriculture User"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

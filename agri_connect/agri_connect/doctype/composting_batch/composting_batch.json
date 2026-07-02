@@ -1,0 +1,184 @@
+{
+ "autoname": "naming_series:CB-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "waste_record",
+  "land_unit",
+  "batch_name",
+  "start_date",
+  "expected_end_date",
+  "status",
+  "method",
+  "section_break_ingredients",
+  "ingredients",
+  "section_break_turning",
+  "turning_events",
+  "section_break_quality",
+  "quality_check",
+  "section_break_output",
+  "output_quantity_kg",
+  "final_quality_rating",
+  "compost_quality_check",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CB-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "waste_record",
+   "fieldtype": "Link",
+   "label": "Source Waste Record",
+   "options": "Waste Record"
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "label": "Land Unit",
+   "options": "Land Unit"
+  },
+  {
+   "fieldname": "batch_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Batch Name"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "expected_end_date",
+   "fieldtype": "Date",
+   "label": "Expected End Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nTurning\nCuring\nReady\nApproved\nRejected",
+   "reqd": 1
+  },
+  {
+   "fieldname": "method",
+   "fieldtype": "Select",
+   "label": "Composting Method",
+   "options": "Aerobic\nAnaerobic\nVermicomposting\nWindrow"
+  },
+  {
+   "fieldname": "section_break_ingredients",
+   "fieldtype": "Section Break",
+   "label": "Ingredients"
+  },
+  {
+   "fieldname": "ingredients",
+   "fieldtype": "Table",
+   "label": "Ingredients",
+   "options": "Compost Ingredient"
+  },
+  {
+   "fieldname": "section_break_turning",
+   "fieldtype": "Section Break",
+   "label": "Turning Events"
+  },
+  {
+   "fieldname": "turning_events",
+   "fieldtype": "Table",
+   "label": "Turning Events",
+   "options": "Compost Turning Event"
+  },
+  {
+   "fieldname": "section_break_quality",
+   "fieldtype": "Section Break",
+   "label": "Quality"
+  },
+  {
+   "fieldname": "quality_check",
+   "fieldtype": "Check",
+   "label": "Quality Check Passed",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_output",
+   "fieldtype": "Section Break",
+   "label": "Output"
+  },
+  {
+   "fieldname": "output_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Output Quantity (kg)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "final_quality_rating",
+   "fieldtype": "Select",
+   "label": "Final Quality Rating",
+   "options": "Excellent\nGood\nAverage\nPoor"
+  },
+  {
+   "fieldname": "compost_quality_check",
+   "fieldtype": "Link",
+   "label": "Compost Quality Check",
+   "options": "Compost Quality Check",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Composting Batch",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Composting Batch",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

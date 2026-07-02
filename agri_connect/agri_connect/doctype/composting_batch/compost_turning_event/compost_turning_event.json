@@ -1,0 +1,55 @@
+{
+ "autoname": "format:TE-{composting_batch}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "turning_date",
+  "turned_by",
+  "temperature_celsius",
+  "moisture_percentage",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "turning_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Turning Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "turned_by",
+   "fieldtype": "Link",
+   "label": "Turned By",
+   "options": "User"
+  },
+  {
+   "fieldname": "temperature_celsius",
+   "fieldtype": "Float",
+   "label": "Temperature (\u00b0C)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "moisture_percentage",
+   "fieldtype": "Percent",
+   "label": "Moisture (%)"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Compost Turning Event",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

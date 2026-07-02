@@ -1,0 +1,163 @@
+{
+ "autoname": "naming_series:FA-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "fertilizer_recommendation",
+  "land_unit",
+  "crop",
+  "application_date",
+  "application_method",
+  "section_break_products",
+  "applied_products",
+  "section_break_totals",
+  "total_quantity_kg",
+  "section_break_daily_log",
+  "create_daily_log",
+  "daily_log",
+  "status",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "FA-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "fertilizer_recommendation",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Fertilizer Recommendation",
+   "options": "Fertilizer Recommendation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "crop",
+   "fieldtype": "Link",
+   "label": "Crop",
+   "options": "Crop"
+  },
+  {
+   "fieldname": "application_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Application Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "application_method",
+   "fieldtype": "Link",
+   "label": "Application Method",
+   "options": "Application Method"
+  },
+  {
+   "fieldname": "section_break_products",
+   "fieldtype": "Section Break",
+   "label": "Applied Products"
+  },
+  {
+   "fieldname": "applied_products",
+   "fieldtype": "Table",
+   "label": "Applied Products",
+   "options": "Fertilizer Application Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "section_break_totals",
+   "fieldtype": "Section Break",
+   "label": "Totals"
+  },
+  {
+   "fieldname": "total_quantity_kg",
+   "fieldtype": "Float",
+   "label": "Total Quantity (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_daily_log",
+   "fieldtype": "Section Break",
+   "label": "Daily Log Integration"
+  },
+  {
+   "fieldname": "create_daily_log",
+   "fieldtype": "Check",
+   "label": "Create Daily Log Entry"
+  },
+  {
+   "fieldname": "daily_log",
+   "fieldtype": "Link",
+   "label": "Daily Log",
+   "options": "Agriculture Daily Log",
+   "read_only": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Draft\nApplied\nCancelled",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Fertilizer Application",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Agri Connect",
+ "name": "Fertilizer Application",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

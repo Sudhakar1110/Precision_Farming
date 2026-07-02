@@ -1,0 +1,42 @@
+[
+ {
+  "doctype": "Soil Nutrient Threshold",
+  "nutrient_name": "Nitrogen (N)",
+  "low_threshold": 50,
+  "medium_threshold": 100,
+  "high_threshold": 200,
+  "unit": "kg/ha"
+ },
+ {
+  "doctype": "Soil Nutrient Threshold",
+  "nutrient_name": "Phosphorus (P)",
+  "low_threshold": 20,
+  "medium_threshold": 50,
+  "high_threshold": 100,
+  "unit": "kg/ha"
+ },
+ {
+  "doctype": "Soil Nutrient Threshold",
+  "nutrient_name": "Potassium (K)",
+  "low_threshold": 100,
+  "medium_threshold": 200,
+  "high_threshold": 300,
+  "unit": "kg/ha"
+ },
+ {
+  "doctype": "Soil Nutrient Threshold",
+  "nutrient_name": "pH Level",
+  "low_threshold": 5.5,
+  "medium_threshold": 6.5,
+  "high_threshold": 7.5,
+  "unit": "pH"
+ },
+ {
+  "doctype": "Soil Nutrient Threshold",
+  "nutrient_name": "Organic Matter",
+  "low_threshold": 0.5,
+  "medium_threshold": 1.5,
+  "high_threshold": 3.0,
+  "unit": "%"
+ }
+]

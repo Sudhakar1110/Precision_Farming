@@ -13,6 +13,7 @@
   "status",
   "method",
   "section_break_ingredients",
+  "total_input_kg",
   "ingredients",
   "section_break_turning",
   "turning_events",
@@ -75,6 +76,13 @@
    "fieldtype": "Select",
    "label": "Composting Method",
    "options": "Aerobic\nAnaerobic\nVermicomposting\nWindrow"
+  },
+  {
+   "fieldname": "total_input_kg",
+   "fieldtype": "Float",
+   "label": "Total Input (kg)",
+   "precision": "2",
+   "read_only": 1
   },
   {
    "fieldname": "section_break_ingredients",

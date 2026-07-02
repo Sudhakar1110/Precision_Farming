@@ -12,7 +12,7 @@ class CompostApplication(Document):
 			frappe.throw(
 				f"Composting Batch {self.composting_batch} must be approved before application."
 			)
-		if self.quantity_kg > (batch.output_quantity_kg or batch.output_quantity_kg or 0):
+		if self.quantity_kg > (batch.output_quantity_kg or 0):
 			frappe.throw(
 				f"Application quantity ({self.quantity_kg} kg) exceeds batch output ({batch.output_quantity_kg or 0} kg)."
 			)

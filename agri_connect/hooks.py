@@ -158,49 +158,10 @@ after_migrate = "agri_connect.install.after_migrate"
 # ---------------
 # Hook on document methods and events
 
-doc_events = {
-	"Waste Record": {
-		"validate": "agri_connect.agri_connect.doctype.waste_record.waste_record.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.waste_record.waste_record.on_submit",
-		"on_cancel": "agri_connect.agri_connect.doctype.waste_record.waste_record.on_cancel"
-	},
-	"Composting Batch": {
-		"validate": "agri_connect.agri_connect.doctype.composting_batch.composting_batch.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.composting_batch.composting_batch.on_submit",
-		"on_cancel": "agri_connect.agri_connect.doctype.composting_batch.composting_batch.on_cancel"
-	},
-	"Compost Quality Check": {
-		"validate": "agri_connect.agri_connect.doctype.compost_quality_check.compost_quality_check.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.compost_quality_check.compost_quality_check.on_submit"
-	},
-	"Compost Application": {
-		"validate": "agri_connect.agri_connect.doctype.compost_application.compost_application.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.compost_application.compost_application.on_submit",
-		"on_cancel": "agri_connect.agri_connect.doctype.compost_application.compost_application.on_cancel"
-	},
-	"Soil Analysis": {
-		"validate": "agri_connect.agri_connect.doctype.soil_analysis.soil_analysis.validate"
-	},
-	"Nutrient Analysis": {
-		"validate": "agri_connect.agri_connect.doctype.nutrient_analysis.nutrient_analysis.validate"
-	},
-	"Fertilizer Recommendation": {
-		"validate": "agri_connect.agri_connect.doctype.fertilizer_recommendation.fertilizer_recommendation.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.fertilizer_recommendation.fertilizer_recommendation.on_submit",
-		"on_update_after_submit": "agri_connect.agri_connect.doctype.fertilizer_recommendation.fertilizer_recommendation.on_update_after_submit"
-	},
-	"Fertilizer Application": {
-		"validate": "agri_connect.agri_connect.doctype.fertilizer_application.fertilizer_application.validate",
-		"on_submit": "agri_connect.agri_connect.doctype.fertilizer_application.fertilizer_application.on_submit",
-		"on_cancel": "agri_connect.agri_connect.doctype.fertilizer_application.fertilizer_application.on_cancel"
-	},
-	"Recycling Record": {
-		"on_submit": "agri_connect.agri_connect.doctype.recycling_record.recycling_record.on_submit"
-	},
-	"Disposal Record": {
-		"on_submit": "agri_connect.agri_connect.doctype.disposal_record.disposal_record.on_submit"
-	}
-}
+# doc_events entries are NOT needed - all Document controllers use class-based
+# methods (validate, on_submit, on_cancel) which are auto-wired by Frappe.
+# Uncomment only for custom standalone functions outside the controller class.
+# doc_events = {}
 
 # Scheduled Tasks
 # ---------------

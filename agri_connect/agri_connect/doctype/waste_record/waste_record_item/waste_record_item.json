@@ -28,7 +28,6 @@
    "read_only": 1
   },
   {
-   "fetch_from": "waste_type.waste_category.category_type",
    "fieldname": "category_type",
    "fieldtype": "Data",
    "label": "Category Type",

@@ -1,6 +1,5 @@
 import frappe
 from frappe.model.document import Document
-from frappe.utils import nowdate
 
 class FertilizerApplication(Document):
 	def validate(self):
@@ -23,24 +22,10 @@ class FertilizerApplication(Document):
 
 	def on_submit(self):
 		self.status = "Applied"
-		self.create_daily_log_entry()
 		self.update_recommendation_status()
 
 	def on_cancel(self):
 		self.status = "Cancelled"
-
-	def create_daily_log_entry(self):
-		if self.create_daily_log and self.land_unit:
-			try:
-				daily_log = frappe.new_doc("Agriculture Daily Log")
-				daily_log.land_unit = self.land_unit
-				daily_log.date = self.application_date or nowdate()
-				daily_log.fertilizer_applied = 1
-				daily_log.notes = f"Fertilizer application: {self.total_quantity_kg} kg total"
-				daily_log.insert(ignore_permissions=True)
-				self.daily_log = daily_log.name
-			except Exception as e:
-				frappe.log_error(f"Failed to create daily log for Fertilizer Application {self.name}: {str(e)}")
 
 	def update_recommendation_status(self):
 		if self.fertilizer_recommendation:

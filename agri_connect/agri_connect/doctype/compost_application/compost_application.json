@@ -11,9 +11,6 @@
   "application_date",
   "quantity_kg",
   "application_method",
-  "section_break_daily_log",
-  "create_daily_log",
-  "daily_log",
   "status",
   "amended_from"
  ],
@@ -68,23 +65,6 @@
    "options": "Broadcasting\nBanding\nIncorporate\nTop Dressing"
   },
   {
-   "fieldname": "section_break_daily_log",
-   "fieldtype": "Section Break",
-   "label": "Daily Log Integration"
-  },
-  {
-   "fieldname": "create_daily_log",
-   "fieldtype": "Check",
-   "label": "Create Daily Log Entry"
-  },
-  {
-   "fieldname": "daily_log",
-   "fieldtype": "Link",
-   "label": "Daily Log",
-   "options": "Agriculture Daily Log",
-   "read_only": 1
-  },
-  {
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
@@ -106,7 +86,7 @@
  "is_submittable": 1,
  "modified": "2024-01-01 00:00:00",
  "modified_by": "Administrator",
- "module": "Agri Connect",
+ "module": "Precision Farming",
  "name": "Compost Application",
  "owner": "Administrator",
  "permissions": [

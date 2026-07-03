@@ -38,14 +38,14 @@ fixtures = [
 
 scheduler_events = {
 	"daily": [
-		"agri_connect.agri_connect.tasks.check_compliance_expiry",
-		"agri_connect.agri_connect.tasks.send_application_reminders"
+		"agri_connect.tasks.check_compliance_expiry",
+		"agri_connect.tasks.send_application_reminders"
 	],
 	"weekly": [
-		"agri_connect.agri_connect.tasks.generate_waste_summary",
-		"agri_connect.agri_connect.tasks.generate_fertilizer_report"
+		"agri_connect.tasks.generate_waste_summary",
+		"agri_connect.tasks.generate_fertilizer_report"
 	],
 	"monthly": [
-		"agri_connect.agri_connect.tasks.generate_nutrient_balance_report"
+		"agri_connect.tasks.generate_nutrient_balance_report"
 	],
 }

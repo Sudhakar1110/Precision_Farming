@@ -1,6 +1,7 @@
 [
  {
   "doctype": "Compost Quality Parameter",
+  "name": "Temperature",
   "parameter_name": "Temperature",
   "description": "Core temperature of composting pile",
   "acceptable_min": 40,
@@ -9,6 +10,7 @@
  },
  {
   "doctype": "Compost Quality Parameter",
+  "name": "Moisture Content",
   "parameter_name": "Moisture Content",
   "description": "Moisture percentage in the compost",
   "acceptable_min": 40,
@@ -17,6 +19,7 @@
  },
  {
   "doctype": "Compost Quality Parameter",
+  "name": "Carbon to Nitrogen Ratio",
   "parameter_name": "Carbon to Nitrogen Ratio",
   "description": "Ratio of carbon to nitrogen in compost",
   "acceptable_min": 20,
@@ -25,6 +28,7 @@
  },
  {
   "doctype": "Compost Quality Parameter",
+  "name": "pH Level",
   "parameter_name": "pH Level",
   "description": "Acidity or alkalinity of compost",
   "acceptable_min": 6.0,

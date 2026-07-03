@@ -1,6 +1,7 @@
 [
  {
   "doctype": "Waste Type",
+  "name": "Crop Residue",
   "waste_type_name": "Crop Residue",
   "waste_category": "Organic Waste",
   "description": "Stalks, stems, and leaves left after harvesting",
@@ -10,6 +11,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Straw",
   "waste_type_name": "Straw",
   "waste_category": "Organic Waste",
   "description": "Dry stalks of cereal plants after grain removal",
@@ -19,6 +21,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Weeds",
   "waste_type_name": "Weeds",
   "waste_category": "Organic Waste",
   "description": "Unwanted plants removed during weeding operations",
@@ -28,6 +31,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Dry Leaves",
   "waste_type_name": "Dry Leaves",
   "waste_category": "Organic Waste",
   "description": "Dried leaves collected from the farm",
@@ -37,6 +41,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Fruit & Vegetable Waste",
   "waste_type_name": "Fruit & Vegetable Waste",
   "waste_category": "Organic Waste",
   "description": "Discarded fruits and vegetables from processing",
@@ -46,6 +51,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Animal Manure",
   "waste_type_name": "Animal Manure",
   "waste_category": "Organic Waste",
   "description": "Livestock manure collected from farm animals",
@@ -55,6 +61,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Empty Fertilizer Bags",
   "waste_type_name": "Empty Fertilizer Bags",
   "waste_category": "Inorganic Waste",
   "description": "Empty plastic or jute bags from fertilizer usage",
@@ -64,6 +71,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Pesticide Containers",
   "waste_type_name": "Pesticide Containers",
   "waste_category": "Inorganic Waste",
   "description": "Empty pesticide and chemical containers",
@@ -73,6 +81,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Plastic Mulch Sheets",
   "waste_type_name": "Plastic Mulch Sheets",
   "waste_category": "Inorganic Waste",
   "description": "Used plastic mulching sheets",
@@ -82,6 +91,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Irrigation Pipes",
   "waste_type_name": "Irrigation Pipes",
   "waste_category": "Inorganic Waste",
   "description": "Damaged or replaced irrigation pipes and drippers",
@@ -91,6 +101,7 @@
  },
  {
   "doctype": "Waste Type",
+  "name": "Packaging Materials",
   "waste_type_name": "Packaging Materials",
   "waste_category": "Inorganic Waste",
   "description": "Cardboard, plastic wraps, and other packaging",

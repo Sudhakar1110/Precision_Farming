@@ -1,6 +1,7 @@
 [
  {
   "doctype": "Waste Category",
+  "name": "Organic Waste",
   "waste_category_name": "Organic Waste",
   "description": "Biodegradable waste from farming activities including crop residue, straw, dry leaves, weeds, fruit and vegetable waste, and animal manure",
   "category_type": "Organic",
@@ -8,6 +9,7 @@
  },
  {
   "doctype": "Waste Category",
+  "name": "Inorganic Waste",
   "waste_category_name": "Inorganic Waste",
   "description": "Non-biodegradable materials such as empty fertilizer bags, pesticide containers, plastic mulch sheets, irrigation pipes, and packaging materials",
   "category_type": "Inorganic",
@@ -15,6 +17,7 @@
  },
  {
   "doctype": "Waste Category",
+  "name": "Hazardous Waste",
   "waste_category_name": "Hazardous Waste",
   "description": "Hazardous materials requiring special handling and disposal",
   "category_type": "Hazardous",

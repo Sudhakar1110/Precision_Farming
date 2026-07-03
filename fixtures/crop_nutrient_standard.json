@@ -1,6 +1,7 @@
 [
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Paddy (Rice)",
   "crop_name": "Paddy (Rice)",
   "nitrogen_n": 120,
   "phosphorus_p": 60,
@@ -10,6 +11,7 @@
  },
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Wheat",
   "crop_name": "Wheat",
   "nitrogen_n": 140,
   "phosphorus_p": 60,
@@ -19,6 +21,7 @@
  },
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Cotton",
   "crop_name": "Cotton",
   "nitrogen_n": 100,
   "phosphorus_p": 50,
@@ -28,6 +31,7 @@
  },
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Corn (Maize)",
   "crop_name": "Corn (Maize)",
   "nitrogen_n": 150,
   "phosphorus_p": 70,
@@ -37,6 +41,7 @@
  },
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Sugarcane",
   "crop_name": "Sugarcane",
   "nitrogen_n": 200,
   "phosphorus_p": 100,
@@ -46,6 +51,7 @@
  },
  {
   "doctype": "Crop Nutrient Standard",
+  "name": "Groundnut",
   "crop_name": "Groundnut",
   "nitrogen_n": 30,
   "phosphorus_p": 60,

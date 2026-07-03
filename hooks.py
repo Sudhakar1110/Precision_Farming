@@ -1,4 +1,4 @@
-app_name = "agri_connect"
+app_name = "precision_farming"
 app_title = "Precision Farming"
 app_publisher = "Precision Farming Solutions"
 app_description = "Waste Management and Fertilizer Measurement for Precision Farming"
@@ -16,8 +16,8 @@ required_apps = ["frappe", "erpnext"]
 # Installation
 # ------------
 
-after_install = "agri_connect.install.after_install"
-after_migrate = "agri_connect.install.after_migrate"
+after_install = "precision_farming.install.after_install"
+after_migrate = "precision_farming.install.after_migrate"
 
 # Fixtures
 # --------
@@ -38,14 +38,14 @@ fixtures = [
 
 scheduler_events = {
 	"daily": [
-		"agri_connect.tasks.check_compliance_expiry",
-		"agri_connect.tasks.send_application_reminders"
+		"precision_farming.tasks.check_compliance_expiry",
+		"precision_farming.tasks.send_application_reminders"
 	],
 	"weekly": [
-		"agri_connect.tasks.generate_waste_summary",
-		"agri_connect.tasks.generate_fertilizer_report"
+		"precision_farming.tasks.generate_waste_summary",
+		"precision_farming.tasks.generate_fertilizer_report"
 	],
 	"monthly": [
-		"agri_connect.tasks.generate_nutrient_balance_report"
+		"precision_farming.tasks.generate_nutrient_balance_report"
 	],
 }

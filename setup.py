@@ -4,7 +4,7 @@ with open("requirements.txt") as f:
     install_requires = f.read().strip().splitlines()
 
 setup(
-    name="agri_connect",
+    name="Precision_Farming",
     version="0.0.1",
     description="Waste Management and Fertilizer Measurement for Precision Farming",
     author="Precision Farming Solutions",

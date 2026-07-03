@@ -1,1 +1,0 @@
-# Frappe/ERPNext dependencies are managed via hooks.py required_apps

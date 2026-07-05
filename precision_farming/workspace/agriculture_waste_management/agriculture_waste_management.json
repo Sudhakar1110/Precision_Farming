@@ -1,0 +1,145 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Organic Waste\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Composting Batch\",\"label\":\"Composting\",\"icon\":\"branch\",\"status_type\":\"Active\"},{\"doctype\":\"Compost Application\",\"label\":\"Field Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]},{\"label\":\"Inorganic Waste\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Recycling Record\",\"label\":\"Recycling\",\"icon\":\"cycle\",\"status_type\":\"Active\"},{\"doctype\":\"Disposal Record\",\"label\":\"Disposal\",\"icon\":\"delete\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Waste Record\",\"col\":3}},{\"id\":\"sc2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Composting Batch\",\"col\":3}},{\"id\":\"sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Compost Application\",\"col\":3}},{\"id\":\"sc4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Compost Quality Check\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Waste Collection</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Waste Collection\",\"col\":3}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Composting\",\"col\":3}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Disposal & Recycling\",\"col\":3}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Compliance & Records\",\"col\":3}}]",
+ "creation": "2026-07-02 00:00:00.000000",
+ "custom_blocks": [],
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "list",
+ "is_hidden": 0,
+ "label": "Agriculture Waste Management",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Waste Collection",
+   "link_type": "DocType",
+   "link_count": 3
+  },
+  {
+   "type": "Link",
+   "label": "Waste Record",
+   "link_to": "Waste Record",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Waste Category",
+   "link_to": "Waste Category",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Waste Type",
+   "link_to": "Waste Type",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Composting",
+   "link_type": "DocType",
+   "link_count": 4
+  },
+  {
+   "type": "Link",
+   "label": "Composting Batch",
+   "link_to": "Composting Batch",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Compost Application",
+   "link_to": "Compost Application",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Compost Quality Check",
+   "link_to": "Compost Quality Check",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Compost Quality Parameter",
+   "link_to": "Compost Quality Parameter",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Disposal & Recycling",
+   "link_type": "DocType",
+   "link_count": 3
+  },
+  {
+   "type": "Link",
+   "label": "Collection Schedule",
+   "link_to": "Collection Schedule",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Recycling Record",
+   "link_to": "Recycling Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Disposal Record",
+   "link_to": "Disposal Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Compliance & Records",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Compliance Record",
+   "link_to": "Compliance Record",
+   "link_type": "DocType"
+  }
+ ],
+ "module": "Agriculture Waste Management",
+ "modified": "2026-07-02 00:00:00",
+ "modified_by": "Administrator",
+ "name": "Agriculture Waste Management",
+ "owner": "Administrator",
+ "shortcuts": [
+  {
+   "label": "New Waste Record",
+   "type": "DocType",
+   "link_to": "Waste Record",
+   "doc_view": "New",
+   "icon": "list",
+   "color": "#29CD42"
+  },
+  {
+   "label": "New Composting Batch",
+   "type": "DocType",
+   "link_to": "Composting Batch",
+   "doc_view": "New",
+   "icon": "branch",
+   "color": "#2490EF"
+  },
+  {
+   "label": "New Compost Application",
+   "type": "DocType",
+   "link_to": "Compost Application",
+   "doc_view": "New",
+   "icon": "leaf",
+   "color": "#2E7D32"
+  },
+  {
+   "label": "New Compost Quality Check",
+   "type": "DocType",
+   "link_to": "Compost Quality Check",
+   "doc_view": "New",
+   "icon": "quality",
+   "color": "#8B4513"
+  }
+ ]
+}

@@ -3,9 +3,9 @@
 
 **App Name:** Precision Farming  
 **Version:** 0.0.1  
-**Module:** Precision Farming  
+**Modules:** Agriculture Waste Management, Fertilizer Measurement & Management  
 **Domain:** Agriculture  
-**Last Updated:** July 3, 2026
+**Last Updated:** July 5, 2026
 
 ---
 
@@ -30,10 +30,10 @@
 Precision Farming is a Frappe/ERPNext application designed for managing agricultural waste and fertilizer measurement. It provides a complete digital workflow for:
 
 - **Agriculture Waste Management** — tracking waste collection, composting, recycling, and disposal
-- **Fertilizer Measurement** — soil analysis, nutrient gap calculation, fertilizer recommendation, and application tracking
+- **Fertilizer Measurement & Management** — soil analysis, nutrient gap calculation, fertilizer recommendation, and application tracking
 
 ### 1.2 Key Features
-- 21 DocTypes for complete waste and fertilizer lifecycle management
+- 30 DocTypes across 2 dedicated modules for complete waste and fertilizer lifecycle management
 - Automated compliance expiry checks
 - Weekly waste summary and fertilizer reports
 - Monthly nutrient balance reports
@@ -54,35 +54,45 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 
 | # | DocType Name | Type | Belongs To |
 |---|-------------|------|------------|
+### 2.2.1 Module: Agriculture Waste Management
+
+| # | DocType Name | Type | Belongs To |
+|---|-------------|------|------------|
 | 1 | Waste Record | Document | Waste Collection |
 | 2 | Waste Category | Setup Master | Waste Collection |
 | 3 | Waste Type | Setup Master | Waste Collection |
-| 4 | Composting Batch | Document | Composting |
-| 5 | Compost Ingredient | Child Table | Composting Batch |
-| 6 | Compost Turning Event | Child Table | Composting Batch |
-| 7 | Compost Application | Document | Composting |
-| 8 | Compost Quality Check | Document | Composting |
-| 9 | Quality Check Result | Child Table | Compost Quality Check |
-| 10 | Compost Quality Parameter | Setup Master | Composting |
-| 11 | Collection Schedule | Document | Disposal & Recycling |
-| 12 | Recycling Record | Document | Disposal & Recycling |
-| 13 | Disposal Record | Document | Disposal & Recycling |
-| 14 | Compliance Record | Document | Compliance |
-| 15 | Soil Analysis | Document | Soil & Nutrient Analysis |
-| 16 | Soil Analysis Result | Child Table | Soil Analysis |
-| 17 | Nutrient Analysis | Document | Soil & Nutrient Analysis |
-| 18 | Nutrient Gap | Child Table | Nutrient Analysis |
-| 19 | Crop Nutrient Standard | Setup Master | Soil & Nutrient Analysis |
-| 20 | Fertilizer Recommendation | Document | Fertilizer Planning |
-| 21 | Recommended Product | Child Table | Fertilizer Recommendation |
-| 22 | Fertilizer Application | Document | Fertilizer Planning |
-| 23 | Fertilizer Application Item | Child Table | Fertilizer Application |
-| 24 | Fertilizer Schedule | Document | Fertilizer Planning |
-| 25 | Fertilizer Schedule Item | Child Table | Fertilizer Schedule |
-| 26 | Fertilizer Product | Setup Master | Fertilizer Planning |
-| 27 | Application Method | Setup Master | Setup |
-| 28 | Soil Nutrient Threshold | Setup Master | Setup |
-| 29 | Measurement Verification | Document | Measurement & Verification |
+| 4 | Waste Record Item | Child Table | Waste Record |
+| 5 | Composting Batch | Document | Composting |
+| 6 | Compost Ingredient | Child Table | Composting Batch |
+| 7 | Compost Turning Event | Child Table | Composting Batch |
+| 8 | Compost Application | Document | Composting |
+| 9 | Compost Quality Check | Document | Composting |
+| 10 | Quality Check Result | Child Table | Compost Quality Check |
+| 11 | Compost Quality Parameter | Setup Master | Composting |
+| 12 | Collection Schedule | Document | Disposal & Recycling |
+| 13 | Recycling Record | Document | Disposal & Recycling |
+| 14 | Disposal Record | Document | Disposal & Recycling |
+| 15 | Compliance Record | Document | Compliance |
+
+### 2.2.2 Module: Fertilizer Measurement & Management
+
+| # | DocType Name | Type | Belongs To |
+|---|-------------|------|------------|
+| 1 | Soil Analysis | Document | Soil & Nutrient Analysis |
+| 2 | Soil Analysis Result | Child Table | Soil Analysis |
+| 3 | Nutrient Analysis | Document | Soil & Nutrient Analysis |
+| 4 | Nutrient Gap | Child Table | Nutrient Analysis |
+| 5 | Crop Nutrient Standard | Setup Master | Soil & Nutrient Analysis |
+| 6 | Fertilizer Recommendation | Document | Fertilizer Planning |
+| 7 | Recommended Product | Child Table | Fertilizer Recommendation |
+| 8 | Fertilizer Application | Document | Fertilizer Planning |
+| 9 | Fertilizer Application Item | Child Table | Fertilizer Application |
+| 10 | Fertilizer Schedule | Document | Fertilizer Planning |
+| 11 | Fertilizer Schedule Item | Child Table | Fertilizer Schedule |
+| 12 | Fertilizer Product | Setup Master | Fertilizer Planning |
+| 13 | Application Method | Setup Master | Setup |
+| 14 | Soil Nutrient Threshold | Setup Master | Setup |
+| 15 | Measurement Verification | Document | Measurement & Verification |
 
 ---
 
@@ -167,7 +177,7 @@ For waste that cannot be composted:
 
 ---
 
-## 5. FEATURE 2: FERTILIZER MEASUREMENT
+## 5. FEATURE 2: FERTILIZER MEASUREMENT & MANAGEMENT
 
 ### 5.1 Workflow Overview
 ```
@@ -177,7 +187,7 @@ Soil Testing → Nutrient Analysis → Fertilizer Recommendation → Fertilizer 
 ### 5.2 Step-by-Step Process
 
 #### Step 1: Soil Analysis
-1. Navigate to **Fertilizer Measurement > Soil & Nutrient Analysis**
+1. Navigate to **Fertilizer Measurement & Management > Soil & Nutrient Analysis**
 2. Click **+ New Soil Analysis**
 3. Enter land unit / field details
 4. Add soil test results (N, P, K, pH, organic matter, etc.)
@@ -247,21 +257,55 @@ Soil Testing → Nutrient Analysis → Fertilizer Recommendation → Fertilizer 
 
 ## 7. WORKSPACE NAVIGATION
 
-### 7.1 Home Workspace Layout
-The Precision Farming workspace is organized into two main sections:
+The application provides **two separate workspaces**, accessible from the Frappe module list.
 
+---
+
+### 7.1 Agriculture Waste Management Workspace
+
+#### Layout
 ```
 ┌─────────────────────────────────────────────────────┐
 │                QUICK ACTIONS                        │
-│  [+Waste]  [+Compost]  [+Soil]  [+Fert] [+Apply]  │
+│  [+Waste Rec]  [+Compost Batch]  [+Compost App]    │
+│  [+Quality Check]                                   │
 ├─────────────────────────────────────────────────────┤
-│           AGRICULTURE WASTE MANAGEMENT              │
+│              WASTE COLLECTION                       │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────┐│
 │  │  Waste   │  │Composting│  │Disposal  │  │Comply││
 │  │Collection│  │          │  │& Recycling│  │Record││
 │  └──────────┘  └──────────┘  └──────────┘  └──────┘│
+└─────────────────────────────────────────────────────┘
+```
+
+#### Shortcuts
+| Shortcut | Action | Icon | Color |
+|----------|--------|------|-------|
+| New Waste Record | Opens Waste Record form | list | Green |
+| New Composting Batch | Opens Composting Batch form | branch | Blue |
+| New Compost Application | Opens Compost Application form | leaf | Dark Green |
+| New Compost Quality Check | Opens Compost Quality Check form | quality | Brown |
+
+#### Card Sections
+| Card | Accessible DocTypes |
+|------|-------------------|
+| Waste Collection | Waste Record, Waste Category, Waste Type |
+| Composting | Composting Batch, Compost Application, Compost Quality Check, Compost Quality Parameter |
+| Disposal & Recycling | Collection Schedule, Recycling Record, Disposal Record |
+| Compliance & Records | Compliance Record |
+
+---
+
+### 7.2 Fertilizer Measurement & Management Workspace
+
+#### Layout
+```
+┌─────────────────────────────────────────────────────┐
+│                QUICK ACTIONS                        │
+│  [+Soil Analysis]  [+Nutrient Analysis]            │
+│  [+Fert Rec]  [+Fert Application]                  │
 ├─────────────────────────────────────────────────────┤
-│              FERTILIZER MEASUREMENT                  │
+│            FERTILIZER MEASUREMENT                   │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────┐│
 │  │Soil &    │  │Fertilizer│  │  Setup   │  │ Meas ││
 │  │Nutrient  │  │Planning  │  │          │  │ Verify││
@@ -269,28 +313,21 @@ The Precision Farming workspace is organized into two main sections:
 └─────────────────────────────────────────────────────┘
 ```
 
-### 7.2 Quick Action Shortcuts
+#### Shortcuts
 | Shortcut | Action | Icon | Color |
 |----------|--------|------|-------|
-| New Waste Record | Opens Waste Record form | list | Green |
-| New Composting Batch | Opens Composting Batch form | branch | Blue |
 | New Soil Analysis | Opens Soil Analysis form | healthcare | Orange |
-| New Fertilizer Recommendation | Opens Fertilizer Recommendation form | clipboard | Purple |
+| New Nutrient Analysis | Opens Nutrient Analysis form | dashboard | Purple |
+| New Fertilizer Recommendation | Opens Fertilizer Recommendation form | clipboard | Blue |
 | New Fertilizer Application | Opens Fertilizer Application form | agriculture | Teal |
-| New Compost Application | Opens Compost Application form | leaf | Dark Green |
 
-### 7.3 Card Sections & Links
-
-| Section | Card | Accessible DocTypes |
-|---------|------|-------------------|
-| Agriculture Waste Management | Waste Collection | Waste Record, Waste Category, Waste Type |
-| Agriculture Waste Management | Composting | Composting Batch, Compost Application, Compost Quality Check, Compost Quality Parameter |
-| Agriculture Waste Management | Disposal & Recycling | Collection Schedule, Recycling Record, Disposal Record |
-| Agriculture Waste Management | Compliance & Records | Compliance Record |
-| Fertilizer Measurement | Soil & Nutrient Analysis | Soil Analysis, Nutrient Analysis, Crop Nutrient Standard |
-| Fertilizer Measurement | Fertilizer Planning | Fertilizer Recommendation, Fertilizer Application, Fertilizer Schedule, Fertilizer Product |
-| Fertilizer Measurement | Setup | Application Method, Soil Nutrient Threshold |
-| Fertilizer Measurement | Measurement & Verification | Measurement Verification |
+#### Card Sections
+| Card | Accessible DocTypes |
+|------|-------------------|
+| Soil & Nutrient Analysis | Soil Analysis, Nutrient Analysis, Crop Nutrient Standard |
+| Fertilizer Planning | Fertilizer Recommendation, Fertilizer Application, Fertilizer Schedule, Fertilizer Product |
+| Setup | Application Method, Soil Nutrient Threshold |
+| Measurement & Verification | Measurement Verification |
 
 ---
 
@@ -361,7 +398,8 @@ The following are loaded automatically as fixtures:
 - Crop Nutrient Standard
 - Fertilizer Product
 - Soil Nutrient Threshold
-- Precision Farming Workspace
+- Agriculture Waste Management Workspace
+- Fertilizer Measurement & Management Workspace
 
 ---
 
@@ -372,10 +410,10 @@ The following are loaded automatically as fixtures:
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | App not found during install | App not in apps.txt | `echo "precision_farming" >> sites/apps.txt` |
-| Module not found error | Module name mismatch | Ensure modules.txt = "Precision Farming" |
+| Module not found error | Module name mismatch | Ensure modules.txt lists both "Agriculture Waste Management" and "Fertilizer Measurement & Management" |
 | Workspace not showing changes | Fixtures not synced | Run `bench --site site migrate` |
 | Scheduled tasks not running | Scheduler disabled | Enable with `bench --site site scheduler enable` |
-| Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc('Precision Farming', 'install').after_install()` |
+| Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |
 
 ### 10.2 Force Sync Workspace
 ```python

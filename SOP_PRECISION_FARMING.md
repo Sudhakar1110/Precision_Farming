@@ -411,6 +411,7 @@ The following are loaded automatically as fixtures:
 |-------|-------|----------|
 | App not found during install | App not in apps.txt | `echo "precision_farming" >> sites/apps.txt` |
 | Module not found error | Module name mismatch | Ensure modules.txt lists both "Agriculture Waste Management" and "Fertilizer Measurement & Management" |
+| Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON file, then run `bench --site site migrate` |
 | Workspace not showing changes | Fixtures not synced | Run `bench --site site migrate` |
 | Scheduled tasks not running | Scheduler disabled | Enable with `bench --site site scheduler enable` |
 | Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |

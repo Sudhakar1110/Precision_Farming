@@ -30,8 +30,7 @@ fixtures = [
 	"Crop Nutrient Standard",
 	"Fertilizer Product",
 	"Soil Nutrient Threshold",
-	{"dt": "Workspace", "filters": [["name", "=", "Agriculture Waste Management"]]},
-	{"dt": "Workspace", "filters": [["name", "=", "Fertilizer Measurement & Management"]]},
+	{"dt": "Workspace", "filters": [["name", "=", "Precision Farming"]]},
 ]
 
 # Scheduled Tasks

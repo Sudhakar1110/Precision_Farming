@@ -3,7 +3,7 @@
 
 **App Name:** Precision Farming  
 **Version:** 0.0.1  
-**Modules:** Agriculture Waste Management, Fertilizer Measurement & Management  
+**Module:** Precision Farming  
 **Domain:** Agriculture  
 **Last Updated:** July 5, 2026
 
@@ -54,7 +54,7 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 
 | # | DocType Name | Type | Belongs To |
 |---|-------------|------|------------|
-### 2.2.1 Module: Agriculture Waste Management
+### 2.2 DocType Structure
 
 | # | DocType Name | Type | Belongs To |
 |---|-------------|------|------------|
@@ -73,26 +73,21 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 | 13 | Recycling Record | Document | Disposal & Recycling |
 | 14 | Disposal Record | Document | Disposal & Recycling |
 | 15 | Compliance Record | Document | Compliance |
-
-### 2.2.2 Module: Fertilizer Measurement & Management
-
-| # | DocType Name | Type | Belongs To |
-|---|-------------|------|------------|
-| 1 | Soil Analysis | Document | Soil & Nutrient Analysis |
-| 2 | Soil Analysis Result | Child Table | Soil Analysis |
-| 3 | Nutrient Analysis | Document | Soil & Nutrient Analysis |
-| 4 | Nutrient Gap | Child Table | Nutrient Analysis |
-| 5 | Crop Nutrient Standard | Setup Master | Soil & Nutrient Analysis |
-| 6 | Fertilizer Recommendation | Document | Fertilizer Planning |
-| 7 | Recommended Product | Child Table | Fertilizer Recommendation |
-| 8 | Fertilizer Application | Document | Fertilizer Planning |
-| 9 | Fertilizer Application Item | Child Table | Fertilizer Application |
-| 10 | Fertilizer Schedule | Document | Fertilizer Planning |
-| 11 | Fertilizer Schedule Item | Child Table | Fertilizer Schedule |
-| 12 | Fertilizer Product | Setup Master | Fertilizer Planning |
-| 13 | Application Method | Setup Master | Setup |
-| 14 | Soil Nutrient Threshold | Setup Master | Setup |
-| 15 | Measurement Verification | Document | Measurement & Verification |
+| 16 | Soil Analysis | Document | Soil & Nutrient Analysis |
+| 17 | Soil Analysis Result | Child Table | Soil Analysis |
+| 18 | Nutrient Analysis | Document | Soil & Nutrient Analysis |
+| 19 | Nutrient Gap | Child Table | Nutrient Analysis |
+| 20 | Crop Nutrient Standard | Setup Master | Soil & Nutrient Analysis |
+| 21 | Fertilizer Recommendation | Document | Fertilizer Planning |
+| 22 | Recommended Product | Child Table | Fertilizer Recommendation |
+| 23 | Fertilizer Application | Document | Fertilizer Planning |
+| 24 | Fertilizer Application Item | Child Table | Fertilizer Application |
+| 25 | Fertilizer Schedule | Document | Fertilizer Planning |
+| 26 | Fertilizer Schedule Item | Child Table | Fertilizer Schedule |
+| 27 | Fertilizer Product | Setup Master | Fertilizer Planning |
+| 28 | Application Method | Setup Master | Setup |
+| 29 | Soil Nutrient Threshold | Setup Master | Setup |
+| 30 | Measurement Verification | Document | Measurement & Verification |
 
 ---
 
@@ -257,55 +252,21 @@ Soil Testing → Nutrient Analysis → Fertilizer Recommendation → Fertilizer 
 
 ## 7. WORKSPACE NAVIGATION
 
-The application provides **two separate workspaces**, accessible from the Frappe module list.
+### 7.1 Home Workspace Layout
+The Precision Farming workspace is organized into two main sections:
 
----
-
-### 7.1 Agriculture Waste Management Workspace
-
-#### Layout
 ```
 ┌─────────────────────────────────────────────────────┐
 │                QUICK ACTIONS                        │
-│  [+Waste Rec]  [+Compost Batch]  [+Compost App]    │
-│  [+Quality Check]                                   │
+│  [+Waste]  [+Compost]  [+Soil]  [+Fert] [+Apply]  │
 ├─────────────────────────────────────────────────────┤
-│              WASTE COLLECTION                       │
+│           AGRICULTURE WASTE MANAGEMENT              │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────┐│
 │  │  Waste   │  │Composting│  │Disposal  │  │Comply││
 │  │Collection│  │          │  │& Recycling│  │Record││
 │  └──────────┘  └──────────┘  └──────────┘  └──────┘│
-└─────────────────────────────────────────────────────┘
-```
-
-#### Shortcuts
-| Shortcut | Action | Icon | Color |
-|----------|--------|------|-------|
-| New Waste Record | Opens Waste Record form | list | Green |
-| New Composting Batch | Opens Composting Batch form | branch | Blue |
-| New Compost Application | Opens Compost Application form | leaf | Dark Green |
-| New Compost Quality Check | Opens Compost Quality Check form | quality | Brown |
-
-#### Card Sections
-| Card | Accessible DocTypes |
-|------|-------------------|
-| Waste Collection | Waste Record, Waste Category, Waste Type |
-| Composting | Composting Batch, Compost Application, Compost Quality Check, Compost Quality Parameter |
-| Disposal & Recycling | Collection Schedule, Recycling Record, Disposal Record |
-| Compliance & Records | Compliance Record |
-
----
-
-### 7.2 Fertilizer Measurement & Management Workspace
-
-#### Layout
-```
-┌─────────────────────────────────────────────────────┐
-│                QUICK ACTIONS                        │
-│  [+Soil Analysis]  [+Nutrient Analysis]            │
-│  [+Fert Rec]  [+Fert Application]                  │
 ├─────────────────────────────────────────────────────┤
-│            FERTILIZER MEASUREMENT                   │
+│              FERTILIZER MEASUREMENT                  │
 │  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────┐│
 │  │Soil &    │  │Fertilizer│  │  Setup   │  │ Meas ││
 │  │Nutrient  │  │Planning  │  │          │  │ Verify││
@@ -313,21 +274,39 @@ The application provides **two separate workspaces**, accessible from the Frappe
 └─────────────────────────────────────────────────────┘
 ```
 
-#### Shortcuts
+### 7.2 Quick Action Shortcuts
 | Shortcut | Action | Icon | Color |
 |----------|--------|------|-------|
+| New Waste Record | Opens Waste Record form | list | Green |
+| New Composting Batch | Opens Composting Batch form | branch | Blue |
 | New Soil Analysis | Opens Soil Analysis form | healthcare | Orange |
-| New Nutrient Analysis | Opens Nutrient Analysis form | dashboard | Purple |
-| New Fertilizer Recommendation | Opens Fertilizer Recommendation form | clipboard | Blue |
+| New Fertilizer Recommendation | Opens Fertilizer Recommendation form | clipboard | Purple |
 | New Fertilizer Application | Opens Fertilizer Application form | agriculture | Teal |
+| New Compost Application | Opens Compost Application form | leaf | Dark Green |
 
-#### Card Sections
-| Card | Accessible DocTypes |
-|------|-------------------|
-| Soil & Nutrient Analysis | Soil Analysis, Nutrient Analysis, Crop Nutrient Standard |
-| Fertilizer Planning | Fertilizer Recommendation, Fertilizer Application, Fertilizer Schedule, Fertilizer Product |
-| Setup | Application Method, Soil Nutrient Threshold |
-| Measurement & Verification | Measurement Verification |
+### 7.3 Card Sections & Links
+
+| Section | Card | Accessible DocTypes |
+|---------|------|-------------------|
+| Agriculture Waste Management | Waste Collection | Waste Record, Waste Category, Waste Type |
+| Agriculture Waste Management | Composting | Composting Batch, Compost Application, Compost Quality Check, Compost Quality Parameter |
+| Agriculture Waste Management | Disposal & Recycling | Collection Schedule, Recycling Record, Disposal Record |
+| Agriculture Waste Management | Compliance & Records | Compliance Record |
+| Fertilizer Measurement | Soil & Nutrient Analysis | Soil Analysis, Nutrient Analysis, Crop Nutrient Standard |
+| Fertilizer Measurement | Fertilizer Planning | Fertilizer Recommendation, Fertilizer Application, Fertilizer Schedule, Fertilizer Product |
+| Fertilizer Measurement | Setup | Application Method, Soil Nutrient Threshold |
+| Fertilizer Measurement | Measurement & Verification | Measurement Verification |
+
+### 7.4 Fixtures (Auto-loaded on Install)
+The following are loaded automatically as fixtures:
+- Waste Category
+- Waste Type
+- Application Method
+- Compost Quality Parameter
+- Crop Nutrient Standard
+- Fertilizer Product
+- Soil Nutrient Threshold
+- Precision Farming Workspace
 
 ---
 
@@ -398,8 +377,7 @@ The following are loaded automatically as fixtures:
 - Crop Nutrient Standard
 - Fertilizer Product
 - Soil Nutrient Threshold
-- Agriculture Waste Management Workspace
-- Fertilizer Measurement & Management Workspace
+- Precision Farming Workspace
 
 ---
 
@@ -410,8 +388,8 @@ The following are loaded automatically as fixtures:
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | App not found during install | App not in apps.txt | `echo "precision_farming" >> sites/apps.txt` |
-| Module not found error | Module name mismatch | Ensure modules.txt lists both "Agriculture Waste Management" and "Fertilizer Measurement & Management" |
-| Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON file, then run `bench --site site migrate` |
+| Module not found error | Module name mismatch | Ensure modules.txt = "Precision Farming" |
+| Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON, run `bench --site site import-fixtures` then `bench --site site migrate` |
 | Workspace not showing changes | Fixtures not synced | Run `bench --site site migrate` |
 | Scheduled tasks not running | Scheduler disabled | Enable with `bench --site site scheduler enable` |
 | Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |

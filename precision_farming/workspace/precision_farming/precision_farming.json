@@ -1,0 +1,249 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Waste Management\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Composting Batch\",\"label\":\"Composting\",\"icon\":\"branch\",\"status_type\":\"Active\"},{\"doctype\":\"Compost Application\",\"label\":\"Field Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]},{\"label\":\"Inorganic Waste\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Recycling Record\",\"label\":\"Recycling\",\"icon\":\"cycle\",\"status_type\":\"Active\"},{\"doctype\":\"Disposal Record\",\"label\":\"Disposal\",\"icon\":\"delete\",\"status_type\":\"Done\"}]},{\"label\":\"Fertilizer Management\",\"doctypes\":[{\"doctype\":\"Soil Analysis\",\"label\":\"Soil Test\",\"icon\":\"healthcare\",\"status_type\":\"Active\"},{\"doctype\":\"Nutrient Analysis\",\"label\":\"NPK Analysis\",\"icon\":\"dashboard\",\"status_type\":\"Active\"},{\"doctype\":\"Fertilizer Recommendation\",\"label\":\"Recommendation\",\"icon\":\"clipboard\",\"status_type\":\"Pending\"},{\"doctype\":\"Fertilizer Application\",\"label\":\"Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer0\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Quick Actions</b></span>\",\"col\":12}},{\"id\":\"sc1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Waste Record\",\"col\":3}},{\"id\":\"sc2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Composting Batch\",\"col\":3}},{\"id\":\"sc3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Soil Analysis\",\"col\":3}},{\"id\":\"sc4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Fertilizer Recommendation\",\"col\":3}},{\"id\":\"sc5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Fertilizer Application\",\"col\":3}},{\"id\":\"sc6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"New Compost Application\",\"col\":3}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Agriculture Waste Management</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Waste Collection\",\"col\":3}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Composting\",\"col\":3}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Disposal & Recycling\",\"col\":3}},{\"id\":\"card7\",\"type\":\"card\",\"data\":{\"card_name\":\"Compliance & Records\",\"col\":3}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Fertilizer Measurement</b></span>\",\"col\":12}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Soil & Nutrient Analysis\",\"col\":3}},{\"id\":\"card5\",\"type\":\"card\",\"data\":{\"card_name\":\"Fertilizer Planning\",\"col\":3}},{\"id\":\"card6\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":3}},{\"id\":\"card8\",\"type\":\"card\",\"data\":{\"card_name\":\"Measurement & Verification\",\"col\":3}}]",
+ "creation": "2026-07-02 00:00:00.000000",
+ "custom_blocks": [],
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "agriculture",
+ "is_public": 1,
+ "is_hidden": 0,
+ "label": "Precision Farming",
+ "links": [
+  {
+   "type": "Card Break",
+   "label": "Waste Collection",
+   "link_type": "DocType",
+   "link_count": 3
+  },
+  {
+   "type": "Link",
+   "label": "Waste Record",
+   "link_to": "Waste Record",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Waste Category",
+   "link_to": "Waste Category",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Waste Type",
+   "link_to": "Waste Type",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Composting",
+   "link_type": "DocType",
+   "link_count": 4
+  },
+  {
+   "type": "Link",
+   "label": "Composting Batch",
+   "link_to": "Composting Batch",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Compost Application",
+   "link_to": "Compost Application",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Compost Quality Check",
+   "link_to": "Compost Quality Check",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Compost Quality Parameter",
+   "link_to": "Compost Quality Parameter",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Disposal & Recycling",
+   "link_type": "DocType",
+   "link_count": 3
+  },
+  {
+   "type": "Link",
+   "label": "Collection Schedule",
+   "link_to": "Collection Schedule",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Recycling Record",
+   "link_to": "Recycling Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Disposal Record",
+   "link_to": "Disposal Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Soil & Nutrient Analysis",
+   "link_type": "DocType",
+   "link_count": 3
+  },
+  {
+   "type": "Link",
+   "label": "Soil Analysis",
+   "link_to": "Soil Analysis",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Nutrient Analysis",
+   "link_to": "Nutrient Analysis",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Crop Nutrient Standard",
+   "link_to": "Crop Nutrient Standard",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Fertilizer Planning",
+   "link_type": "DocType",
+   "link_count": 4
+  },
+  {
+   "type": "Link",
+   "label": "Fertilizer Recommendation",
+   "link_to": "Fertilizer Recommendation",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Fertilizer Application",
+   "link_to": "Fertilizer Application",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Fertilizer Schedule",
+   "link_to": "Fertilizer Schedule",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Fertilizer Product",
+   "link_to": "Fertilizer Product",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Setup",
+   "link_type": "DocType",
+   "link_count": 2
+  },
+  {
+   "type": "Link",
+   "label": "Application Method",
+   "link_to": "Application Method",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Link",
+   "label": "Soil Nutrient Threshold",
+   "link_to": "Soil Nutrient Threshold",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Compliance & Records",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Compliance Record",
+   "link_to": "Compliance Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Measurement & Verification",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Measurement Verification",
+   "link_to": "Measurement Verification",
+   "link_type": "DocType"
+  }
+ ],
+ "module": "Precision Farming",
+ "modified": "2026-07-02 00:00:00",
+ "modified_by": "Administrator",
+ "name": "Precision Farming",
+ "owner": "Administrator",
+ "shortcuts": [
+  {
+   "label": "New Waste Record",
+   "type": "DocType",
+   "link_to": "Waste Record",
+   "doc_view": "New",
+   "icon": "list",
+   "color": "#29CD42"
+  },
+  {
+   "label": "New Composting Batch",
+   "type": "DocType",
+   "link_to": "Composting Batch",
+   "doc_view": "New",
+   "icon": "branch",
+   "color": "#2490EF"
+  },
+  {
+   "label": "New Soil Analysis",
+   "type": "DocType",
+   "link_to": "Soil Analysis",
+   "doc_view": "New",
+   "icon": "healthcare",
+   "color": "#ECAD4B"
+  },
+  {
+   "label": "New Fertilizer Recommendation",
+   "type": "DocType",
+   "link_to": "Fertilizer Recommendation",
+   "doc_view": "New",
+   "icon": "clipboard",
+   "color": "#7578F6"
+  },
+  {
+   "label": "New Fertilizer Application",
+   "type": "DocType",
+   "link_to": "Fertilizer Application",
+   "doc_view": "New",
+   "icon": "agriculture",
+   "color": "#00A3A3"
+  },
+  {
+   "label": "New Compost Application",
+   "type": "DocType",
+   "link_to": "Compost Application",
+   "doc_view": "New",
+   "icon": "leaf",
+   "color": "#2E7D32"
+  }
+ ]
+}

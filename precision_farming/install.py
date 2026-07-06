@@ -45,11 +45,7 @@ def activate_agriculture_domain():
 
 
 def link_module_to_domain():
-	"""Link the Precision Farming Module Def to the Agriculture domain.
-
-	This ensures users with Agriculture-restricted roles (Agriculture Manager,
-	Agriculture User) can see all Precision Farming DocTypes in the workspace.
-	"""
+	"""Link the Precision Farming Module Def to the Agriculture domain."""
 	if frappe.db.exists("Module Def", "Precision Farming"):
 		module_def = frappe.get_doc("Module Def", "Precision Farming")
 		if module_def.restrict_to_domain != "Agriculture":
@@ -59,12 +55,17 @@ def link_module_to_domain():
 
 
 def create_biogas_master_data():
-	"""Create UOMs, GST HSN Codes, Items and Warehouses needed for the Biogas Management module."""
+	"""Create all master data needed by the Biogas Management module.
+
+	Order matters — every link an Item references must exist in the DB first.
+	"""
 	create_uom_if_not_exists("m3")
 	create_uom_if_not_exists("Kg")
-	# GST HSN codes must exist before Items can reference them (India Compliance)
 	create_gst_hsn_code_if_not_exists("31010000", "Organic fertilizers")
 	create_gst_hsn_code_if_not_exists("27112900", "Other petroleum gases")
+	# Item Groups must exist before Items reference them
+	create_item_group_if_not_exists("Farm Energy", "Products")
+	create_item_group_if_not_exists("Organic Inputs", "Products")
 	create_item_if_not_exists("Biogas", "Biogas", "m3", "Farm Energy", "27112900")
 	create_item_if_not_exists("Digestate", "Digestate", "Kg", "Organic Inputs", "31010000")
 	create_warehouse_if_not_exists("Biogas Storage")
@@ -87,7 +88,6 @@ def create_gst_hsn_code_if_not_exists(hsn_code, description):
 	"""Create a GST HSN Code if it doesn't already exist."""
 	if frappe.db.exists("GST HSN Code", hsn_code):
 		return
-	# If India Compliance / GST HSN Code doctype is not installed, skip silently
 	if not frappe.db.exists("DocType", "GST HSN Code"):
 		return
 	hsn = frappe.get_doc({
@@ -97,6 +97,19 @@ def create_gst_hsn_code_if_not_exists(hsn_code, description):
 	})
 	hsn.insert(ignore_permissions=True)
 	frappe.db.commit()
+
+
+def create_item_group_if_not_exists(item_group, parent_item_group):
+	"""Create an Item Group if it doesn't already exist."""
+	if not frappe.db.exists("Item Group", item_group):
+		ig = frappe.get_doc({
+			"doctype": "Item Group",
+			"item_group_name": item_group,
+			"parent_item_group": parent_item_group,
+			"is_group": 0,
+		})
+		ig.insert(ignore_permissions=True)
+		frappe.db.commit()
 
 
 def create_item_if_not_exists(item_code, item_name, uom, item_group, gst_hsn_code=None):

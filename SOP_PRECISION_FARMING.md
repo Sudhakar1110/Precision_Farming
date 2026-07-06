@@ -2,7 +2,7 @@
 ## Precision Farming — Waste Management & Fertilizer Measurement System
 
 **App Name:** Precision Farming  
-**Version:** 0.0.1  
+**Version:** 1.0.0  
 **Module:** Precision Farming  
 **Domain:** Agriculture  
 **Last Updated:** July 6, 2026
@@ -101,12 +101,25 @@ bench --site your-site.com install-app precision_farming
 bench --site your-site.com migrate
 ```
 
-### 3.2 Role Setup
+### 3.2 Developer Mode Requirement
+Frappe v15 requires **Developer Mode** to be enabled for creating and syncing Standard DocTypes. After installation:
+
+```bash
+bench --site your-site.com set-config developer_mode 1
+bench --site your-site.com migrate
+```
+
+You can disable it afterward if preferred:
+```bash
+bench --site your-site.com set-config developer_mode 0
+```
+
+### 3.3 Role Setup
 Two roles are automatically created on install:
 1. **Agriculture Manager** — Full access to all waste and fertilizer operations
 2. **Agriculture User** — Can create and edit records, restricted to Agriculture domain
 
-### 3.3 Initial Configuration
+### 3.4 Initial Configuration
 Before using the application, configure these masters:
 1. **Waste Categories** — Define organic and inorganic waste types
 2. **Waste Types** — Specify individual waste materials
@@ -394,6 +407,9 @@ The Precision Farming Workspace is auto-discovered by Frappe v15 from the worksp
 | Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON, run `bench --site site migrate` then `bench --site site clear-cache` |
 | Workspace not showing changes | Fixtures not synced | Run `bench --site site migrate` |
 | **DocType not found for child tables** | **Child table JSON in nested directory** | **Frappe v15 requires flat structure: `doctype/[table_name]/[table_name].json`. Ensure child tables are NOT nested under parent DocType directories.** |
+| **DocTypes not created during migrate** | **Developer Mode is off** | **Enable with `bench --site site set-config developer_mode 1` then re-run `bench migrate`** |
+| **Workspace Public checkbox greyed out** | **Expected behavior for standard workspaces** | **The workspace IS public via `is_public: 1` in JSON. The greyed checkbox is normal — edit the JSON file instead.** |
+| Workspace not appearing after fixes | Workspace document needs re-sync | Run `bench console` then `from frappe.modules.import_file import import_file_by_path; import_file_by_path(frappe.get_app_path('precision_farming','workspace','precision_farming','precision_farming.json'), force=True); frappe.db.commit()` |
 | Scheduled tasks not running | Scheduler disabled | Enable with `bench --site site scheduler enable` |
 | Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |
 
@@ -408,14 +424,21 @@ frappe.db.commit()
 exit()
 ```
 
-### 10.3 Full Re-install (Last Resort)
+### 10.3 Create Demo Data
+To populate the application with sample records for testing:
+```bash
+bench --site your-site.com execute precision_farming.demo.create_demo_data
+```
+This creates demo Waste Records, Composting Batches, Soil Analysis, Fertilizer workflows, and more.
+
+### 10.4 Full Re-install (Last Resort)
 ```bash
 bench --site your-site.com uninstall-app precision_farming
 bench --site your-site.com install-app precision_farming
 bench --site your-site.com migrate
 ```
 
-### 10.4 Clear Cache
+### 10.5 Clear Cache
 ```bash
 bench --site your-site.com clear-cache
 bench --site your-site.com migrate

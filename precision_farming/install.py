@@ -214,7 +214,8 @@ def create_biogas_management_workspace_if_not_exists():
 		frappe.db.commit()
 
 	# Strip metadata keys that shouldn't be passed to frappe.get_doc() on insert
-	for meta_key in ("doctype", "name", "creation", "modified", "modified_by", "owner"):
+	# Keep 'doctype' — frappe.get_doc() requires it
+	for meta_key in ("name", "creation", "modified", "modified_by", "owner"):
 		ws_data.pop(meta_key, None)
 
 	# Use 'Precision Farming' (existing module) to avoid LinkValidationError

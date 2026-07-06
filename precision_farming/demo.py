@@ -28,6 +28,16 @@ def create_demo_data():
 	_create_collection_schedule()
 	_create_compliance_record()
 	_create_measurement_verification()
+	_create_biogas_plant()
+	_create_biogas_conversion_ratio()
+	_create_biogas_batch()
+	_create_biogas_production()
+	_create_biogas_production_batch()
+	_create_biogas_quality_check()
+	_create_biogas_storage_entry()
+	_create_biogas_consumption()
+	_create_digestate_production()
+	_create_digestate_application()
 
 	frappe.db.commit()
 	print("\n" + "=" * 60)
@@ -339,6 +349,236 @@ def _create_measurement_verification():
 		"actual_quantity_kg": 485,
 		"status": "Verified"
 	}, "DEMO-MV-001")
+
+
+def _create_biogas_plant():
+	"""Create a demo Biogas Plant."""
+	if frappe.db.exists("Biogas Plant", "DEMO-Bio Plant-001"):
+		print("  Biogas Plant already exists")
+		return
+
+	_ensure_land_unit("Demo Farm")
+
+	plant = frappe.get_doc({
+		"doctype": "Biogas Plant",
+		"plant_name": "DEMO-Bio Plant-001",
+		"land_unit": "Demo Farm",
+		"capacity_m3": 200.00,
+		"conversion_ratio": 0.50,
+		"digester_type": "Fixed Dome",
+		"status": "Active",
+	})
+	plant.flags.ignore_validate = True
+	plant.flags.ignore_links = True
+	plant.flags.ignore_permissions = True
+	plant.insert()
+	frappe.db.commit()
+	print(f"  Biogas Plant: DEMO-Bio Plant-001")
+
+
+def _create_biogas_conversion_ratio():
+	"""Create demo Biogas Conversion Ratios for common waste types."""
+	ratios = [
+		{"waste_type": "Crop Residue", "ratio": 0.45, "digestate": 1.50},
+		{"waste_type": "Animal Manure", "ratio": 0.35, "digestate": 1.80},
+		{"waste_type": "Fruit & Vegetable Waste", "ratio": 0.55, "digestate": 1.30},
+		{"waste_type": "Straw", "ratio": 0.40, "digestate": 1.60},
+		{"waste_type": "Dry Leaves", "ratio": 0.30, "digestate": 1.40},
+	]
+	for r in ratios:
+		expected_name = f"BCR-{r['waste_type']}-001"
+		if frappe.db.exists("Biogas Conversion Ratio", expected_name):
+			print(f"  Biogas Conversion Ratio for {r['waste_type']} already exists")
+			continue
+
+		doc = frappe.get_doc({
+			"doctype": "Biogas Conversion Ratio",
+			"waste_type": r["waste_type"],
+			"conversion_ratio_m3_per_kg": r["ratio"],
+			"digestate_factor": r["digestate"],
+			"is_active": 1,
+		})
+		doc.flags.ignore_validate = True
+		doc.flags.ignore_links = True
+		doc.flags.ignore_permissions = True
+		doc.insert()
+		frappe.db.commit()
+		print(f"  Biogas Conversion Ratio: {expected_name} ({r['waste_type']}: {r['ratio']} m\u00b3/kg)")
+
+
+def _create_biogas_batch():
+	"""Create a demo Biogas Batch."""
+	if frappe.db.exists("Biogas Batch", "DEMO-BB-001"):
+		print("  Biogas Batch already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Biogas Batch",
+		"naming_series": "BB-.YYYY.-",
+		"batch_name": "Q1 2026 Demo Batch",
+		"biogas_plant": "DEMO-Bio Plant-001",
+		"start_date": today(),
+		"status": "Active",
+		"notes": "Demo biogas batch for Q1 2026 demonstration"
+	}, "DEMO-BB-001")
+
+
+def _create_biogas_production():
+	"""Create a demo Biogas Production record."""
+	if frappe.db.exists("Biogas Production", "DEMO-BP-001"):
+		print("  Biogas Production already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Biogas Production",
+		"naming_series": "BP-.YYYY.-",
+		"biogas_plant": "DEMO-Bio Plant-001",
+		"waste_record": "DEMO-WR-001",
+		"land_unit": "Demo Farm",
+		"biogas_batch": "DEMO-BB-001",
+		"start_date": today(),
+		"status": "Digesting",
+		"production_items": [
+			{"waste_type": "Crop Residue", "quantity_kg": 500},
+			{"waste_type": "Animal Manure", "quantity_kg": 300},
+		],
+		"feedstock": [
+			{"waste_type": "Crop Residue", "quantity_kg": 500, "carbon_ratio": 60},
+			{"waste_type": "Animal Manure", "quantity_kg": 300, "carbon_ratio": 15},
+		],
+	}, "DEMO-BP-001")
+
+
+def _create_biogas_production_batch():
+	"""Create a demo Biogas Production Batch (submittable)."""
+	if frappe.db.exists("Biogas Production Batch", "DEMO-BPB-001"):
+		print("  Biogas Production Batch already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Biogas Production Batch",
+		"naming_series": "BP-.YYYY.-",
+		"biogas_plant": "DEMO-Bio Plant-001",
+		"waste_record": "DEMO-WR-001",
+		"land_unit": "Demo Farm",
+		"biogas_batch": "DEMO-BB-001",
+		"start_date": today(),
+		"status": "Digesting",
+		"expected_biogas_quantity": 120.00,
+		"expected_digestate_quantity": 750.00,
+		"input_entries": [
+			{"waste_type": "Crop Residue", "quantity_kg": 500, "carbon_ratio": 60},
+			{"waste_type": "Animal Manure", "quantity_kg": 300, "carbon_ratio": 15},
+			{"waste_type": "Fruit & Vegetable Waste", "quantity_kg": 200, "carbon_ratio": 25},
+		],
+	}, "DEMO-BPB-001")
+
+
+def _create_biogas_quality_check():
+	"""Create a demo Biogas Quality Check."""
+	if frappe.db.exists("Biogas Quality Check", "DEMO-BQC-001"):
+		print("  Biogas Quality Check already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Biogas Quality Check",
+		"naming_series": "BQC-.YYYY.-",
+		"biogas_production": "DEMO-BP-001",
+		"biogas_production_batch": "DEMO-BPB-001",
+		"biogas_batch": "DEMO-BB-001",
+		"check_date": today(),
+		"status": "Completed",
+		"methane_percentage": 58.5,
+		"co2_percentage": 38.2,
+		"h2s_ppm": 850.00,
+		"moisture_percentage": 3.5,
+		"temperature_celsius": 37.0,
+		"ph_level": 7.2,
+		"overall_result": "Pass",
+		"remarks": "Good quality biogas - methane content above threshold"
+	}, "DEMO-BQC-001")
+
+
+def _create_biogas_storage_entry():
+	"""Create a demo Biogas Storage Entry."""
+	if frappe.db.exists("Biogas Storage Entry", "DEMO-BSE-001"):
+		print("  Biogas Storage Entry already exists")
+		return
+
+	# Ensure Biogas Storage warehouse exists
+	company = frappe.defaults.get_user_default("Company")
+	warehouse_name = None
+	if company:
+		abbr = frappe.db.get_value("Company", company, "abbr")
+		warehouse_name = f"Biogas Storage - {abbr}"
+
+	_insert_and_rename({
+		"doctype": "Biogas Storage Entry",
+		"naming_series": "BSE-.YYYY.-",
+		"biogas_production_batch": "DEMO-BPB-001",
+		"biogas_batch": "DEMO-BB-001",
+		"storage_date": today(),
+		"quantity_m3": 80.00,
+		"warehouse": warehouse_name,
+		"notes": "Demo storage entry for biogas produced from batch DEMO-BPB-001"
+	}, "DEMO-BSE-001")
+
+
+def _create_biogas_consumption():
+	"""Create a demo Biogas Consumption record."""
+	if frappe.db.exists("Biogas Consumption", "DEMO-BC-001"):
+		print("  Biogas Consumption already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Biogas Consumption",
+		"naming_series": "BC-.YYYY.-",
+		"biogas_production": "DEMO-BP-001",
+		"biogas_batch": "DEMO-BB-001",
+		"consumption_date": today(),
+		"quantity_m3": 30.00,
+		"purpose": "Heating",
+		"land_unit": "Demo Farm",
+		"notes": "Demo biogas consumption for farm heating"
+	}, "DEMO-BC-001")
+
+
+def _create_digestate_production():
+	"""Create a demo Digestate Production record."""
+	if frappe.db.exists("Digestate Production", "DEMO-DP-001"):
+		print("  Digestate Production already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Digestate Production",
+		"naming_series": "DP-.YYYY.-",
+		"biogas_production": "DEMO-BP-001",
+		"biogas_batch": "DEMO-BB-001",
+		"production_date": today(),
+		"quantity_kg": 700.00,
+		"notes": "Digestate produced from demo biogas batch"
+	}, "DEMO-DP-001")
+
+
+def _create_digestate_application():
+	"""Create a demo Digestate Application record."""
+	if frappe.db.exists("Digestate Application", "DEMO-DA-001"):
+		print("  Digestate Application already exists")
+		return
+
+	_insert_and_rename({
+		"doctype": "Digestate Application",
+		"naming_series": "DA-.YYYY.-",
+		"biogas_production": "DEMO-BP-001",
+		"biogas_production_batch": "DEMO-BPB-001",
+		"land_unit": "Demo Farm",
+		"application_date": today(),
+		"quantity_applied": 500.00,
+		"uom": "Kg",
+		"application_method": "Broadcasting",
+		"area_covered": 2.000,
+		"status": "Draft",
+	}, "DEMO-DA-001")
 
 
 if __name__ == "__main__":

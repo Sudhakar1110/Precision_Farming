@@ -306,7 +306,8 @@ The following are loaded automatically as fixtures:
 - Crop Nutrient Standard
 - Fertilizer Product
 - Soil Nutrient Threshold
-- Precision Farming Workspace
+
+The Precision Farming Workspace is auto-discovered by Frappe v15 from the standard workspace directory (`precision_farming/workspace/precision_farming/precision_farming.json`).
 
 ---
 
@@ -377,7 +378,8 @@ The following are loaded automatically as fixtures:
 - Crop Nutrient Standard
 - Fertilizer Product
 - Soil Nutrient Threshold
-- Precision Farming Workspace
+
+The Precision Farming Workspace is auto-discovered by Frappe v15 from the workspace directory and is NOT a fixture entry. To modify workspace settings, edit the JSON file directly.
 
 ---
 

@@ -202,5 +202,6 @@ def create_biogas_management_workspace_if_not_exists():
 		],
 	})
 	workspace.flags.ignore_permissions = True
+	workspace.flags.ignore_links = True
 	workspace.insert()
 	frappe.db.commit()

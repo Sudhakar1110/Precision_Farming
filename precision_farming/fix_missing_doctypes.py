@@ -68,13 +68,18 @@ def fix():
             doc = frappe.get_doc(data)
             doc.flags.ignore_links = True
             doc.flags.ignore_permissions = True
-            doc.insert()
+            # DocType validate() checks frappe.flags.in_migrate, not ignore_links
+            frappe.flags.in_migrate = True
+            try:
+                doc.insert()
+            finally:
+                frappe.flags.in_migrate = False
             frappe.db.commit()
             print("✅")
             created += 1
         except Exception as e:
             frappe.db.rollback()
-            print(f"❌ {e}")
+            print(f"❌ {e.__class__.__name__}: {e}")
             failed += 1
 
     print()

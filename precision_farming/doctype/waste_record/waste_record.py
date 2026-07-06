@@ -37,8 +37,9 @@ class WasteRecord(Document):
 
 	def on_submit(self):
 		self.classification_status = "Classified"
-		# Auto-create a composting batch for organic/mixed waste
-		if self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
+		# Auto-create a composting batch only if processing route is NOT Biogas
+		# (Biogas route uses the manual 'Create Biogas Production Batch' button)
+		if self.processing_route != "Biogas" and self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
 			self._create_composting_batch()
 
 	def on_cancel(self):

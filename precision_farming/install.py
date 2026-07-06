@@ -8,8 +8,9 @@ def after_install():
 
 
 def after_migrate():
-	"""Re-apply customizations on every bench migrate."""
-	pass
+	"""Re-apply customizations on every bench migrate: ensure roles exist and domain is active."""
+	create_roles()
+	activate_agriculture_domain()
 
 
 def create_roles():

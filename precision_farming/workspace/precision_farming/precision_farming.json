@@ -9,6 +9,17 @@
  "icon": "agriculture",
  "is_public": 1,
  "is_hidden": 0,
+ "roles": [
+  {
+   "role": "Agriculture Manager"
+  },
+  {
+   "role": "Agriculture User"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
  "label": "Precision Farming",
  "links": [
   {
@@ -196,5 +207,53 @@
  "modified_by": "Administrator",
  "name": "Precision Farming",
  "owner": "Administrator",
- "shortcuts": []
-}
+ "shortcuts": [
+  {
+   "label": "New Waste Record",
+   "type": "DocType",
+   "link_to": "Waste Record",
+   "doc_type": "Waste Record",
+   "color": "Green",
+   "icon": "list"
+  },
+  {
+   "label": "New Composting Batch",
+   "type": "DocType",
+   "link_to": "Composting Batch",
+   "doc_type": "Composting Batch",
+   "color": "Blue",
+   "icon": "branch"
+  },
+  {
+   "label": "New Soil Analysis",
+   "type": "DocType",
+   "link_to": "Soil Analysis",
+   "doc_type": "Soil Analysis",
+   "color": "Orange",
+   "icon": "healthcare"
+  },
+  {
+   "label": "New Fertilizer Recommendation",
+   "type": "DocType",
+   "link_to": "Fertilizer Recommendation",
+   "doc_type": "Fertilizer Recommendation",
+   "color": "Purple",
+   "icon": "clipboard"
+  },
+  {
+   "label": "New Fertilizer Application",
+   "type": "DocType",
+   "link_to": "Fertilizer Application",
+   "doc_type": "Fertilizer Application",
+   "color": "Teal",
+   "icon": "agriculture"
+  },
+  {
+   "label": "New Compost Application",
+   "type": "DocType",
+   "link_to": "Compost Application",
+   "doc_type": "Compost Application",
+   "color": "Dark Green",
+   "icon": "leaf"
+  }
+ ]

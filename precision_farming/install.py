@@ -218,6 +218,11 @@ def create_biogas_management_workspace_if_not_exists():
 	for meta_key in ("name", "creation", "modified", "modified_by", "owner"):
 		ws_data.pop(meta_key, None)
 
+	# Ensure 'title' is set — Frappe v15 workspace validate() calls strip_html(title)
+	# and crashes if title is None
+	if not ws_data.get("title"):
+		ws_data["title"] = ws_data.get("label", "Biogas Management")
+
 	# Use 'Precision Farming' (existing module) to avoid LinkValidationError
 	ws_data["module"] = "Precision Farming"
 

@@ -1,0 +1,109 @@
+{
+ "add_total_row": 1,
+ "columns": [
+  {
+   "fieldname": "batch_id",
+   "fieldtype": "Link",
+   "label": "Batch ID",
+   "options": "Biogas Production Batch",
+   "width": 150
+  },
+  {
+   "fieldname": "biogas_plant",
+   "fieldtype": "Link",
+   "label": "Biogas Plant",
+   "options": "Biogas Plant",
+   "width": 150
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "width": 120
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "label": "Start Date",
+   "width": 100
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date",
+   "width": 100
+  },
+  {
+   "fieldname": "total_input_quantity",
+   "fieldtype": "Float",
+   "label": "Total Input (kg)",
+   "precision": "2",
+   "width": 120
+  },
+  {
+   "fieldname": "output_biogas_volume",
+   "fieldtype": "Float",
+   "label": "Biogas Produced (m\u00b3)",
+   "precision": "2",
+   "width": 150
+  },
+  {
+   "fieldname": "yield_m3_per_kg",
+   "fieldtype": "Float",
+   "label": "Yield (m\u00b3/kg)",
+   "precision": "4",
+   "width": 120
+  },
+  {
+   "fieldname": "output_digestate_quantity",
+   "fieldtype": "Float",
+   "label": "Digestate Produced (kg)",
+   "precision": "2",
+   "width": 160
+  }
+ ],
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "Report",
+ "is_standard": "Yes",
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Yield Report",
+ "owner": "Administrator",
+ "ref_doctype": "Biogas Production Batch",
+ "report_name": "Biogas Yield Report",
+ "report_type": "Script Report",
+ "filters": [
+  {
+   "fieldname": "from_date",
+   "fieldtype": "Date",
+   "label": "From Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "to_date",
+   "fieldtype": "Date",
+   "label": "To Date",
+   "mandatory": 0,
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "biogas_plant",
+   "fieldtype": "Link",
+   "label": "Biogas Plant",
+   "mandatory": 0,
+   "options": "Biogas Plant",
+   "wildcard_filter": 0
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "label": "Land Unit",
+   "mandatory": 0,
+   "options": "Land Unit",
+   "wildcard_filter": 0
+  }
+ ]
+}

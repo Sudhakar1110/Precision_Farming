@@ -1,0 +1,80 @@
+{
+ "autoname": "field:plant_name",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "plant_name",
+  "land_unit",
+  "capacity_m3",
+  "digester_type",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "plant_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Plant Name",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Land Unit",
+   "options": "Land Unit",
+   "reqd": 1
+  },
+  {
+   "fieldname": "capacity_m3",
+   "fieldtype": "Float",
+   "label": "Capacity (m\u00b3)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "digester_type",
+   "fieldtype": "Select",
+   "label": "Digester Type",
+   "options": "Fixed Dome\nFloating Drum\nBalloon-Bag\nContinuous Stirred Tank",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nUnder Maintenance\nInactive",
+   "reqd": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Plant",
+ "naming_rule": "By fieldname",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Agriculture User"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

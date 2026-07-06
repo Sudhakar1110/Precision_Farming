@@ -10,6 +10,7 @@
   "collection_date",
   "collected_by",
   "location",
+  "processing_route",
   "section_break_waste_items",
   "waste_items",
   "section_break_classification",
@@ -63,6 +64,14 @@
    "fieldname": "location",
    "fieldtype": "Small Text",
    "label": "Location"
+  },
+  {
+   "fieldname": "processing_route",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Processing Route",
+   "options": "Undecided\nComposting\nBiogas",
+   "default": "Undecided"
   },
   {
    "fieldname": "section_break_waste_items",

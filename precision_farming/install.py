@@ -2,17 +2,19 @@ import frappe
 
 
 def after_install():
-	"""Post-install setup: create roles, activate domain, link module."""
+	"""Post-install setup: create roles, activate domain, link module, create master data."""
 	create_roles()
 	activate_agriculture_domain()
 	link_module_to_domain()
+	create_biogas_master_data()
 
 
 def after_migrate():
-	"""Re-apply customizations on every bench migrate: ensure roles, domain, and module linkage."""
+	"""Re-apply customizations on every bench migrate: ensure roles, domain, module linkage, and master data."""
 	create_roles()
 	activate_agriculture_domain()
 	link_module_to_domain()
+	create_biogas_master_data()
 
 
 def create_roles():
@@ -54,3 +56,45 @@ def link_module_to_domain():
 			module_def.restrict_to_domain = "Agriculture"
 			module_def.save(ignore_permissions=True)
 			frappe.db.commit()
+
+
+def create_biogas_master_data():
+	"""Create Items and Warehouses needed for the Biogas Management module."""
+	create_item_if_not_exists("Biogas", "Biogas", "m3", "Farm Energy")
+	create_item_if_not_exists("Digestate", "Digestate", "Kg", "Organic Inputs")
+	create_warehouse_if_not_exists("Biogas Storage")
+	create_warehouse_if_not_exists("Digestate Storage")
+
+
+def create_item_if_not_exists(item_code, item_name, uom, item_group):
+	"""Create an Item if it doesn't already exist."""
+	if not frappe.db.exists("Item", item_code):
+		item = frappe.get_doc({
+			"doctype": "Item",
+			"item_code": item_code,
+			"item_name": item_name,
+			"item_group": item_group,
+			"stock_uom": uom,
+			"is_stock_item": 1,
+		})
+		item.insert(ignore_permissions=True)
+		frappe.db.commit()
+
+
+def create_warehouse_if_not_exists(warehouse_name):
+	"""Create a Warehouse if it doesn't already exist."""
+	company = frappe.defaults.get_user_default("Company")
+	if not company:
+		return
+
+	abbr = frappe.db.get_value("Company", company, "abbr")
+	full_name = f"{warehouse_name} - {abbr}"
+	
+	if not frappe.db.exists("Warehouse", full_name):
+		warehouse = frappe.get_doc({
+			"doctype": "Warehouse",
+			"warehouse_name": warehouse_name,
+			"company": company,
+		})
+		warehouse.insert(ignore_permissions=True)
+		frappe.db.commit()

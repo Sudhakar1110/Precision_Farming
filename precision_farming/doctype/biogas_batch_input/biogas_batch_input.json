@@ -1,0 +1,61 @@
+{
+ "autoname": "format:BI-{biogas_production_batch}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "waste_type",
+  "waste_category",
+  "quantity_kg",
+  "carbon_ratio",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "waste_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Type",
+   "options": "Waste Type",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "waste_type.waste_category",
+   "fieldname": "waste_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Waste Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "carbon_ratio",
+   "fieldtype": "Float",
+   "label": "C:N Ratio",
+   "precision": "1"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Batch Input",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

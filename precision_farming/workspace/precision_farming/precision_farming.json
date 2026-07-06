@@ -1,6 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Waste Management\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Composting Batch\",\"label\":\"Composting\",\"icon\":\"branch\",\"status_type\":\"Active\"},{\"doctype\":\"Compost Application\",\"label\":\"Field Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]},{\"label\":\"Inorganic Waste\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Recycling Record\",\"label\":\"Recycling\",\"icon\":\"cycle\",\"status_type\":\"Active\"},{\"doctype\":\"Disposal Record\",\"label\":\"Disposal\",\"icon\":\"delete\",\"status_type\":\"Done\"}]},{\"label\":\"Fertilizer Management\",\"doctypes\":[{\"doctype\":\"Soil Analysis\",\"label\":\"Soil Test\",\"icon\":\"healthcare\",\"status_type\":\"Active\"},{\"doctype\":\"Nutrient Analysis\",\"label\":\"NPK Analysis\",\"icon\":\"dashboard\",\"status_type\":\"Active\"},{\"doctype\":\"Fertilizer Recommendation\",\"label\":\"Recommendation\",\"icon\":\"clipboard\",\"status_type\":\"Pending\"},{\"doctype\":\"Fertilizer Application\",\"label\":\"Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Agriculture Waste Management</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Waste Collection\",\"col\":3}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Composting\",\"col\":3}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Disposal & Recycling\",\"col\":3}},{\"id\":\"card7\",\"type\":\"card\",\"data\":{\"card_name\":\"Compliance & Records\",\"col\":3}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Fertilizer Measurement</b></span>\",\"col\":12}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Soil & Nutrient Analysis\",\"col\":3}},{\"id\":\"card5\",\"type\":\"card\",\"data\":{\"card_name\":\"Fertilizer Planning\",\"col\":3}},{\"id\":\"card6\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":3}},{\"id\":\"card8\",\"type\":\"card\",\"data\":{\"card_name\":\"Measurement & Verification\",\"col\":3}}]",
+ "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Waste Management\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Composting Batch\",\"label\":\"Composting\",\"icon\":\"branch\",\"status_type\":\"Active\"},{\"doctype\":\"Compost Application\",\"label\":\"Field Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]},{\"label\":\"Inorganic Waste\",\"doctypes\":[{\"doctype\":\"Waste Record\",\"label\":\"Waste Collection\",\"icon\":\"list\",\"status_type\":\"Active\"},{\"doctype\":\"Recycling Record\",\"label\":\"Recycling\",\"icon\":\"cycle\",\"status_type\":\"Active\"},{\"doctype\":\"Disposal Record\",\"label\":\"Disposal\",\"icon\":\"delete\",\"status_type\":\"Done\"}]},{\"label\":\"Biogas Management\",\"doctypes\":[{\"doctype\":\"Biogas Production Batch\",\"label\":\"Biogas Batch\",\"icon\":\"biotech\",\"status_type\":\"Active\"},{\"doctype\":\"Digestate Application\",\"label\":\"Digestate App.\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]},{\"label\":\"Fertilizer Management\",\"doctypes\":[{\"doctype\":\"Soil Analysis\",\"label\":\"Soil Test\",\"icon\":\"healthcare\",\"status_type\":\"Active\"},{\"doctype\":\"Nutrient Analysis\",\"label\":\"NPK Analysis\",\"icon\":\"dashboard\",\"status_type\":\"Active\"},{\"doctype\":\"Fertilizer Recommendation\",\"label\":\"Recommendation\",\"icon\":\"clipboard\",\"status_type\":\"Pending\"},{\"doctype\":\"Fertilizer Application\",\"label\":\"Application\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Agriculture Waste Management</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Waste Collection\",\"col\":3}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Composting\",\"col\":3}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Disposal & Recycling\",\"col\":3}},{\"id\":\"card7\",\"type\":\"card\",\"data\":{\"card_name\":\"Compliance & Records\",\"col\":3}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header4\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Biogas Management</b></span>\",\"col\":12}},{\"id\":\"card9\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Plants\",\"col\":4}},{\"id\":\"card10\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Production\",\"col\":4}},{\"id\":\"card11\",\"type\":\"card\",\"data\":{\"card_name\":\"Digestate Application\",\"col\":4}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header3\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Fertilizer Measurement</b></span>\",\"col\":12}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Soil & Nutrient Analysis\",\"col\":3}},{\"id\":\"card5\",\"type\":\"card\",\"data\":{\"card_name\":\"Fertilizer Planning\",\"col\":3}},{\"id\":\"card6\",\"type\":\"card\",\"data\":{\"card_name\":\"Setup\",\"col\":3}},{\"id\":\"card8\",\"type\":\"card\",\"data\":{\"card_name\":\"Measurement & Verification\",\"col\":3}}]",
  "creation": "2026-07-02 00:00:00.000000",
  "custom_blocks": [],
  "doctype": "Workspace",
@@ -93,6 +93,61 @@
   },
   {
    "type": "Card Break",
+   "label": "Compliance & Records",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Compliance Record",
+   "link_to": "Compliance Record",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Biogas Plants",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Biogas Plant",
+   "link_to": "Biogas Plant",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Biogas Production",
+   "link_type": "DocType",
+   "link_count": 2
+  },
+  {
+   "type": "Link",
+   "label": "Biogas Production Batch",
+   "link_to": "Biogas Production Batch",
+   "link_type": "DocType",
+   "onboard": 1
+  },
+  {
+   "type": "Link",
+   "label": "Biogas Yield Report",
+   "link_to": "Biogas Yield Report",
+   "link_type": "Report"
+  },
+  {
+   "type": "Card Break",
+   "label": "Digestate Application",
+   "link_type": "DocType",
+   "link_count": 1
+  },
+  {
+   "type": "Link",
+   "label": "Digestate Application",
+   "link_to": "Digestate Application",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
    "label": "Soil & Nutrient Analysis",
    "link_type": "DocType",
    "link_count": 3
@@ -168,18 +223,6 @@
   },
   {
    "type": "Card Break",
-   "label": "Compliance & Records",
-   "link_type": "DocType",
-   "link_count": 1
-  },
-  {
-   "type": "Link",
-   "label": "Compliance Record",
-   "link_to": "Compliance Record",
-   "link_type": "DocType"
-  },
-  {
-   "type": "Card Break",
    "label": "Measurement & Verification",
    "link_type": "DocType",
    "link_count": 1
@@ -214,6 +257,14 @@
    "icon": "branch"
   },
   {
+   "label": "New Biogas Production Batch",
+   "type": "DocType",
+   "link_to": "Biogas Production Batch",
+   "doc_type": "Biogas Production Batch",
+   "color": "Orange",
+   "icon": "biotech"
+  },
+  {
    "label": "New Soil Analysis",
    "type": "DocType",
    "link_to": "Soil Analysis",
@@ -246,3 +297,4 @@
    "icon": "leaf"
   }
  ]
+}

@@ -1,6 +1,6 @@
 import frappe
 from frappe.model.document import Document
-from frappe.utils import nowdate
+from frappe.utils import nowdate, flt
 
 class WasteRecord(Document):
 	def validate(self):

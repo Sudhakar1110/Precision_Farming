@@ -5,7 +5,7 @@
 **Version:** 0.0.1  
 **Module:** Precision Farming  
 **Domain:** Agriculture  
-**Last Updated:** July 5, 2026
+**Last Updated:** July 6, 2026
 
 ---
 
@@ -391,20 +391,31 @@ The Precision Farming Workspace is auto-discovered by Frappe v15 from the worksp
 |-------|-------|----------|
 | App not found during install | App not in apps.txt | `echo "precision_farming" >> sites/apps.txt` |
 | Module not found error | Module name mismatch | Ensure modules.txt = "Precision Farming" |
-| Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON, run `bench --site site import-fixtures` then `bench --site site migrate` |
+| Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON, run `bench --site site migrate` then `bench --site site clear-cache` |
 | Workspace not showing changes | Fixtures not synced | Run `bench --site site migrate` |
+| **DocType not found for child tables** | **Child table JSON in nested directory** | **Frappe v15 requires flat structure: `doctype/[table_name]/[table_name].json`. Ensure child tables are NOT nested under parent DocType directories.** |
 | Scheduled tasks not running | Scheduler disabled | Enable with `bench --site site scheduler enable` |
 | Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |
 
-### 10.2 Force Sync Workspace
+### 10.2 Force Sync DocTypes (if missing)
+```bash
+bench --site your-site.com console
+```
 ```python
-# In bench console
-import frappe
-from frappe.utils.fixtures import sync_fixtures
-sync_fixtures("precision_farming")
+from frappe.model.sync import sync_for
+sync_for("precision_farming")
+frappe.db.commit()
+exit()
 ```
 
-### 10.3 Clear Cache
+### 10.3 Full Re-install (Last Resort)
+```bash
+bench --site your-site.com uninstall-app precision_farming
+bench --site your-site.com install-app precision_farming
+bench --site your-site.com migrate
+```
+
+### 10.4 Clear Cache
 ```bash
 bench --site your-site.com clear-cache
 bench --site your-site.com migrate

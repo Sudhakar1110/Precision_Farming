@@ -13,6 +13,7 @@ def get_biogas_doctype_paths():
     # Order matters: DocTypes with no Link fields first,
     # then DocTypes that reference earlier ones
     doctype_dirs = [
+        "biogas_plant",                # Master - referenced by Biogas Production Batch
         "biogas_production_settings",  # Single - no dependencies
         "biogas_conversion_ratio",     # Master - no dependencies
         "biogas_production_item",      # Child Table - depends on Biogas Production

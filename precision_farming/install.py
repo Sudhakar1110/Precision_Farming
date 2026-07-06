@@ -189,11 +189,61 @@ def create_biogas_management_module_def_if_not_exists():
 	frappe.db.commit()
 
 
-def create_biogas_management_workspace_if_not_exists():
-	"""Create the Biogas Management workspace from its JSON file.
+def _build_biogas_workspace_content():
+	"""Build the workspace content (visual card layout) as a JSON string.
 
-	Reads the full workspace layout from workspace/biogas_management/biogas_management.json
-	to maintain a single source of truth.
+	Using json.dumps() here instead of reading from the workspace JSON file
+	avoids nested-JSON escaping errors in the file's content field.
+	"""
+	import json
+	content = [
+		{
+			"id": "wo1",
+			"type": "workflow_overview",
+			"data": {
+				"col": 12,
+				"workflows": [
+					{
+						"label": "Biogas Production",
+						"doctypes": [
+							{"doctype": "Biogas Production Batch", "label": "Production", "icon": "biotech", "status_type": "Active"},
+							{"doctype": "Biogas Quality Check", "label": "Quality Check", "icon": "check", "status_type": "Active"},
+							{"doctype": "Biogas Storage Entry", "label": "Storage", "icon": "warehouse", "status_type": "Done"},
+							{"doctype": "Digestate Application", "label": "Digestate App.", "icon": "agriculture", "status_type": "Done"},
+						],
+					}
+				],
+			},
+		},
+		{"id": "spacer1", "type": "spacer", "data": {"col": 12}},
+		{
+			"id": "header1",
+			"type": "header",
+			"data": {
+				"col": 12,
+				"text": '<span class="h4"><b>Masters</b></span>',
+			},
+		},
+		{"id": "card1", "type": "card", "data": {"card_name": "Settings", "col": 6}},
+		{"id": "card2", "type": "card", "data": {"card_name": "Infrastructure", "col": 6}},
+		{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+		{
+			"id": "header2",
+			"type": "header",
+			"data": {
+				"col": 12,
+				"text": '<span class="h4"><b>Transactions</b></span>',
+			},
+		},
+		{"id": "card3", "type": "card", "data": {"card_name": "Production", "col": 4}},
+		{"id": "card4", "type": "card", "data": {"card_name": "Quality & Storage", "col": 4}},
+		{"id": "card5", "type": "card", "data": {"card_name": "Output", "col": 4}},
+	]
+	return json.dumps(content)
+
+
+def create_biogas_management_workspace_if_not_exists():
+	"""Create the Biogas Management workspace.
 
 	Uses 'Precision Farming' module to avoid LinkValidationError during migration.
 	Workspace still appears as 'Biogas Management' in the Desk.
@@ -230,6 +280,9 @@ def create_biogas_management_workspace_if_not_exists():
 	# but frappe.get_doc() does not — the field is named 'public' in v15 Workspace DocType)
 	if "is_public" in ws_data:
 		ws_data["public"] = ws_data.pop("is_public")
+
+	# Build content programmatically with json.dumps() to avoid nested-JSON escaping errors
+	ws_data["content"] = _build_biogas_workspace_content()
 
 	workspace = frappe.get_doc(ws_data)
 	workspace.flags.ignore_permissions = True

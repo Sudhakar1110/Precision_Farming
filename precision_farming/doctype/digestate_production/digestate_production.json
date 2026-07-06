@@ -1,19 +1,18 @@
 {
- "autoname": "naming_series:BB-.YYYY.-.#####",
+ "autoname": "naming_series:DP-.YYYY.-.#####",
  "creation": "2024-01-01 00:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "batch_name",
-  "biogas_plant",
-  "start_date",
-  "end_date",
-  "status",
-  "column_break_metrics",
-  "total_expected_biogas",
-  "total_produced_biogas",
-  "total_input_quantity",
+  "biogas_production",
+  "biogas_batch",
+  "production_date",
+  "quantity_kg",
+  "column_break_details",
+  "warehouse",
+  "digestate_stock_entry",
+  "quality_check",
   "section_break_notes",
   "notes",
   "amended_from"
@@ -23,68 +22,61 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "BB-.YYYY.-",
+   "options": "DP-.YYYY.-",
    "reqd": 1
   },
   {
-   "fieldname": "batch_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Batch Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "biogas_plant",
+   "fieldname": "biogas_production",
    "fieldtype": "Link",
    "in_list_view": 1,
-   "label": "Biogas Plant",
-   "options": "Biogas Plant",
+   "label": "Biogas Production",
+   "options": "Biogas Production",
    "reqd": 1
   },
   {
-   "fieldname": "start_date",
+   "fieldname": "biogas_batch",
+   "fieldtype": "Link",
+   "label": "Biogas Batch",
+   "options": "Biogas Batch"
+  },
+  {
+   "default": "Today",
+   "fieldname": "production_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Start Date",
+   "label": "Production Date",
    "reqd": 1
   },
   {
-   "fieldname": "end_date",
-   "fieldtype": "Date",
-   "label": "End Date"
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
    "in_list_view": 1,
-   "label": "Status",
-   "options": "Active\nCompleted\nCancelled",
-   "reqd": 1,
-   "default": "Active"
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
   },
   {
-   "fieldname": "column_break_metrics",
+   "fieldname": "column_break_details",
    "fieldtype": "Column Break"
   },
   {
-   "fieldname": "total_expected_biogas",
-   "fieldtype": "Float",
-   "label": "Total Expected Biogas (m\u00b3)",
-   "precision": "2",
+   "fieldname": "warehouse",
+   "fieldtype": "Link",
+   "label": "Warehouse",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "digestate_stock_entry",
+   "fieldtype": "Link",
+   "label": "Digestate Stock Entry",
+   "options": "Stock Entry",
    "read_only": 1
   },
   {
-   "fieldname": "total_produced_biogas",
-   "fieldtype": "Float",
-   "label": "Total Produced Biogas (m\u00b3)",
-   "precision": "2",
-   "read_only": 1
-  },
-  {
-   "fieldname": "total_input_quantity",
-   "fieldtype": "Float",
-   "label": "Total Input Quantity (kg)",
-   "precision": "2",
+   "fieldname": "quality_check",
+   "fieldtype": "Link",
+   "label": "Quality Check",
+   "options": "Biogas Quality Check",
    "read_only": 1
   },
   {
@@ -102,7 +94,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Biogas Batch",
+   "options": "Digestate Production",
    "print_hide": 1,
    "read_only": 1
   }
@@ -111,7 +103,7 @@
  "modified": "2024-01-01 00:00:00",
  "modified_by": "Administrator",
  "module": "Biogas Management",
- "name": "Biogas Batch",
+ "name": "Digestate Production",
  "owner": "Administrator",
  "permissions": [
   {
@@ -127,6 +119,7 @@
    "write": 1
   },
   {
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,

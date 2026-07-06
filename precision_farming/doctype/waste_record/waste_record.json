@@ -21,6 +21,7 @@
   "section_break_processing",
   "waste_category_type",
   "composting_batch",
+  "biogas_production",
   "biogas_batch",
   "recycling_record",
   "disposal_record",
@@ -136,6 +137,13 @@
    "fieldtype": "Link",
    "label": "Composting Batch",
    "options": "Composting Batch",
+   "read_only": 1
+  },
+  {
+   "fieldname": "biogas_production",
+   "fieldtype": "Link",
+   "label": "Biogas Production",
+   "options": "Biogas Production",
    "read_only": 1
   },
   {

@@ -5,6 +5,7 @@
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
+  "biogas_production",
   "biogas_production_batch",
   "land_unit",
   "crop_cycle",
@@ -28,12 +29,18 @@
    "reqd": 1
   },
   {
+   "fieldname": "biogas_production",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Biogas Production",
+   "options": "Biogas Production"
+  },
+  {
    "fieldname": "biogas_production_batch",
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Biogas Production Batch",
-   "options": "Biogas Production Batch",
-   "reqd": 1
+   "options": "Biogas Production Batch"
   },
   {
    "fieldname": "land_unit",
@@ -124,7 +131,7 @@
  "is_submittable": 1,
  "modified": "2024-01-01 00:00:00",
  "modified_by": "Administrator",
- "module": "Precision Farming",
+ "module": "Biogas Management",
  "name": "Digestate Application",
  "owner": "Administrator",
  "permissions": [

@@ -1,0 +1,243 @@
+{
+ "autoname": "naming_series:BP-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "biogas_plant",
+  "conversion_ratio",
+  "waste_record",
+  "land_unit",
+  "biogas_batch",
+  "start_date",
+  "end_date",
+  "status",
+  "section_break_items",
+  "production_items",
+  "feedstock",
+  "total_input_quantity",
+  "section_break_expected",
+  "expected_biogas_quantity",
+  "expected_digestate_quantity",
+  "section_break_output",
+  "output_biogas_volume",
+  "output_digestate_quantity",
+  "biogas_yield_m3_per_kg",
+  "section_break_quality",
+  "quality_check",
+  "section_break_accounting",
+  "biogas_stock_entry",
+  "digestate_stock_entry",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BP-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "biogas_plant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Biogas Plant",
+   "options": "Biogas Plant",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "biogas_plant.conversion_ratio",
+   "fieldname": "conversion_ratio",
+   "fieldtype": "Float",
+   "label": "Conversion Ratio (m\u00b3/kg)",
+   "precision": "4",
+   "read_only": 1,
+   "description": "Auto-fetched from Biogas Plant"
+  },
+  {
+   "fieldname": "waste_record",
+   "fieldtype": "Link",
+   "label": "Source Waste Record",
+   "options": "Waste Record"
+  },
+  {
+   "fieldname": "land_unit",
+   "fieldtype": "Link",
+   "label": "Land Unit",
+   "options": "Land Unit"
+  },
+  {
+   "fieldname": "biogas_batch",
+   "fieldtype": "Link",
+   "label": "Biogas Batch",
+   "options": "Biogas Batch"
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Digesting\nCompleted\nCancelled",
+   "reqd": 1,
+   "default": "Digesting"
+  },
+  {
+   "fieldname": "section_break_items",
+   "fieldtype": "Section Break",
+   "label": "Input Materials"
+  },
+  {
+   "fieldname": "production_items",
+   "fieldtype": "Table",
+   "label": "Production Items",
+   "options": "Biogas Production Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "feedstock",
+   "fieldtype": "Table",
+   "label": "Feedstock",
+   "options": "Biogas Feedstock"
+  },
+  {
+   "fieldname": "total_input_quantity",
+   "fieldtype": "Float",
+   "label": "Total Input Quantity (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_expected",
+   "fieldtype": "Section Break",
+   "label": "Expected Output"
+  },
+  {
+   "fieldname": "expected_biogas_quantity",
+   "fieldtype": "Float",
+   "label": "Expected Biogas Quantity (m\u00b3)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "expected_digestate_quantity",
+   "fieldtype": "Float",
+   "label": "Expected Digestate Quantity (kg)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "section_break_output",
+   "fieldtype": "Section Break",
+   "label": "Actual Output"
+  },
+  {
+   "fieldname": "output_biogas_volume",
+   "fieldtype": "Float",
+   "label": "Biogas Produced (m\u00b3)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "output_digestate_quantity",
+   "fieldtype": "Float",
+   "label": "Digestate Produced (kg)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "biogas_yield_m3_per_kg",
+   "fieldtype": "Float",
+   "label": "Yield (m\u00b3/kg)",
+   "precision": "4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_quality",
+   "fieldtype": "Section Break",
+   "label": "Quality"
+  },
+  {
+   "fieldname": "quality_check",
+   "fieldtype": "Link",
+   "label": "Biogas Quality Check",
+   "options": "Biogas Quality Check",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_accounting",
+   "fieldtype": "Section Break",
+   "label": "Stock Accounting"
+  },
+  {
+   "fieldname": "biogas_stock_entry",
+   "fieldtype": "Link",
+   "label": "Biogas Stock Entry",
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "digestate_stock_entry",
+   "fieldtype": "Link",
+   "label": "Digestate Stock Entry",
+   "options": "Stock Entry",
+   "read_only": 1
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Biogas Production",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "is_submittable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Biogas Management",
+ "name": "Biogas Production",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "amend": 1,
+   "cancel": 1,
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "submit": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

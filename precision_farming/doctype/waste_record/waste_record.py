@@ -38,7 +38,7 @@ class WasteRecord(Document):
 	def on_submit(self):
 		self.classification_status = "Classified"
 		# Auto-create a composting batch only if processing route is NOT Biogas
-		# (Biogas route uses the manual 'Create Biogas Production Batch' button)
+		# (Biogas route uses the 'Start Biogas Production' button)
 		if self.processing_route != "Biogas" and self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
 			self._create_composting_batch()
 
@@ -58,17 +58,17 @@ class WasteRecord(Document):
 
 
 @frappe.whitelist()
-def create_biogas_batch_from_waste(waste_record_name):
-	"""Create a Biogas Production Batch with input entries auto-populated from a Waste Record.
+def create_biogas_production_from_waste(waste_record_name):
+	"""Create a Biogas Production with production items auto-populated from a Waste Record.
 
-	Called from the 'Create Biogas Production Batch' button on the Waste Record form.
-	Returns the batch name for navigation.
+	Called from the 'Start Biogas Production' button on the Waste Record form.
+	Returns the production name for navigation.
 	"""
 	waste_record = frappe.get_doc("Waste Record", waste_record_name)
 
-	if waste_record.biogas_batch:
-		frappe.msgprint(f"Biogas Production Batch {waste_record.biogas_batch} already exists.")
-		return {"batch": waste_record.biogas_batch, "existing": True}
+	if waste_record.biogas_production:
+		frappe.msgprint(f"Biogas Production already exists for this Waste Record.")
+		return {"production": waste_record.biogas_production, "existing": True}
 
 	# Need a Biogas Plant - prompt user to select one
 	plants = frappe.get_all("Biogas Plant", filters={"status": "Active"}, limit=1)
@@ -81,38 +81,38 @@ def create_biogas_batch_from_waste(waste_record_name):
 
 	plant = frappe.get_doc("Biogas Plant", plants[0].name)
 
-	batch = frappe.new_doc("Biogas Production Batch")
-	batch.biogas_plant = plants[0].name
-	batch.conversion_ratio = flt(plant.conversion_ratio) or 0.5
-	batch.waste_record = waste_record_name
-	batch.land_unit = waste_record.land_unit
-	batch.start_date = nowdate()
-	batch.status = "Digesting"
+	production = frappe.new_doc("Biogas Production")
+	production.biogas_plant = plants[0].name
+	production.conversion_ratio = flt(plant.conversion_ratio) or 0.5
+	production.waste_record = waste_record_name
+	production.land_unit = waste_record.land_unit
+	production.start_date = nowdate()
+	production.status = "Digesting"
 
-	# Auto-populate input entries from organic waste items
+	# Auto-populate production items from organic waste items
 	for item in waste_record.get("waste_items", []):
 		if item.waste_type:
 			waste_type_doc = frappe.get_cached_value("Waste Type", item.waste_type, "waste_category")
 			if waste_type_doc:
 				cat_type = frappe.get_cached_value("Waste Category", waste_type_doc, "category_type")
 				if cat_type == "Organic":
-					batch.append("input_entries", {
+					production.append("production_items", {
 						"waste_type": item.waste_type,
 						"quantity_kg": item.quantity_kg,
 						"notes": item.description
 					})
 
-	if not batch.get("input_entries"):
-		frappe.msgprint("No organic waste items found to add as input entries.")
+	if not production.get("production_items"):
+		frappe.msgprint("No organic waste items found to add as production items.")
 		return
 
-	batch.flags.ignore_permissions = True
-	batch.insert()
+	production.flags.ignore_permissions = True
+	production.insert()
 
-	frappe.db.set_value("Waste Record", waste_record_name, "biogas_batch", batch.name)
+	frappe.db.set_value("Waste Record", waste_record_name, "biogas_production", production.name)
 	frappe.db.set_value("Waste Record", waste_record_name, "classification_status", "Processing")
-	frappe.msgprint(f"Biogas Production Batch {batch.name} created with organic waste input entries.")
-	return {"batch": batch.name, "existing": False}
+	frappe.msgprint(f"Biogas Production {production.name} created with organic waste items.")
+	return {"production": production.name, "existing": False}
 
 
 @frappe.whitelist()

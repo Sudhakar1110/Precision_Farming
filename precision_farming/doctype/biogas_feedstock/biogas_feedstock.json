@@ -1,0 +1,51 @@
+{
+ "autoname": "format:BFS-{biogas_production}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "feedstock_type",
+  "quantity_kg",
+  "source",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "feedstock_type",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Feedstock Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "quantity_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Quantity (kg)",
+   "precision": "2",
+   "reqd": 1
+  },
+  {
+   "fieldname": "source",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Source"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Biogas Management",
+ "name": "Biogas Feedstock",
+ "owner": "Administrator",
+ "permissions": [],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

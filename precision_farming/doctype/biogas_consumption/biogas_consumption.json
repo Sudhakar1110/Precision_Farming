@@ -1,18 +1,16 @@
 {
- "autoname": "naming_series:BSE-.YYYY.-.#####",
+ "autoname": "naming_series:BC-.YYYY.-.#####",
  "creation": "2024-01-01 00:00:00",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "naming_series",
-  "biogas_production_batch",
+  "biogas_production",
   "biogas_batch",
-  "storage_date",
+  "consumption_date",
   "quantity_m3",
-  "column_break_details",
-  "warehouse",
-  "reference_stock_entry",
-  "section_break_notes",
+  "purpose",
+  "land_unit",
   "notes",
   "amended_from"
  ],
@@ -21,16 +19,14 @@
    "fieldname": "naming_series",
    "fieldtype": "Select",
    "label": "Series",
-   "options": "BSE-.YYYY.-",
+   "options": "BC-.YYYY.-",
    "reqd": 1
   },
   {
-   "fieldname": "biogas_production_batch",
+   "fieldname": "biogas_production",
    "fieldtype": "Link",
-   "in_list_view": 1,
-   "label": "Biogas Production Batch",
-   "options": "Biogas Production Batch",
-   "reqd": 1
+   "label": "Biogas Production",
+   "options": "Biogas Production"
   },
   {
    "fieldname": "biogas_batch",
@@ -39,12 +35,12 @@
    "options": "Biogas Batch"
   },
   {
-   "fieldname": "storage_date",
+   "default": "Today",
+   "fieldname": "consumption_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Storage Date",
-   "reqd": 1,
-   "default": "Today"
+   "label": "Consumption Date",
+   "reqd": 1
   },
   {
    "fieldname": "quantity_m3",
@@ -55,27 +51,18 @@
    "reqd": 1
   },
   {
-   "fieldname": "column_break_details",
-   "fieldtype": "Column Break"
-  },
-  {
-   "fieldname": "warehouse",
-   "fieldtype": "Link",
-   "label": "Warehouse",
-   "options": "Warehouse",
+   "fieldname": "purpose",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Purpose",
+   "options": "Heating\nElectricity Generation\nCooking\nOther",
    "reqd": 1
   },
   {
-   "fieldname": "reference_stock_entry",
+   "fieldname": "land_unit",
    "fieldtype": "Link",
-   "label": "Reference Stock Entry",
-   "options": "Stock Entry",
-   "read_only": 1
-  },
-  {
-   "fieldname": "section_break_notes",
-   "fieldtype": "Section Break",
-   "label": "Notes"
+   "label": "Land Unit",
+   "options": "Land Unit"
   },
   {
    "fieldname": "notes",
@@ -87,7 +74,7 @@
    "fieldtype": "Link",
    "label": "Amended From",
    "no_copy": 1,
-   "options": "Biogas Storage Entry",
+   "options": "Biogas Consumption",
    "print_hide": 1,
    "read_only": 1
   }
@@ -96,7 +83,7 @@
  "modified": "2024-01-01 00:00:00",
  "modified_by": "Administrator",
  "module": "Biogas Management",
- "name": "Biogas Storage Entry",
+ "name": "Biogas Consumption",
  "owner": "Administrator",
  "permissions": [
   {
@@ -112,6 +99,7 @@
    "write": 1
   },
   {
+   "create": 1,
    "email": 1,
    "export": 1,
    "print": 1,

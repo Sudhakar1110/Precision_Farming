@@ -17,16 +17,16 @@ frappe.ui.form.on('Waste Record', {
 						});
 					});
 				}
-				if (!frm.doc.biogas_batch) {
-					frm.add_custom_button(__('Create Biogas Production Batch'), function() {
+				if (!frm.doc.biogas_production) {
+					frm.add_custom_button(__('Start Biogas Production'), function() {
 						frappe.call({
-							method: 'precision_farming.doctype.waste_record.waste_record.create_biogas_batch_from_waste',
+							method: 'precision_farming.doctype.waste_record.waste_record.create_biogas_production_from_waste',
 							args: {
 								waste_record_name: frm.doc.name
 							},
 							callback: function(r) {
-								if (r.message && r.message.batch) {
-									frappe.set_route('Form', 'Biogas Production Batch', r.message.batch);
+								if (r.message && r.message.production) {
+									frappe.set_route('Form', 'Biogas Production', r.message.production);
 								}
 							}
 						});

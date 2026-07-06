@@ -9,12 +9,19 @@ class DigestateApplication(Document):
 		self.validate_available_stock()
 
 	def validate_digestate_batch(self):
-		"""Ensure the source batch is Completed."""
-		batch = frappe.get_doc("Biogas Production Batch", self.biogas_production_batch)
-		if batch.status != "Completed":
-			frappe.throw(
-				f"Biogas Production Batch {self.biogas_production_batch} must be Completed before application."
-			)
+		"""Ensure the source batch/production is Completed."""
+		if self.biogas_production:
+			production = frappe.get_doc("Biogas Production", self.biogas_production)
+			if production.status != "Completed":
+				frappe.throw(
+					f"Biogas Production {self.biogas_production} must be Completed before application."
+				)
+		elif self.biogas_production_batch:
+			batch = frappe.get_doc("Biogas Production Batch", self.biogas_production_batch)
+			if batch.status != "Completed":
+				frappe.throw(
+					f"Biogas Production Batch {self.biogas_production_batch} must be Completed before application."
+				)
 
 	def calculate_application_rate(self):
 		"""Compute application rate as kg per hectare."""

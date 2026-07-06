@@ -1,7 +1,6 @@
 {
  "charts": [],
- "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Biogas Production\",\"doctypes\":[{\"doctype\":\"Biogas Production\",\"label\":\"Production\",\"icon\":\"biotech\",\"status_type\":\"Active\"},{\"doctype\":\"Biogas Quality Check\",\"label\":\"Quality Check\",\"icon\":\"check\",\"status_type\":\"Active\"},{\"doctype\":\"Biogas Storage Entry\",\"label\":\"Storage\",\"icon\":\"warehouse\",\"status_type\":\"Done\"},{\"doctype\":\"Digestate Application\",\"label\":\"Digestate App.\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Masters</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Production Settings\",\"col\":4}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Conversion Ratio\",\"col\":4}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Production\",\"col\":3}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Batch\",\"col\":3}},{\"id\":\"card5\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Quality Check\",\"col\":3}},{\"id\":\"card6\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Storage Entry\",\"col\":3}},{\"id\":\"spacer3\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"card7\",\"type\":\"card\",\"data\":{\"card_name\":\"Biogas Consumption\",\"col\":3}},{\"id\":\"card8\",\"type\":\"card\",\"data\":{\"card_name\":\"Digestate Production\",\"col\":3}},{\"id\":\"card9\",\"type\":\"card\",\"data\":{\"card_name\":\"Digestate Application\",\"col\":3}}]",
- "creation": "2026-07-02 00:00:00.000000",
+ "content": "[{\"id\":\"wo1\",\"type\":\"workflow_overview\",\"data\":{\"col\":12,\"workflows\":[{\"label\":\"Biogas Production\",\"doctypes\":[{\"doctype\":\"Biogas Production Batch\",\"label\":\"Production\",\"icon\":\"biotech\",\"status_type\":\"Active\"},{\"doctype\":\"Biogas Quality Check\",\"label\":\"Quality Check\",\"icon\":\"check\",\"status_type\":\"Active\"},{\"doctype\":\"Biogas Storage Entry\",\"label\":\"Storage\",\"icon\":\"warehouse\",\"status_type\":\"Done\"},{\"doctype\":\"Digestate Application\",\"label\":\"Digestate App.\",\"icon\":\"agriculture\",\"status_type\":\"Done\"}]}]}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\\"h4\\\"><b>Masters</b></span>\",\"col\":12}},{\"id\":\"card1\",\"type\":\"card\",\"data\":{\"card_name\":\"Settings\",\"col\":6}},{\"id\":\"card2\",\"type\":\"card\",\"data\":{\"card_name\":\"Infrastructure\",\"col\":6}},{\"id\":\"spacer2\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"header2\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\\"h4\\\"><b>Transactions</b></span>\",\"col\":12}},{\"id\":\"card3\",\"type\":\"card\",\"data\":{\"card_name\":\"Production\",\"col\":4}},{\"id\":\"card4\",\"type\":\"card\",\"data\":{\"card_name\":\"Quality & Storage\",\"col\":4}},{\"id\":\"card5\",\"type\":\"card\",\"data\":{\"card_name\":\"Output\",\"col\":4}}]",
  "custom_blocks": [],
  "doctype": "Workspace",
  "for_user": "",
@@ -13,7 +12,7 @@
  "links": [
   {
    "type": "Card Break",
-   "label": "Masters",
+   "label": "Settings",
    "link_type": "DocType",
    "link_count": 2
   },
@@ -32,14 +31,26 @@
   },
   {
    "type": "Card Break",
-   "label": "Transactions",
+   "label": "Infrastructure",
    "link_type": "DocType",
-   "link_count": 7
+   "link_count": 1
   },
   {
    "type": "Link",
-   "label": "Biogas Production",
-   "link_to": "Biogas Production",
+   "label": "Biogas Plant",
+   "link_to": "Biogas Plant",
+   "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Production",
+   "link_type": "DocType",
+   "link_count": 2
+  },
+  {
+   "type": "Link",
+   "label": "Biogas Production Batch",
+   "link_to": "Biogas Production Batch",
    "link_type": "DocType",
    "onboard": 1
   },
@@ -50,16 +61,29 @@
    "link_type": "DocType"
   },
   {
+   "type": "Card Break",
+   "label": "Quality & Storage",
+   "link_type": "DocType",
+   "link_count": 2
+  },
+  {
    "type": "Link",
    "label": "Biogas Quality Check",
    "link_to": "Biogas Quality Check",
-   "link_type": "DocType"
+   "link_type": "DocType",
+   "onboard": 1
   },
   {
    "type": "Link",
    "label": "Biogas Storage Entry",
    "link_to": "Biogas Storage Entry",
    "link_type": "DocType"
+  },
+  {
+   "type": "Card Break",
+   "label": "Output",
+   "link_type": "DocType",
+   "link_count": 3
   },
   {
    "type": "Link",
@@ -81,16 +105,14 @@
   }
  ],
  "module": "Precision Farming",
- "modified": "2026-07-02 00:00:00",
- "modified_by": "Administrator",
  "name": "Biogas Management",
  "owner": "Administrator",
  "shortcuts": [
   {
-   "label": "New Biogas Production",
+   "label": "New Biogas Production Batch",
    "type": "DocType",
-   "link_to": "Biogas Production",
-   "doc_type": "Biogas Production",
+   "link_to": "Biogas Production Batch",
+   "doc_type": "Biogas Production Batch",
    "color": "Orange",
    "icon": "biotech"
   },
@@ -110,5 +132,7 @@
    "color": "Green",
    "icon": "group"
   }
- ]
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC"
 }

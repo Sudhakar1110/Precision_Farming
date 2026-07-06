@@ -59,11 +59,29 @@ def link_module_to_domain():
 
 
 def create_biogas_master_data():
-	"""Create Items and Warehouses needed for the Biogas Management module."""
+	"""Create UOMs, Items and Warehouses needed for the Biogas Management module.
+
+	Runs after_install and after_migrate. Creates the custom UOM "m3" if missing
+	(since it does not ship with ERPNext by default) and ensures "Kg" exists.
+	"""
+	create_uom_if_not_exists("m3", "Cubic Meter", "Volume")
+	create_uom_if_not_exists("Kg", "Kilogram", "Weight")
 	create_item_if_not_exists("Biogas", "Biogas", "m3", "Farm Energy")
 	create_item_if_not_exists("Digestate", "Digestate", "Kg", "Organic Inputs")
 	create_warehouse_if_not_exists("Biogas Storage")
 	create_warehouse_if_not_exists("Digestate Storage")
+
+
+def create_uom_if_not_exists(uom_name, uom_description, uom_type):
+	"""Create a UOM if it doesn't already exist."""
+	if not frappe.db.exists("UOM", uom_name):
+		uom = frappe.get_doc({
+			"doctype": "UOM",
+			"uom_name": uom_name,
+			"enabled": 1,
+		})
+		uom.insert(ignore_permissions=True)
+		frappe.db.commit()
 
 
 def create_item_if_not_exists(item_code, item_name, uom, item_group):

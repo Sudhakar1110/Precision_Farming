@@ -57,6 +57,13 @@ def get_columns():
 			"width": 120
 		},
 		{
+			"fieldname": "expected_biogas_quantity",
+			"label": _("Expected Biogas (m\u00b3)"),
+			"fieldtype": "Float",
+			"precision": 2,
+			"width": 140
+		},
+		{
 			"fieldname": "output_biogas_volume",
 			"label": _("Biogas Produced (m\u00b3)"),
 			"fieldtype": "Float",
@@ -64,11 +71,11 @@ def get_columns():
 			"width": 150
 		},
 		{
-			"fieldname": "yield_m3_per_kg",
-			"label": _("Yield (m\u00b3/kg)"),
+			"fieldname": "expected_digestate_quantity",
+			"label": _("Expected Digestate (kg)"),
 			"fieldtype": "Float",
-			"precision": 4,
-			"width": 120
+			"precision": 2,
+			"width": 150
 		},
 		{
 			"fieldname": "output_digestate_quantity",
@@ -77,13 +84,20 @@ def get_columns():
 			"precision": 2,
 			"width": 160
 		},
+		{
+			"fieldname": "yield_m3_per_kg",
+			"label": _("Yield (m\u00b3/kg)"),
+			"fieldtype": "Float",
+			"precision": 4,
+			"width": 120
+		},
 	]
 
 
 def get_data(filters):
 	"""Fetch report data."""
 	conditions = "bp.docstatus = 1 AND bp.status = 'Completed'"
-	
+
 	if filters.get("from_date"):
 		conditions += f" AND bp.start_date >= '{filters['from_date']}'"
 	if filters.get("to_date"):
@@ -101,6 +115,8 @@ def get_data(filters):
 			bp.start_date AS start_date,
 			bp.end_date AS end_date,
 			bp.total_input_quantity AS total_input_quantity,
+			bp.expected_biogas_quantity AS expected_biogas_quantity,
+			bp.expected_digestate_quantity AS expected_digestate_quantity,
 			bp.output_biogas_volume AS output_biogas_volume,
 			CASE WHEN bp.total_input_quantity > 0
 				THEN ROUND(bp.output_biogas_volume / bp.total_input_quantity, 4)

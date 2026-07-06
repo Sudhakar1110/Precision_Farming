@@ -23,17 +23,12 @@ class BiogasProductionBatch(Document):
 			self.biogas_yield_m3_per_kg = 0
 
 	def validate_waste_record_consumption(self):
-		"""Ensure total input doesn't exceed the source Waste Record's organic weight.
-
-		Uses a single SQL query to sum already-consumed quantities from other
-		batches linked to the same Waste Record.
-		"""
+		"""Ensure total input doesn't exceed the source Waste Record's organic weight."""
 		if not self.waste_record:
 			return
 
 		waste_record = frappe.get_doc("Waste Record", self.waste_record)
 
-		# Single efficient query to sum consumed quantities
 		exclusion_clause = f"AND name != {frappe.db.escape(self.name)}" if self.name else ""
 		total_consumed = frappe.db.sql(f"""
 			SELECT COALESCE(SUM(total_input_quantity), 0)
@@ -126,37 +121,124 @@ def mark_completed(batch_name):
 		frappe.throw(f"Failed to complete batch: {str(e)}")
 
 
+def _ensure_item_exists(item_code, item_name, uom, item_group, gst_hsn_code=None):
+	"""Create an Item at runtime if it doesn't exist. Returns the item code."""
+	if not frappe.db.exists("Item", item_code):
+		# Ensure linked records exist first
+		_ensure_uom_exists(uom)
+		_ensure_item_group_exists(item_group)
+		if gst_hsn_code:
+			_ensure_gst_hsn_code_exists(gst_hsn_code)
+
+		item_doc = {
+			"doctype": "Item",
+			"item_code": item_code,
+			"item_name": item_name,
+			"item_group": item_group,
+			"stock_uom": uom,
+			"is_stock_item": 1,
+		}
+		if gst_hsn_code:
+			item_doc["gst_hsn_code"] = gst_hsn_code
+
+		item = frappe.get_doc(item_doc)
+		item.flags.ignore_permissions = True
+		item.insert()
+	return item_code
+
+
+def _ensure_uom_exists(uom_name):
+	"""Create a UOM at runtime if it doesn't exist."""
+	if not frappe.db.exists("UOM", uom_name):
+		uom = frappe.get_doc({
+			"doctype": "UOM",
+			"uom_name": uom_name,
+			"enabled": 1,
+		})
+		uom.flags.ignore_permissions = True
+		uom.insert()
+
+
+def _ensure_item_group_exists(item_group_name, parent_item_group="Products"):
+	"""Create an Item Group at runtime if it doesn't exist."""
+	if not frappe.db.exists("Item Group", item_group_name):
+		ig = frappe.get_doc({
+			"doctype": "Item Group",
+			"item_group_name": item_group_name,
+			"parent_item_group": parent_item_group,
+			"is_group": 0,
+		})
+		ig.flags.ignore_permissions = True
+		ig.insert()
+
+
+def _ensure_gst_hsn_code_exists(hsn_code, description=None):
+	"""Create a GST HSN Code at runtime if it doesn't exist."""
+	if frappe.db.exists("GST HSN Code", hsn_code):
+		return
+	if not frappe.db.exists("DocType", "GST HSN Code"):
+		return
+	hsn = frappe.get_doc({
+		"doctype": "GST HSN Code",
+		"hsn_code": hsn_code,
+		"description": description or hsn_code,
+	})
+	hsn.flags.ignore_permissions = True
+	hsn.insert()
+
+
+def _ensure_warehouse_exists(warehouse_name):
+	"""Create a Warehouse at runtime if it doesn't exist. Returns the full warehouse name."""
+	company = frappe.defaults.get_user_default("Company")
+	if not company:
+		frappe.throw("No default company set. Please set a default company first.")
+
+	abbr = frappe.db.get_value("Company", company, "abbr")
+	full_name = f"{warehouse_name} - {abbr}"
+
+	if not frappe.db.exists("Warehouse", full_name):
+		warehouse = frappe.get_doc({
+			"doctype": "Warehouse",
+			"warehouse_name": warehouse_name,
+			"company": company,
+		})
+		warehouse.flags.ignore_permissions = True
+		warehouse.insert()
+
+	return full_name
+
+
 def _create_stock_entry(item_code, qty, uom, warehouse_prefix):
 	"""Create a Material Receipt Stock Entry for the given item/quantity.
-	
-	Note: Warehouse names use the company abbreviation suffix. We look up
-	by warehouse_name pattern matching since the app may be on any site.
+
+	Auto-creates the Item, UOM, Item Group, GST HSN Code, and Warehouse
+	if they do not exist yet (runtime self-healing).
 	"""
-	from frappe.utils import cstr
-	
-	# Find the warehouse dynamically
-	warehouse_name = f"{warehouse_prefix}"
-	warehouses = frappe.get_all("Warehouse", 
-		filters={"warehouse_name": ["like", f"{warehouse_prefix}%"]},
-		limit=1)
-	
-	if not warehouses:
-		frappe.throw(f"Warehouse '{warehouse_prefix}' not found. Please create it via Setup.")
-	
+	# Auto-create master data at runtime if missing
+	if item_code == "Biogas":
+		_ensure_item_exists("Biogas", "Biogas", "m3", "Farm Energy", "27112900")
+	elif item_code == "Digestate":
+		_ensure_item_exists("Digestate", "Digestate", "Kg", "Organic Inputs", "31010000")
+	else:
+		_ensure_item_exists(item_code, item_code, uom, "Products")
+
+	# Ensure warehouse exists
+	full_warehouse_name = _ensure_warehouse_exists(warehouse_prefix)
+
 	se = frappe.new_doc("Stock Entry")
 	se.stock_entry_type = "Material Receipt"
 	se.company = frappe.defaults.get_user_default("Company")
-	
+
 	se.append("items", {
 		"item_code": item_code,
-		"t_warehouse": warehouses[0].name,
+		"t_warehouse": full_warehouse_name,
 		"qty": qty,
 		"uom": uom,
 		"stock_uom": uom,
 		"conversion_factor": 1,
-		"basic_rate": 0
+		"basic_rate": 0,
 	})
-	
+
 	se.flags.ignore_permissions = True
 	se.insert()
 	se.submit()

@@ -14,6 +14,9 @@
   "section_break_input",
   "input_entries",
   "total_input_quantity",
+  "section_break_expected",
+  "expected_biogas_quantity",
+  "expected_digestate_quantity",
   "section_break_output",
   "output_biogas_volume",
   "output_digestate_quantity",
@@ -92,9 +95,26 @@
    "read_only": 1
   },
   {
+   "fieldname": "section_break_expected",
+   "fieldtype": "Section Break",
+   "label": "Expected Output"
+  },
+  {
+   "fieldname": "expected_biogas_quantity",
+   "fieldtype": "Float",
+   "label": "Expected Biogas Quantity (m\u00b3)",
+   "precision": "2"
+  },
+  {
+   "fieldname": "expected_digestate_quantity",
+   "fieldtype": "Float",
+   "label": "Expected Digestate Quantity (kg)",
+   "precision": "2"
+  },
+  {
    "fieldname": "section_break_output",
    "fieldtype": "Section Break",
-   "label": "Output"
+   "label": "Actual Output"
   },
   {
    "fieldname": "output_biogas_volume",

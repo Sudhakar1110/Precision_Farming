@@ -71,6 +71,7 @@ def create_biogas_master_data():
 	create_warehouse_if_not_exists("Biogas Storage")
 	create_warehouse_if_not_exists("Digestate Storage")
 	create_biogas_production_settings_if_not_exists()
+	create_biogas_management_workspace_if_not_exists()
 
 
 def create_uom_if_not_exists(uom_name):
@@ -167,3 +168,45 @@ def create_biogas_production_settings_if_not_exists():
 	})
 	settings.insert(ignore_permissions=True)
 	frappe.db.commit()
+
+
+def create_biogas_management_workspace_if_not_exists():
+	"""Create the Biogas Management workspace if not already present.
+
+	Uses 'Precision Farming' module to avoid LinkValidationError during migration
+	(since 'Biogas Management' Module Def may not exist yet). Workspace still
+	appears as a separate 'Biogas Management' entry in the Desk.
+	"""
+	if frappe.db.exists("Workspace", "Biogas Management"):
+		return
+	workspace = frappe.get_doc({
+		"doctype": "Workspace",
+		"title": "Biogas Management",
+		"label": "Biogas Management",
+		"module": "Precision Farming",
+		"icon": "biotech",
+		"is_public": 1,
+		"is_hidden": 0,
+		"links": [
+			{"type": "Card Break", "label": "Masters"},
+			{"type": "Link", "label": "Biogas Production Settings", "link_to": "Biogas Production Settings", "link_type": "DocType", "onboard": 1},
+			{"type": "Link", "label": "Biogas Conversion Ratio", "link_to": "Biogas Conversion Ratio", "link_type": "DocType"},
+			{"type": "Card Break", "label": "Transactions"},
+			{"type": "Link", "label": "Biogas Production", "link_to": "Biogas Production", "link_type": "DocType", "onboard": 1},
+			{"type": "Link", "label": "Biogas Batch", "link_to": "Biogas Batch", "link_type": "DocType"},
+			{"type": "Link", "label": "Biogas Quality Check", "link_to": "Biogas Quality Check", "link_type": "DocType"},
+			{"type": "Link", "label": "Biogas Storage Entry", "link_to": "Biogas Storage Entry", "link_type": "DocType"},
+			{"type": "Link", "label": "Biogas Consumption", "link_to": "Biogas Consumption", "link_type": "DocType"},
+			{"type": "Link", "label": "Digestate Production", "link_to": "Digestate Production", "link_type": "DocType"},
+			{"type": "Link", "label": "Digestate Application", "link_to": "Digestate Application", "link_type": "DocType"}
+		],
+	})
+	workspace.flags.ignore_permissions = True
+	try:
+		workspace.insert()
+		frappe.db.commit()
+	except frappe.LinkValidationError as e:
+		# If link validation fails, try creating with ignore_links
+		workspace.flags.ignore_links = True
+		workspace.insert()
+		frappe.db.commit()

@@ -2,8 +2,8 @@
 ## Precision Farming — Waste Management & Fertilizer Measurement System
 
 **App Name:** Precision Farming  
-**Version:** 1.0.0  
-**Module:** Precision Farming  
+**Version:** 2.0.0  
+**Modules:** Precision Farming, Biogas Management  
 **Domain:** Agriculture  
 **Required Apps:** Frappe v15, ERPNext v15 (Agriculture domain)  
 **Last Updated:** July 6, 2026
@@ -16,9 +16,10 @@
 2. [System Architecture](#2-system-architecture)
 3. [Getting Started](#3-getting-started)
 4. [Feature 1: Agriculture Waste Management](#4-feature-1-agriculture-waste-management)
-5. [Feature 2: Fertilizer Measurement & Management](#5-feature-2-fertilizer-measurement--management)
-6. [Quality Control & Compliance](#6-quality-control--compliance)
-7. [Workspace Navigation](#7-workspace-navigation)
+5. [Feature 2: Biogas Management](#5-feature-2-biogas-management)
+6. [Feature 3: Fertilizer Measurement & Management](#6-feature-3-fertilizer-measurement--management)
+7. [Quality Control & Compliance](#7-quality-control--compliance)
+8. [Workspace Navigation](#8-workspace-navigation)
 8. [Scheduled Tasks & Automation](#8-scheduled-tasks--automation)
 9. [Setup & Configuration (Fixtures)](#9-setup--configuration-fixtures)
 10. [Demo Data](#10-demo-data)
@@ -34,14 +35,15 @@
 Precision Farming is a Frappe/ERPNext application designed for managing agricultural waste and fertilizer measurement. It provides a complete digital workflow for:
 
 - **Agriculture Waste Management** — tracking waste collection, composting, recycling, and disposal
+- **Biogas Management** — biogas plant setup, production batch tracking, quality monitoring, storage, consumption, and digestate application
 - **Fertilizer Measurement & Management** — soil analysis, nutrient gap calculation, fertilizer recommendation, and application tracking
 
 ### 1.2 Key Features
-- **30 DocTypes** — 14 master/document DocTypes, 9 child tables, 7 setup masters
-- **3 Workflow Sections** — Waste Management (Organic), Inorganic Waste, Fertilizer Management
+- **44 DocTypes** — 22 master/document DocTypes, 14 child tables, 8 setup masters
+- **5 Workflow Sections** — Waste Management (Organic), Inorganic Waste, Biogas Management, Fertilizer Management
 - **7 Fixtures** — auto-loaded on install (Waste Category, Waste Type, Application Method, etc.)
 - **5 Automated Tasks** — daily compliance checks, weekly summaries, monthly reports
-- **6 Quick Action Shortcuts** — New Waste Record, Composting Batch, Soil Analysis, Fertilizer Recommendation, Fertilizer Application, Compost Application
+- **9 Quick Action Shortcuts** — New Waste Record, Composting Batch, Biogas Production Batch, Biogas Quality Check, Biogas Batch, Soil Analysis, Fertilizer Recommendation, Fertilizer Application, Compost Application
 - **Role-based Access** — Agriculture Manager (full), Agriculture User (create/read/write)
 
 ---
@@ -89,6 +91,20 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 | 28 | Application Method | Setup Master | Setup | ❌ |
 | 29 | Soil Nutrient Threshold | Setup Master | Setup | ❌ |
 | 30 | Measurement Verification | Document | Measurement & Verification | ❌ |
+| 31 | Biogas Plant | Document | Infrastructure | ❌ |
+| 32 | Biogas Production Settings | Document | Settings | ❌ |
+| 33 | Biogas Conversion Ratio | Document | Settings | ❌ |
+| 34 | Biogas Production Batch | Document | Production | ✅ |
+| 35 | Biogas Batch | Document | Production | ❌ |
+| 36 | Biogas Production | Document | Production | ✅ |
+| 37 | Biogas Production Item | Child Table | — | ❌ |
+| 38 | Biogas Feedstock | Child Table | — | ❌ |
+| 39 | Biogas Batch Input | Child Table | — | ❌ |
+| 40 | Biogas Quality Check | Document | Quality & Storage | ❌ |
+| 41 | Biogas Storage Entry | Document | Quality & Storage | ❌ |
+| 42 | Biogas Consumption | Document | Output | ❌ |
+| 43 | Digestate Production | Document | Output | ❌ |
+| 44 | Digestate Application | Document | Output | ✅ |
 
 ### 2.3 Naming Series Convention
 
@@ -107,6 +123,16 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 | Collection Schedule | CS | CS-.YYYY.-.##### |
 | Compliance Record | CR | CR-.YYYY.-.##### |
 | Measurement Verification | MV | MV-.YYYY.-.##### |
+| Biogas Production Batch | BP | BP-.YYYY.-.##### |
+| Biogas Batch | BB | BB-.YYYY.-.##### |
+| Biogas Production | BP | BP-.YYYY.-.##### |
+| Biogas Quality Check | BQC | BQC-.YYYY.-.##### |
+| Biogas Storage Entry | BSE | BSE-.YYYY.-.##### |
+| Biogas Consumption | BC | BC-.YYYY.-.##### |
+| Digestate Production | DP | DP-.YYYY.-.##### |
+| Digestate Application | DA | DA-.YYYY.-.##### |
+| Biogas Plant | — | By fieldname (plant_name) |
+| Biogas Conversion Ratio | BCR | BCR-{waste_type}-{###} |
 
 > **Note:** Demo data uses `DEMO-*` names (e.g., `DEMO-WR-001`) instead of auto-generated naming series names to ensure cross-references work correctly on submit.
 
@@ -128,6 +154,19 @@ Precision Farming is a Frappe/ERPNext application designed for managing agricult
 │  │  Waste   │───▶│  Recycling   │───▶│   Disposal   │              │
 │  │  Record  │    │    Record    │    │    Record    │              │
 │  └──────────┘    └──────────────┘    └──────────────┘              │
+│                                                                     │
+│  🔋 BIOGAS MANAGEMENT                                              │
+│  ┌──────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────┐  │
+│  │  Waste   │───▶│   Biogas     │───▶│    Biogas    │───▶│Digest│  │
+│  │  Record  │    │ Production   │    │  Quality     │    │Applic│  │
+│  └──────────┘    │   Batch      │    │   Check      │    └──────┘  │
+│                  └──────┬───────┘    └──────┬───────┘              │
+│                         │                   │                      │
+│                         ▼                   ▼                      │
+│                  ┌──────────────┐    ┌──────────────┐              │
+│                  │    Biogas    │    │   Digestate  │              │
+│                  │   Storage    │    │  Production  │              │
+│                  └──────────────┘    └──────────────┘              │
 │                                                                     │
 │  🌾 FERTILIZER MANAGEMENT                                           │
 │  ┌──────────┐    ┌──────────────┐    ┌──────────────┐    ┌──────┐  │
@@ -296,9 +335,135 @@ Waste Record → Recycling Record  OR  Waste Record → Disposal Record
 
 ---
 
-## 5. FEATURE 2: FERTILIZER MEASUREMENT & MANAGEMENT
+## 5. FEATURE 2: BIOGAS MANAGEMENT
 
-### 5.1 Workflow
+### 5.1 Biogas Production Workflow
+```
+Waste Record → Biogas Production Batch → Biogas Quality Check → Biogas Storage Entry
+                                                                   → Digestate Production → Digestate Application
+                                                                   → Biogas Consumption
+```
+
+#### Step 1: Biogas Plant (Setup)
+1. Navigate to **Infrastructure** card → **Biogas Plant**
+2. Click **+ Add Biogas Plant**
+3. Fill required fields:
+   - **Plant Name** — Unique name (auto-sets document name)
+   - **Land Unit** — Link to Land Unit (from ERPNext Agriculture)
+   - **Digester Type** — Fixed Dome / Floating Drum / Balloon-Bag / Continuous Stirred Tank
+   - **Status** — Active / Under Maintenance / Inactive
+4. Optional fields:
+   - **Capacity (m³)** — Maximum biogas capacity
+   - **Conversion Ratio (m³/kg)** — Default conversion ratio for this plant
+5. Save
+
+#### Step 2: Biogas Production Batch
+1. Navigate to **Production** card → **Biogas Production Batch**
+2. Click **+ New Biogas Production Batch**
+3. Fill required fields:
+   - **Biogas Plant** — Link to Biogas Plant
+   - **Start Date** — When production begins
+   - **Status** — Digesting / Completed / Cancelled
+4. Optional fields:
+   - **Source Waste Record** — Link to Waste Record
+   - **Land Unit** — Link to Land Unit
+   - **Biogas Batch** — Link to Biogas Batch
+5. Add **Input Entries** (child table):
+   - **Waste Type** — Select from Waste Type
+   - **Quantity (kg)** — Weight of each input type
+   - **C:N Ratio** — Optional
+6. Read-only fields:
+   - **Total Input Quantity (kg)**
+   - **Conversion Ratio** — Auto-fetched from Biogas Plant
+7. Optional: **Expected Biogas Quantity (m³)**, **Expected Digestate Quantity (kg)**
+8. **Submit** to lock the record
+
+#### Step 3: Biogas Quality Check
+1. Navigate to **Quality & Storage** card → **Biogas Quality Check**
+2. Click **+ New Biogas Quality Check**
+3. Fill required fields:
+   - **Check Date**
+   - **Status** — Pending / In Progress / Completed
+4. Optional: Link to **Biogas Production**, **Biogas Production Batch**, or **Biogas Batch**
+5. Fill quality parameters:
+   - **Methane (CH₄) %**
+   - **Carbon Dioxide (CO₂) %**
+   - **Hydrogen Sulfide (H₂S) ppm**
+   - **Moisture %**
+   - **Temperature (°C)**
+   - **pH Level**
+6. Read-only: **Overall Result** — Pass / Conditional Pass / Fail
+7. Add remarks if needed
+8. **Save**
+
+#### Step 4: Biogas Storage Entry
+1. Navigate to **Quality & Storage** card → **Biogas Storage Entry**
+2. Click **+ New Biogas Storage Entry**
+3. Required fields:
+   - **Biogas Production Batch** — Link to completed batch
+   - **Storage Date**
+   - **Quantity (m³)** — Volume stored
+   - **Warehouse** — Select Biogas Storage warehouse
+4. Optional: **Biogas Batch**, **Notes**
+5. **Save**
+
+#### Step 5: Biogas Consumption
+1. Navigate to **Output** card → **Biogas Consumption**
+2. Click **+ New Biogas Consumption**
+3. Required fields:
+   - **Consumption Date**
+   - **Quantity (m³)**
+   - **Purpose** — Heating / Electricity Generation / Cooking / Other
+4. Optional: **Biogas Production** (link), **Biogas Batch**, **Land Unit**
+5. **Save**
+
+#### Step 6: Digestate Production & Application
+
+**Digestate Production:**
+1. Navigate to **Output** card → **Digestate Production**
+2. Required fields:
+   - **Biogas Production** — Link to production record
+   - **Production Date**
+   - **Quantity (kg)**
+3. Optional: **Warehouse** (Digestate Storage), **Quality Check** (link)
+4. **Save**
+
+**Digestate Application:**
+1. Navigate to **Output** card → **Digestate Application**
+2. Required fields:
+   - **Land Unit** — Target field
+   - **Application Date**
+   - **Quantity Applied (kg)**
+3. Optional: **Biogas Production Batch** (link), **Application Method**
+4. **Submit** to lock
+
+### 5.2 Biogas Conversion Ratios
+
+Biogas Conversion Ratios define how efficiently each waste type converts to biogas. Set up for each waste type:
+
+| Waste Type | Conversion Ratio (m³/kg) | Digestate Factor |
+|------------|:-----------------------:|:----------------:|
+| Crop Residue | 0.45 | 1.50 |
+| Animal Manure | 0.35 | 1.80 |
+| Fruit & Vegetable Waste | 0.55 | 1.30 |
+| Straw | 0.40 | 1.60 |
+| Dry Leaves | 0.30 | 1.40 |
+
+### 5.3 Biogas Production Settings
+
+The **Biogas Production Settings** singleton configures global defaults:
+- **Default Conversion Ratio** — 0.50 m³/kg
+- **Digestate Factor** — 1.50 (multiplier to estimate digestate from biogas)
+- **Default Methane Threshold** — 50.0%
+- **Default CO₂ Threshold** — 50.0%
+- **Default H₂S Threshold** — 1000 ppm
+- **Enable Auto Stock Entry** — Auto-create Stock Entries on batch completion
+
+---
+
+## 6. FEATURE 3: FERTILIZER MEASUREMENT & MANAGEMENT
+
+### 6.1 Workflow
 ```
 Soil Analysis → Nutrient Analysis → Fertilizer Recommendation → Fertilizer Application
 ```
@@ -394,7 +559,7 @@ Plus supporting: Fertilizer Schedule (planning), Measurement Verification (quali
 
 ---
 
-## 6. QUALITY CONTROL & COMPLIANCE
+## 7. QUALITY CONTROL & COMPLIANCE
 
 ### 6.1 Compliance Records
 - Track regulatory compliance for waste management and fertilizer usage
@@ -417,71 +582,88 @@ Plus supporting: Fertilizer Schedule (planning), Measurement Verification (quali
 
 ---
 
-## 7. WORKSPACE NAVIGATION
+## 8. WORKSPACE NAVIGATION
 
-### 7.1 Workspace Layout
+### 8.1 Workspace Layout
 
+The Precision Farming app provides two workspaces:
+
+#### Precision Farming Workspace
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    WORKFLOW OVERVIEW                                 │
 ├─────────────────────────────────────────────────────────────────────┤
-│                                                                     │
-│ 🌿 Waste Management          ♻️ Inorganic Waste      🌾 Fertilizer  │
-│                              │                       Management    │
-│ Waste Collection →           Waste Collection →      Soil Test →   │
-│ Composting →                 Recycling →             NPK Analysis →│
-│ Field Application            Disposal                Recommendation→│
-│                                                       Application   │
+│ 🌿 Waste Mgmt     ♻️ Inorganic     🔋 Biogas Mgmt    🌾 Fertilizer  │
+│ Waste Coll.→      Waste Coll.→     Production →       Soil Test→   │
+│ Composting→       Recycling→      Quality Check→      NPK Analysis→│
+│ Field App.        Disposal        Storage/App.        Recomm.→App. │
 └─────────────────────────────────────────────────────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────┐
-│                AGRICULTURE WASTE MANAGEMENT                         │
-├──────────────┬──────────────┬──────────────┬───────────────────────┤
-│ Waste        │ Composting   │ Disposal &   │ Compliance &          │
-│ Collection   │              │ Recycling    │ Records               │
+┌──────────────┬──────────────┬──────────────┬───────────────────────┐
+│ Waste Coll.  │ Composting   │ Disposal &   │ Compliance            │
+│ • Waste Rec. │ • Comp. Batch│ Recycling    │ • Compliance Record   │
+│ • Waste Cat. │ • Comp. App. │ • Coll. Sched│                       │
+│ • Waste Type │ • Comp. QC   │ • Recycl. Rec│                       │
+│              │ • Comp. QC Pa│ • Disp. Rec. │                       │
+│ Biogas Plants│ Biogas Prod. │ Biogas Batch │ Digestate Application │
+│ • Biogas Pl. │ • BPB        │ • Biogas Btch│ • Digestate App.      │
 │              │              │              │                       │
-│ • Waste      │ • Composting │ • Collection  │ • Compliance Record   │
-│   Record     │   Batch      │   Schedule   │                       │
-│ • Waste      │ • Compost    │ • Recycling  │                       │
-│   Category   │   Application│   Record     │                       │
-│ • Waste Type │ • Compost    │ • Disposal   │                       │
-│              │   Quality    │   Record     │                       │
-│              │   Check      │              │                       │
-│              │ • Compost    │              │                       │
-│              │   Quality    │              │                       │
-│              │   Parameter  │              │                       │
-└──────────────┴──────────────┴──────────────┴───────────────────────┘
-
-┌─────────────────────────────────────────────────────────────────────┐
-│                FERTILIZER MEASUREMENT                               │
-├──────────────┬──────────────┬──────────────┬───────────────────────┤
-│ Soil &       │ Fertilizer   │ Setup        │ Measurement &         │
-│ Nutrient     │ Planning     │              │ Verification          │
-│ Analysis     │              │              │                       │
-│              │              │              │                       │
-│ • Soil       │ • Fertilizer │ • Application│ • Measurement         │
-│   Analysis   │   Recommend  │   Method     │   Verification        │
-│ • Nutrient   │ • Fertilizer │ • Soil       │                       │
-│   Analysis   │   Applic.    │   Nutrient   │                       │
-│ • Crop       │ • Fertilizer │   Threshold  │                       │
-│   Nutrient   │   Schedule   │              │                       │
-│   Standard   │ • Fertilizer │              │                       │
-│              │   Product    │              │                       │
+│ Quality Check│ Storage Entry│ Biogas Setup │                       │
+│ • Biogas QC  │ • Biogas SE  │ • Biogas Pl. │                       │
+│              │              │ • Conv. Ratio│                       │
+│              │              │ • Prod. Setti│                       │
+├──────────────┼──────────────┼──────────────┼───────────────────────┤
+│ Soil & Nutr. │ Fert. Planning│ Setup        │ Measurement & Verif.  │
+│ Analysis     │              │              │ • Measurement Verif.  │
+│ • Soil Analy │ • Fert. Rec. │ • App Method │                       │
+│ • Nutr. Analy│ • Fert. App. │ • Soil Nutr. │                       │
+│ • Crop Nutr. │ • Fert. Sched│   Threshold  │                       │
+│   Standard   │ • Fert. Prod.│              │                       │
 └──────────────┴──────────────┴──────────────┴───────────────────────┘
 ```
 
-### 7.2 Quick Action Shortcuts
+#### Biogas Management Workspace
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                         WORKFLOW OVERVIEW                           │
+├─────────────────────────────────────────────────────────────────────┤
+│ 🔋 Biogas Production: Production → Quality Check → Storage → App.  │
+└─────────────────────────────────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                          MASTERS                                    │
+├──────────────────────────────┬──────────────────────────────────────┤
+│         Settings             │          Infrastructure             │
+│ • Biogas Production Settings │ • Biogas Plant                      │
+│ • Biogas Conversion Ratio    │                                      │
+└──────────────────────────────┴──────────────────────────────────────┘
+┌─────────────────────────────────────────────────────────────────────┐
+│                        TRANSACTIONS                                 │
+├──────────────┬──────────────┬──────────────┬───────────────────────┤
+│  Production  │ Quality &    │   Output     │                       │
+│              │   Storage    │              │                       │
+│ • Biogas     │ • Biogas QC  │ • Biogas     │                       │
+│   Prod. Batch│ • Biogas SE  │   Consumption│                       │
+│ • Biogas     │              │ • Digestate  │                       │
+│   Batch      │              │   Production │                       │
+│              │              │ • Digestate  │                       │
+│              │              │   Applic.    │                       │
+└──────────────┴──────────────┴──────────────┴───────────────────────┘
+```
+
+### 8.2 Quick Action Shortcuts
 
 | Shortcut | Action | Icon | Color |
 |----------|--------|------|-------|
 | New Waste Record | Opens Waste Record form | list | Green |
 | New Composting Batch | Opens Composting Batch form | branch | Blue |
+| New Biogas Production Batch | Opens Biogas Production Batch form | biotech | Orange |
+| New Quality Check | Opens Biogas Quality Check form | check | Blue |
+| New Batch | Opens Biogas Batch form | group | Green |
 | New Soil Analysis | Opens Soil Analysis form | healthcare | Orange |
 | New Fertilizer Recommendation | Opens Fertilizer Recommendation form | clipboard | Purple |
 | New Fertilizer Application | Opens Fertilizer Application form | agriculture | Teal |
 | New Compost Application | Opens Compost Application form | leaf | Dark Green |
 
-### 7.3 Card Sections & Links
+### 8.3 Card Sections & Links
 
 | Section | Card | DocTypes |
 |---------|------|----------|
@@ -489,6 +671,11 @@ Plus supporting: Fertilizer Schedule (planning), Measurement Verification (quali
 | Agriculture Waste Management | Composting | Composting Batch, Compost Application, Compost Quality Check, Compost Quality Parameter |
 | Agriculture Waste Management | Disposal & Recycling | Collection Schedule, Recycling Record, Disposal Record |
 | Agriculture Waste Management | Compliance & Records | Compliance Record |
+| Biogas Management | Settings | Biogas Production Settings, Biogas Conversion Ratio |
+| Biogas Management | Infrastructure | Biogas Plant |
+| Biogas Management | Production | Biogas Production Batch, Biogas Batch |
+| Biogas Management | Quality & Storage | Biogas Quality Check, Biogas Storage Entry |
+| Biogas Management | Output | Biogas Consumption, Digestate Production, Digestate Application |
 | Fertilizer Measurement | Soil & Nutrient Analysis | Soil Analysis, Nutrient Analysis, Crop Nutrient Standard |
 | Fertilizer Measurement | Fertilizer Planning | Fertilizer Recommendation, Fertilizer Application, Fertilizer Schedule, Fertilizer Product |
 | Fertilizer Measurement | Setup | Application Method, Soil Nutrient Threshold |
@@ -496,38 +683,38 @@ Plus supporting: Fertilizer Schedule (planning), Measurement Verification (quali
 
 ---
 
-## 8. SCHEDULED TASKS & AUTOMATION
+## 9. SCHEDULED TASKS & AUTOMATION
 
-### 8.1 Daily Tasks
+### 9.1 Daily Tasks
 
 | Task | Function | Description |
 |------|----------|-------------|
 | Check Compliance Expiry | `check_compliance_expiry()` | Marks expired compliance records as "Expired" where `valid_until < today()` and status is not already "Expired" |
 | Send Application Reminders | `send_application_reminders()` | Creates ToDo for Fertilizer Recommendations with status "Approved" and `modified > 7 days` |
 
-### 8.2 Weekly Tasks (runs every Monday)
+### 9.2 Weekly Tasks (runs every Monday)
 
 | Task | Function | Description |
 |------|----------|-------------|
 | Generate Waste Summary | `generate_waste_summary()` | Queries submitted Waste Records from the last 7 days. Creates a Notification Log with total organic, inorganic, and overall weight collected |
 | Generate Fertilizer Report | `generate_fertilizer_report()` | Queries submitted Fertilizer Applications from the last 7 days. Creates a Notification Log with total quantity applied and number of applications |
 
-### 8.3 Monthly Tasks (runs 1st of month)
+### 9.3 Monthly Tasks (runs 1st of month)
 
 | Task | Function | Description |
 |------|----------|-------------|
 | Generate Nutrient Balance Report | `generate_nutrient_balance_report()` | Queries Nutrient Analysis records from the last 30 days. Creates a Notification Log with total N, P, K gaps across all analyses |
 
-### 8.4 Error Handling
+### 9.4 Error Handling
 All scheduled tasks have try/except blocks and log errors via `frappe.log_error()` to the Error Log doctype.
 
 ---
 
-## 9. SETUP & CONFIGURATION (FIXTURES)
+## 10. SETUP & CONFIGURATION (FIXTURES)
 
 All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). They are also re-synced on `bench migrate`.
 
-### 9.1 Waste Categories
+### 10.1 Waste Categories
 
 | Name | Type | Default Disposal Method | Description |
 |------|------|------------------------|-------------|
@@ -535,7 +722,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | Inorganic Waste | Inorganic | Recycling | Non-biodegradable materials (bags, containers, plastics) |
 | Hazardous Waste | Hazardous | Landfill | Hazardous materials requiring special handling |
 
-### 9.2 Waste Types
+### 10.2 Waste Types
 
 | Name | Category | Biodegradable | Recyclable | Hazardous |
 |------|----------|:---:|:---:|:---:|
@@ -551,7 +738,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | Irrigation Pipes | Inorganic Waste | ❌ | ✅ | ❌ |
 | Packaging Materials | Inorganic Waste | ❌ | ✅ | ❌ |
 
-### 9.3 Application Methods
+### 10.3 Application Methods
 
 | Method | Efficiency | Description |
 |--------|:----------:|-------------|
@@ -561,7 +748,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | Drip Irrigation | 95% | Fertigation through drip irrigation system |
 | Side Dressing | 80% | Applying alongside growing plants |
 
-### 9.4 Compost Quality Parameters
+### 10.4 Compost Quality Parameters
 
 | Parameter | Acceptable Range | Unit |
 |-----------|:----------------:|:----:|
@@ -570,7 +757,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | Carbon to Nitrogen Ratio | 20 – 40 | Ratio |
 | pH Level | 6.0 – 8.0 | pH |
 
-### 9.5 Crop Nutrient Standards
+### 10.5 Crop Nutrient Standards
 
 | Crop | N (kg/ha) | P (kg/ha) | K (kg/ha) |
 |------|:---------:|:---------:|:---------:|
@@ -581,7 +768,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | Sugarcane | 200 | 100 | 120 |
 | Groundnut | 30 | 60 | 50 |
 
-### 9.6 Fertilizer Products
+### 10.6 Fertilizer Products
 
 | Product | Type | N (%) | P (%) | K (%) |
 |---------|:----:|:-----:|:-----:|:-----:|
@@ -592,7 +779,7 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 | NPK 20-20-0 | Chemical | 20 | 20 | 0 |
 | Compost (Farm-made) | Organic | 1.5 | 0.5 | 1.0 |
 
-### 9.7 Soil Nutrient Thresholds
+### 10.7 Soil Nutrient Thresholds
 
 | Nutrient | Low | Medium | High | Unit |
 |----------|:---:|:------:|:----:|:----:|
@@ -604,11 +791,11 @@ All 7 fixtures are auto-loaded on install (via `hooks.py` `fixtures` array). The
 
 ---
 
-## 10. DEMO DATA
+## 11. DEMO DATA
 
-The application includes a comprehensive demo data script that creates 14 interconnected records for testing.
+The application includes a comprehensive demo data script that creates 25 interconnected records for testing.
 
-### 10.1 Records Created
+### 11.1 Records Created
 
 | # | DocType | Record Name | Links To |
 |---|---------|-------------|----------|
@@ -627,8 +814,22 @@ The application includes a comprehensive demo data script that creates 14 interc
 | 13 | Collection Schedule | DEMO-CS-001 | Demo Farm |
 | 14 | Compliance Record | DEMO-CR-001 | DEMO-WR-001 |
 | 15 | Measurement Verification | DEMO-MV-001 | Demo Farm |
+| 16 | Biogas Plant | DEMO-Bio Plant-001 | Demo Farm |
+| 17 | Biogas Conversion Ratio | BCR-Crop Residue-001 | Crop Residue |
+| 18 | Biogas Conversion Ratio | BCR-Animal Manure-001 | Animal Manure |
+| 19 | Biogas Conversion Ratio | BCR-Fruit & Veg-001 | Fruit & Vegetable Waste |
+| 20 | Biogas Conversion Ratio | BCR-Straw-001 | Straw |
+| 21 | Biogas Conversion Ratio | BCR-Dry Leaves-001 | Dry Leaves |
+| 22 | Biogas Batch | DEMO-BB-001 | DEMO-Bio Plant-001 |
+| 23 | Biogas Production | DEMO-BP-001 | DEMO-Bio Plant-001, DEMO-WR-001, DEMO-BB-001 |
+| 24 | Biogas Production Batch | DEMO-BPB-001 | DEMO-Bio Plant-001, DEMO-WR-001, DEMO-BB-001 |
+| 25 | Biogas Quality Check | DEMO-BQC-001 | DEMO-BP-001, DEMO-BPB-001, DEMO-BB-001 |
+| 26 | Biogas Storage Entry | DEMO-BSE-001 | DEMO-BPB-001, DEMO-BB-001 |
+| 27 | Biogas Consumption | DEMO-BC-001 | DEMO-BP-001, DEMO-BB-001 |
+| 28 | Digestate Production | DEMO-DP-001 | DEMO-BP-001, DEMO-BB-001 |
+| 29 | Digestate Application | DEMO-DA-001 | DEMO-BP-001, DEMO-BPB-001, Demo Farm |
 
-### 10.2 Run Demo Data
+### 11.2 Run Demo Data
 
 ```bash
 cd ~/frappe-bench-v15
@@ -637,7 +838,7 @@ bench --site your-site.com execute precision_farming.demo.create_demo_data
 
 The script is idempotent — it checks if each record already exists and skips duplicates. Records use `DEMO-*` names (not auto-generated naming series) so cross-references resolve correctly on submit.
 
-### 10.3 Demo Data Naming Convention
+### 11.3 Demo Data Naming Convention
 
 All demo records use the naming pattern `DEMO-{PREFIX}-{NNN}`:
 
@@ -658,16 +859,25 @@ All demo records use the naming pattern `DEMO-{PREFIX}-{NNN}`:
 | Collection Schedule | DEMO-CS-001 |
 | Compliance Record | DEMO-CR-001 |
 | Measurement Verification | DEMO-MV-001 |
+| Biogas Plant | DEMO-Bio Plant-001 |
+| Biogas Batch | DEMO-BB-001 |
+| Biogas Production | DEMO-BP-001 |
+| Biogas Production Batch | DEMO-BPB-001 |
+| Biogas Quality Check | DEMO-BQC-001 |
+| Biogas Storage Entry | DEMO-BSE-001 |
+| Biogas Consumption | DEMO-BC-001 |
+| Digestate Production | DEMO-DP-001 |
+| Digestate Application | DEMO-DA-001 |
 
 ---
 
-## 11. FIX UTILITIES
+## 12. FIX UTILITIES
 
-The application includes a `fix_workspace.py` utility with three fix functions to resolve common server-side issues.
+The application includes `fix_workspace.py` and `fix_missing_doctypes.py` utilities to resolve common server-side issues.
 
-### 11.1 Fix Workspace (Restore all 3 workflow sections)
+### 12.1 Fix Workspace (Restore all 3 workflow sections)
 
-If the workspace shows only Fertilizer Management (missing Waste Management and Inorganic Waste sections):
+If the Precision Farming workspace shows only Fertilizer Management (missing Waste Management and Inorganic Waste sections):
 
 ```bash
 cd ~/frappe-bench-v15
@@ -678,7 +888,7 @@ bench restart
 
 This restores the workspace `content` field with all 3 workflow sections, 8 cards, and ensures `is_public=1`, `is_hidden=0`.
 
-### 11.2 Create Land Unit (Fix "Could not find Land Unit: Demo Farm" error)
+### 12.2 Create Land Unit (Fix "Could not find Land Unit: Demo Farm" error)
 
 If submitting documents fails with "Could not find Land Unit: Demo Farm":
 
@@ -691,7 +901,7 @@ bench restart
 
 This checks if Land Unit "Demo Farm" exists, renames it from auto-generated names (like `LU-Demo Farm`) if needed, or creates a new one.
 
-### 11.3 Fix All References (Rename auto-generated names to DEMO-*)
+### 12.3 Fix All References (Rename auto-generated names to DEMO-*)
 
 If submitting documents fails with "Could not find [DocType]: DEMO-XXX":
 
@@ -704,36 +914,57 @@ bench restart
 
 The demo data script may have created records with auto-generated names (e.g., `FR-2026-00001`) while link fields reference `DEMO-FR-001`. This utility renames all records so cross-references resolve correctly on submit.
 
-### 11.4 All Fixes in Sequence (New Installation)
+### 12.4 Fix Missing Biogas DocTypes
+
+If Biogas Management DocTypes were not created during migration:
+
+```bash
+cd ~/frappe-bench-v15
+bench --site your-site.com execute precision_farming.fix_missing_doctypes.fix
+bench --site your-site.com clear-cache
+```
+
+This creates all 14 Biogas Management DocTypes in dependency order with `ignore_links` and `in_migrate` flags.
+
+### 12.5 All Fixes in Sequence (New Installation)
 
 For a fresh site with demo data issues, run in order:
 
 ```bash
-# 1. Fix workspace layout
+# 1. Fix missing DocTypes (if needed)
+bench --site your-site.com execute precision_farming.fix_missing_doctypes.fix
+
+# 2. Run migration to sync workspace
+bench --site your-site.com migrate
+
+# 3. Fix workspace layout
 bench --site your-site.com execute precision_farming.fix_workspace.fix
 
-# 2. Fix Land Unit name
+# 4. Fix Land Unit name
 bench --site your-site.com execute precision_farming.fix_workspace.create_land_unit
 
-# 3. Fix all demo record names
+# 5. Fix all demo record names
 bench --site your-site.com execute precision_farming.fix_workspace.fix_all_references
 
-# 4. Clear cache and restart
+# 6. Clear cache and restart
 bench --site your-site.com clear-cache
 bench restart
 ```
 
 ---
 
-## 12. TROUBLESHOOTING
+## 13. TROUBLESHOOTING
 
-### 12.1 Common Issues
+### 13.1 Common Issues
 
 | Issue | Cause | Solution |
 |-------|-------|----------|
 | App not found during install | App not in apps.txt | `echo "precision_farming" >> sites/apps.txt` |
 | Module not found error | Module name mismatch | Ensure `modules.txt` = "Precision Farming" |
 | Workspace shows only Fertilizer section | Content field corrupted on server | Run `bench execute precision_farming.fix_workspace.fix` |
+| Biogas workspace cards empty | Card name / Card Break label mismatch | Run `bench migrate` with latest code that builds content via `json.dumps()` |
+| Biogas workspace not shown | Workspace private | Re-run `bench migrate` which sets `public=1` and `ignore_links=True` |
+| "Field X referring to non-existing doctype Y" | Biogas DocTypes not created | Run `bench execute precision_farming.fix_missing_doctypes.fix` |
 | "Could not find Land Unit: Demo Farm" on submit | Land Unit name mismatch | Run `bench execute precision_farming.fix_workspace.create_land_unit` |
 | "Could not find [DocType]: DEMO-XXX" on submit | Auto-generated name vs DEMO-* name | Run `bench execute precision_farming.fix_workspace.fix_all_references` |
 | Workspace not showing in module list | Private workspace | Set `"is_public": 1` in the workspace JSON, run `bench migrate` then `bench clear-cache` |
@@ -743,7 +974,7 @@ bench restart
 | Role permission issues | Roles not created | Run `bench console` then `frappe.get_doc("Precision Farming", "install").after_install()` |
 | Fixture data not loading | Fixtures not synced | Run `bench --site site migrate` |
 
-### 12.2 Force Sync DocTypes (if missing)
+### 13.2 Force Sync DocTypes (if missing)
 ```bash
 bench --site your-site.com console
 ```
@@ -754,7 +985,7 @@ frappe.db.commit()
 exit()
 ```
 
-### 12.3 Force Sync Workspace (if workspace changes not appearing)
+### 13.3 Force Sync Workspace (if workspace changes not appearing)
 ```bash
 bench --site your-site.com console
 ```
@@ -771,7 +1002,7 @@ bench --site your-site.com clear-cache
 bench restart
 ```
 
-### 12.4 Full Re-install (Last Resort)
+### 13.4 Full Re-install (Last Resort)
 ```bash
 bench --site your-site.com uninstall-app precision_farming
 bench --site your-site.com install-app precision_farming
@@ -779,7 +1010,7 @@ bench --site your-site.com migrate
 bench --site your-site.com clear-cache
 ```
 
-### 12.5 Clear Cache
+### 13.5 Clear Cache
 ```bash
 bench --site your-site.com clear-cache
 bench restart
@@ -787,17 +1018,17 @@ bench restart
 
 ---
 
-## 13. APPENDIX
+## 14. APPENDIX
 
 ### A. Role Permissions
 
-| Role | Waste Mgmt | Fertilizer | Compliance | Setup | Submit/Amend |
-|------|:-----------:|:----------:|:----------:|:-----:|:------------:|
-| Agriculture Manager | Full Access | Full Access | Full Access | Full Access | ✅ |
-| Agriculture User | Create, Read, Write | Create, Read, Write | Read | Read | ❌ |
-| System Manager | Full Access | Full Access | Full Access | Full Access | ✅ |
+| Role | Waste Mgmt | Biogas | Fertilizer | Compliance | Setup | Submit/Amend |
+|------|:----------:|:------:|:----------:|:----------:|:-----:|:------------:|
+| Agriculture Manager | Full Access | Full Access | Full Access | Full Access | Full Access | ✅ |
+| Agriculture User | Create, Read, Write | Create, Read, Write | Create, Read, Write | Read | Read | ❌ |
+| System Manager | Full Access | Full Access | Full Access | Full Access | Full Access | ✅ |
 
-> **Note:** Agriculture User cannot submit or amend submittable DocTypes (Waste Record, Composting Batch, Compost Application, Compost Quality Check, Soil Analysis, Fertilizer Recommendation, Fertilizer Application).
+> **Note:** Agriculture User cannot submit or amend submittable DocTypes (Waste Record, Composting Batch, Compost Application, Compost Quality Check, Biogas Production Batch, Biogas Production, Digestate Application, Soil Analysis, Fertilizer Recommendation, Fertilizer Application).
 
 ### B. DocType Field Reference
 

@@ -101,6 +101,7 @@ def create_land_unit():
 		"unit_type": "Hectare",
 		"area_in_hectare": 5.0
 	})
+	lu.flags.ignore_links = True
 	lu.insert()
 	frappe.db.commit()
 	print(f"✅ Land Unit '{name}' created successfully!")

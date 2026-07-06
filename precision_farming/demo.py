@@ -403,7 +403,9 @@ def _create_measurement_verification():
 		"naming_series": "MV-.YYYY.-",
 		"land_unit": "Demo Farm",
 		"verification_date": today(),
-		"status": "Pending"
+		"expected_quantity_kg": 500,
+		"actual_quantity_kg": 485,
+		"status": "Verified"
 	})
 	mv.flags.ignore_validate = True
 	mv.flags.ignore_links = True

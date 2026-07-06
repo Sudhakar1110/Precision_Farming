@@ -69,11 +69,12 @@ def fix():
             doc.flags.ignore_links = True
             doc.flags.ignore_permissions = True
             # DocType validate() checks frappe.flags.in_migrate, not ignore_links
+            _prev_migrate = frappe.flags.in_migrate
             frappe.flags.in_migrate = True
             try:
                 doc.insert()
             finally:
-                frappe.flags.in_migrate = False
+                frappe.flags.in_migrate = _prev_migrate
             frappe.db.commit()
             print("✅")
             created += 1

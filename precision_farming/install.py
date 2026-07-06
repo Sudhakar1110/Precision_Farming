@@ -147,8 +147,8 @@ def create_warehouse_if_not_exists(warehouse_name):
 			"warehouse_name": warehouse_name,
 			"company": company,
 		})
-	warehouse.insert(ignore_permissions=True)
-	frappe.db.commit()
+		warehouse.insert(ignore_permissions=True)
+		frappe.db.commit()
 
 
 def create_biogas_production_settings_if_not_exists():

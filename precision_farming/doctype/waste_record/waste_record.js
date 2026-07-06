@@ -3,12 +3,16 @@ frappe.ui.form.on('Waste Record', {
 		if (frm.doc.docstatus === 1) {
 			if ((frm.doc.waste_category_type === 'Organic' || frm.doc.waste_category_type === 'Mixed') && !frm.doc.composting_batch) {
 				frm.add_custom_button(__('Create Composting Batch'), function() {
-					frappe.new_doc('Composting Batch', {
-						waste_record: frm.doc.name,
-						land_unit: frm.doc.land_unit,
-						batch_name: 'Batch from ' + frm.doc.name,
-						start_date: frappe.datetime.get_today(),
-						status: 'Active'
+					frappe.call({
+						method: 'precision_farming.doctype.waste_record.waste_record.create_composting_batch_from_waste',
+						args: {
+							waste_record_name: frm.doc.name
+						},
+						callback: function(r) {
+							if (r.message && r.message.batch) {
+								frappe.set_route('Form', 'Composting Batch', r.message.batch);
+							}
+						}
 					});
 				});
 			}

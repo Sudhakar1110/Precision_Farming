@@ -85,19 +85,18 @@ def create_uom_if_not_exists(uom_name):
 
 def create_gst_hsn_code_if_not_exists(hsn_code, description):
 	"""Create a GST HSN Code if it doesn't already exist."""
-	if not frappe.db.exists("GST HSN Code", hsn_code):
-		try:
-			hsn = frappe.get_doc({
-				"doctype": "GST HSN Code",
-				"hsn_code": hsn_code,
-				"description": description,
-			})
-			hsn.insert(ignore_permissions=True)
-			frappe.db.commit()
-		except Exception:
-			# GST HSN Code table may not exist if India Compliance isn't fully set up
-			# silently skip - item creation will also need to handle this gracefully
-			pass
+	if frappe.db.exists("GST HSN Code", hsn_code):
+		return
+	# If India Compliance / GST HSN Code doctype is not installed, skip silently
+	if not frappe.db.exists("DocType", "GST HSN Code"):
+		return
+	hsn = frappe.get_doc({
+		"doctype": "GST HSN Code",
+		"hsn_code": hsn_code,
+		"description": description,
+	})
+	hsn.insert(ignore_permissions=True)
+	frappe.db.commit()
 
 
 def create_item_if_not_exists(item_code, item_name, uom, item_group, gst_hsn_code=None):
@@ -115,15 +114,8 @@ def create_item_if_not_exists(item_code, item_name, uom, item_group, gst_hsn_cod
 			item_doc["gst_hsn_code"] = gst_hsn_code
 
 		item = frappe.get_doc(item_doc)
-		try:
-			item.insert(ignore_permissions=True)
-			frappe.db.commit()
-		except frappe.exceptions.ValidationError as e:
-			# If India Compliance still blocks (e.g. HSN not found), retry without stock tracking
-			if "HSN" in str(e):
-				item.is_stock_item = 0
-				item.insert(ignore_permissions=True)
-				frappe.db.commit()
+		item.insert(ignore_permissions=True)
+		frappe.db.commit()
 
 
 def create_warehouse_if_not_exists(warehouse_name):

@@ -85,5 +85,27 @@ def fix():
 	print("   Soil & Nutrient Analysis | Fertilizer Planning | Setup | Measurement & Verification")
 
 
+def create_land_unit():
+	"""Create a demo Land Unit for testing.
+
+	Run via: bench --site your-site execute precision_farming.fix_workspace.create_land_unit
+	"""
+	name = "Demo Farm"
+	if frappe.db.exists("Land Unit", name):
+		print(f"⏭️  Land Unit '{name}' already exists")
+		return
+
+	lu = frappe.get_doc({
+		"doctype": "Land Unit",
+		"land_unit_name": name,
+		"unit_type": "Hectare",
+		"area_in_hectare": 5.0
+	})
+	lu.insert()
+	frappe.db.commit()
+	print(f"✅ Land Unit '{name}' created successfully!")
+	print(f"   You can now use '{name}' in all Land Unit fields.")
+
+
 if __name__ == "__main__":
 	fix()

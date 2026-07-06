@@ -162,9 +162,8 @@ def _create_compost_application():
 		"composting_batch": "DEMO-CB-001",
 		"land_unit": "Demo Farm",
 		"application_date": add_days(today(), 60),
-		"quantity_applied_kg": 550,
-		"application_method": "Broadcasting",
-		"status": "Draft"
+		"quantity_kg": 550,
+		"application_method": "Broadcasting"
 	})
 	ca.flags.ignore_validate = True
 	ca.flags.ignore_links = True

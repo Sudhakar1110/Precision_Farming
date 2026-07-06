@@ -7,6 +7,7 @@
   "plant_name",
   "land_unit",
   "capacity_m3",
+  "conversion_ratio",
   "digester_type",
   "status"
  ],
@@ -32,6 +33,14 @@
    "fieldtype": "Float",
    "label": "Capacity (m\u00b3)",
    "precision": "2"
+  },
+  {
+   "fieldname": "conversion_ratio",
+   "fieldtype": "Float",
+   "label": "Conversion Ratio (m\u00b3/kg)",
+   "precision": "4",
+   "default": "0.50",
+   "description": "m\u00b3 of biogas produced per kg of organic waste input"
   },
   {
    "fieldname": "digester_type",

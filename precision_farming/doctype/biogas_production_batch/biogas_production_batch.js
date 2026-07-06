@@ -28,9 +28,14 @@ frappe.ui.form.on('Biogas Production Batch', {
 	
 	biogas_plant: function(frm) {
 		if (frm.doc.biogas_plant) {
-			frappe.db.get_value('Biogas Plant', frm.doc.biogas_plant, 'land_unit', (r) => {
-				if (r && r.land_unit) {
-					frm.set_value('land_unit', r.land_unit);
+			frappe.db.get_value('Biogas Plant', frm.doc.biogas_plant,
+				['land_unit', 'conversion_ratio'], (r) => {
+				if (r) {
+					if (r.land_unit) {
+						frm.set_value('land_unit', r.land_unit);
+					}
+					frm.set_value('conversion_ratio', r.conversion_ratio);
+					frm.trigger('calculate_expected_quantities');
 				}
 			});
 		}
@@ -44,8 +49,18 @@ frappe.ui.form.on('Biogas Production Batch', {
 					if (r.land_unit && !frm.doc.land_unit) {
 						frm.set_value('land_unit', r.land_unit);
 					}
+					frm.trigger('calculate_expected_quantities');
 				}
 			});
+		}
+	},
+	
+	calculate_expected_quantities: function(frm) {
+		if (frm.doc.total_input_quantity && frm.doc.conversion_ratio) {
+			let expected_biogas = flt(frm.doc.total_input_quantity) * flt(frm.doc.conversion_ratio);
+			frm.set_value('expected_biogas_quantity', expected_biogas);
+			// Estimate digestate as ~1.5x the biogas volume (typical ratio)
+			frm.set_value('expected_digestate_quantity', flt(expected_biogas) * 1.5);
 		}
 	}
 });

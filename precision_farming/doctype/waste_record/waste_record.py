@@ -79,8 +79,11 @@ def create_biogas_batch_from_waste(waste_record_name):
 		)
 		return
 
+	plant = frappe.get_doc("Biogas Plant", plants[0].name)
+
 	batch = frappe.new_doc("Biogas Production Batch")
 	batch.biogas_plant = plants[0].name
+	batch.conversion_ratio = flt(plant.conversion_ratio) or 0.5
 	batch.waste_record = waste_record_name
 	batch.land_unit = waste_record.land_unit
 	batch.start_date = nowdate()

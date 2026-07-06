@@ -6,6 +6,7 @@
  "field_order": [
   "naming_series",
   "biogas_plant",
+  "conversion_ratio",
   "waste_record",
   "land_unit",
   "start_date",
@@ -41,6 +42,15 @@
    "label": "Biogas Plant",
    "options": "Biogas Plant",
    "reqd": 1
+  },
+  {
+   "fetch_from": "biogas_plant.conversion_ratio",
+   "fieldname": "conversion_ratio",
+   "fieldtype": "Float",
+   "label": "Conversion Ratio (m\u00b3/kg)",
+   "precision": "4",
+   "read_only": 1,
+   "description": "Auto-fetched from Biogas Plant. Biogas m\u00b3 per kg of organic waste."
   },
   {
    "fieldname": "waste_record",

@@ -5,6 +5,7 @@ from frappe.utils import nowdate, flt
 class BiogasProductionBatch(Document):
 	def validate(self):
 		self.calculate_total_input()
+		self.calculate_expected_quantities()
 		self.calculate_yield()
 		self.validate_waste_record_consumption()
 
@@ -21,6 +22,18 @@ class BiogasProductionBatch(Document):
 			self.biogas_yield_m3_per_kg = flt(self.output_biogas_volume) / flt(self.total_input_quantity)
 		else:
 			self.biogas_yield_m3_per_kg = 0
+
+	def calculate_expected_quantities(self):
+		"""Auto-calculate expected biogas/digestate from total input and conversion ratio.
+
+		The conversion_ratio is fetched from the Biogas Plant (m³ of biogas
+		per kg of organic waste). Digestate estimate is ~1.5x biogas volume.
+		"""
+		if self.total_input_quantity and self.conversion_ratio:
+			if not self.expected_biogas_quantity:
+				self.expected_biogas_quantity = flt(self.total_input_quantity) * flt(self.conversion_ratio)
+			if not self.expected_digestate_quantity:
+				self.expected_digestate_quantity = flt(self.expected_biogas_quantity) * 1.5
 
 	def validate_waste_record_consumption(self):
 		"""Ensure total input doesn't exceed the source Waste Record's organic weight."""

@@ -45,13 +45,14 @@ def activate_agriculture_domain():
 
 
 def link_module_to_domain():
-	"""Link the Precision Farming Module Def to the Agriculture domain."""
-	if frappe.db.exists("Module Def", "Precision Farming"):
-		module_def = frappe.get_doc("Module Def", "Precision Farming")
-		if module_def.restrict_to_domain != "Agriculture":
-			module_def.restrict_to_domain = "Agriculture"
-			module_def.save(ignore_permissions=True)
-			frappe.db.commit()
+	"""Link both Precision Farming and Biogas Management Module Defs to the Agriculture domain."""
+	for module_name in ("Precision Farming", "Biogas Management"):
+		if frappe.db.exists("Module Def", module_name):
+			module_def = frappe.get_doc("Module Def", module_name)
+			if module_def.restrict_to_domain != "Agriculture":
+				module_def.restrict_to_domain = "Agriculture"
+				module_def.save(ignore_permissions=True)
+				frappe.db.commit()
 
 
 def create_biogas_master_data():
@@ -184,6 +185,7 @@ def create_biogas_management_module_def_if_not_exists():
 		"doctype": "Module Def",
 		"module_name": "Biogas Management",
 		"app_name": "precision_farming",
+		"restrict_to_domain": "Agriculture",
 	})
 	module_def.insert(ignore_permissions=True)
 	frappe.db.commit()

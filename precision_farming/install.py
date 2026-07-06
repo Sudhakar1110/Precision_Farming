@@ -64,15 +64,15 @@ def create_biogas_master_data():
 	Runs after_install and after_migrate. Creates the custom UOM "m3" if missing
 	(since it does not ship with ERPNext by default) and ensures "Kg" exists.
 	"""
-	create_uom_if_not_exists("m3", "Cubic Meter", "Volume")
-	create_uom_if_not_exists("Kg", "Kilogram", "Weight")
+	create_uom_if_not_exists("m3")
+	create_uom_if_not_exists("Kg")
 	create_item_if_not_exists("Biogas", "Biogas", "m3", "Farm Energy")
 	create_item_if_not_exists("Digestate", "Digestate", "Kg", "Organic Inputs")
 	create_warehouse_if_not_exists("Biogas Storage")
 	create_warehouse_if_not_exists("Digestate Storage")
 
 
-def create_uom_if_not_exists(uom_name, uom_description, uom_type):
+def create_uom_if_not_exists(uom_name):
 	"""Create a UOM if it doesn't already exist."""
 	if not frappe.db.exists("UOM", uom_name):
 		uom = frappe.get_doc({

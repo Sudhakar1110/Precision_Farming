@@ -202,11 +202,5 @@ def create_biogas_management_workspace_if_not_exists():
 		],
 	})
 	workspace.flags.ignore_permissions = True
-	try:
-		workspace.insert()
-		frappe.db.commit()
-	except frappe.LinkValidationError as e:
-		# If link validation fails, try creating with ignore_links
-		workspace.flags.ignore_links = True
-		workspace.insert()
-		frappe.db.commit()
+	workspace.insert()
+	frappe.db.commit()

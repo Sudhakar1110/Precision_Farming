@@ -86,26 +86,52 @@ def fix():
 
 
 def create_land_unit():
-	"""Create a demo Land Unit for testing.
+	"""Create a demo Land Unit named 'Demo Farm' for testing.
 
 	Run via: bench --site your-site execute precision_farming.fix_workspace.create_land_unit
 	"""
-	name = "Demo Farm"
-	if frappe.db.exists("Land Unit", name):
-		print(f"⏭️  Land Unit '{name}' already exists")
+	expected_name = "Demo Farm"
+
+	# Check if it already exists with expected name
+	if frappe.db.exists("Land Unit", expected_name):
+		print(f"⏭️  Land Unit '{expected_name}' already exists")
 		return
 
+	# Check if it was created with auto-generated naming (like 'LU-Demo Farm')
+	# If so, rename it to 'Demo Farm'
+	for existing in frappe.get_all("Land Unit", filters={"land_unit_name": "Demo Farm"}):
+		if existing.name != expected_name:
+			lu = frappe.get_doc("Land Unit", existing.name)
+			old_name = lu.name
+			lu.name = expected_name
+			lu.db_set("land_unit_name", expected_name)
+			frappe.rename_doc("Land Unit", old_name, expected_name, force=True)
+			frappe.db.commit()
+			print(f"✅ Land Unit renamed from '{old_name}' to '{expected_name}'")
+			print(f"   You can now use '{expected_name}' in all Land Unit fields.")
+			return
+
+	# Create a new Land Unit with explicit name
 	lu = frappe.get_doc({
 		"doctype": "Land Unit",
-		"land_unit_name": name,
+		"land_unit_name": expected_name,
 		"unit_type": "Hectare",
 		"area_in_hectare": 5.0
 	})
 	lu.flags.ignore_links = True
 	lu.insert()
-	frappe.db.commit()
-	print(f"✅ Land Unit '{name}' created successfully!")
-	print(f"   You can now use '{name}' in all Land Unit fields.")
+
+	# If the autonaming generated a different name, rename it
+	if lu.name != expected_name:
+		generated_name = lu.name
+		frappe.rename_doc("Land Unit", generated_name, expected_name, force=True)
+		frappe.db.commit()
+		print(f"✅ Land Unit created as '{generated_name}', renamed to '{expected_name}'")
+	else:
+		frappe.db.commit()
+		print(f"✅ Land Unit '{expected_name}' created successfully!")
+	
+	print(f"   You can now use '{expected_name}' in all Land Unit fields.")
 
 
 if __name__ == "__main__":

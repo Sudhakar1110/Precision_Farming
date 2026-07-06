@@ -37,32 +37,49 @@ class WasteRecord(Document):
 
 	def on_submit(self):
 		self.classification_status = "Classified"
-		self.create_composting_batch()
+		# Auto-create a composting batch for organic/mixed waste
+		if self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
+			self.create_composting_batch()
 
 	def on_cancel(self):
 		self.classification_status = "Pending"
 
+	@frappe.whitelist()
 	def create_composting_batch(self):
-		if self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
-			batch = frappe.new_doc("Composting Batch")
-			batch.waste_record = self.name
-			batch.land_unit = self.land_unit
-			batch.batch_name = f"Batch from {self.name}"
-			batch.start_date = nowdate()
-			batch.status = "Active"
+		"""Create a Composting Batch from organic waste items.
 
-			for item in self.get("waste_items", []):
-				if item.waste_type:
-					waste_type_doc = frappe.get_cached_value("Waste Type", item.waste_type, "waste_category")
-					if waste_type_doc:
-						cat_type = frappe.get_cached_value("Waste Category", waste_type_doc, "category_type")
-						if cat_type == "Organic":
-							batch.append("ingredients", {
-								"waste_type": item.waste_type,
-								"quantity_kg": item.quantity_kg,
-								"notes": item.description
-							})
+		Called automatically on submit, or manually via the 'Create Composting Batch' button.
+		"""
+		if self.composting_batch:
+			frappe.msgprint(f"Composting Batch {self.composting_batch} already exists for this Waste Record.")
+			return
 
-			if batch.get("ingredients"):
-				batch.insert(ignore_permissions=True)
-				self.composting_batch = batch.name
+		if self.total_organic_weight <= 0:
+			frappe.msgprint("No organic waste items to compost.")
+			return
+
+		batch = frappe.new_doc("Composting Batch")
+		batch.waste_record = self.name
+		batch.land_unit = self.land_unit
+		batch.batch_name = f"Batch from {self.name}"
+		batch.start_date = nowdate()
+		batch.status = "Active"
+
+		for item in self.get("waste_items", []):
+			if item.waste_type:
+				waste_type_doc = frappe.get_cached_value("Waste Type", item.waste_type, "waste_category")
+				if waste_type_doc:
+					cat_type = frappe.get_cached_value("Waste Category", waste_type_doc, "category_type")
+					if cat_type == "Organic":
+						batch.append("ingredients", {
+							"waste_type": item.waste_type,
+							"quantity_kg": item.quantity_kg,
+							"notes": item.description
+						})
+
+		if batch.get("ingredients"):
+			batch.flags.ignore_permissions = True
+			batch.insert()
+			self.db_set("composting_batch", batch.name)
+			frappe.msgprint(f"Composting Batch {batch.name} created successfully.")
+		return batch.name

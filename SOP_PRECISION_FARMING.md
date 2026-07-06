@@ -20,12 +20,12 @@
 6. [Feature 3: Fertilizer Measurement & Management](#6-feature-3-fertilizer-measurement--management)
 7. [Quality Control & Compliance](#7-quality-control--compliance)
 8. [Workspace Navigation](#8-workspace-navigation)
-8. [Scheduled Tasks & Automation](#8-scheduled-tasks--automation)
-9. [Setup & Configuration (Fixtures)](#9-setup--configuration-fixtures)
-10. [Demo Data](#10-demo-data)
-11. [Fix Utilities](#11-fix-utilities)
-12. [Troubleshooting](#12-troubleshooting)
-13. [Appendix](#13-appendix)
+9. [Scheduled Tasks & Automation](#9-scheduled-tasks--automation)
+10. [Setup & Configuration (Fixtures)](#10-setup--configuration-fixtures)
+11. [Demo Data](#11-demo-data)
+12. [Fix Utilities](#12-fix-utilities)
+13. [Troubleshooting](#13-troubleshooting)
+14. [Appendix](#14-appendix)
 
 ---
 
@@ -561,20 +561,20 @@ Plus supporting: Fertilizer Schedule (planning), Measurement Verification (quali
 
 ## 7. QUALITY CONTROL & COMPLIANCE
 
-### 6.1 Compliance Records
+### 7.1 Compliance Records
 - Track regulatory compliance for waste management and fertilizer usage
 - **Regulation Types:** Environmental, Safety, Transport, Disposal, Recycling
 - Set validity periods with **Valid Until** date
 - System auto-expires records via daily scheduled task (`check_compliance_expiry`)
 - Status values: Compliant, Non-Compliant, Pending, Expired
 
-### 6.2 Compost Quality Control
+### 7.2 Compost Quality Control
 - Define quality parameters with acceptable ranges (min/max)
 - Test results auto-calculate Pass/Fail status per parameter
 - Overall result (Pass/Fail/Conditional Pass) is read-only
 - Approval workflow for quality sign-off
 
-### 6.3 Measurement Verification
+### 7.3 Measurement Verification
 - Record field measurements for fertilizer/compost application accuracy
 - Compare **Expected Quantity (kg)** vs **Actual Quantity (kg)**
 - Deviation percentage auto-calculated

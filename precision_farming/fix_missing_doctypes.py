@@ -17,6 +17,8 @@ def get_biogas_doctype_paths():
         "biogas_conversion_ratio",     # Master - no dependencies
         "biogas_production_item",      # Child Table - depends on Biogas Production
         "biogas_feedstock",            # Child Table - depends on Biogas Production
+        "biogas_batch_input",          # Child Table - depends on Biogas Production Batch
+        "biogas_production_batch",     # Document - referenced by many others!
         "biogas_production",           # Document
         "biogas_batch",                # Document
         "biogas_quality_check",        # Document

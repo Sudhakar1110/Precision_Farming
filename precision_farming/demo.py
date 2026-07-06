@@ -443,8 +443,8 @@ def _create_biogas_production():
 			{"waste_type": "Animal Manure", "quantity_kg": 300},
 		],
 		"feedstock": [
-			{"waste_type": "Crop Residue", "quantity_kg": 500, "carbon_ratio": 60},
-			{"waste_type": "Animal Manure", "quantity_kg": 300, "carbon_ratio": 15},
+			{"feedstock_type": "Crop Residue", "quantity_kg": 500, "source": "Field A-1"},
+			{"feedstock_type": "Animal Manure", "quantity_kg": 300, "source": "Livestock Shed"},
 		],
 	}, "DEMO-BP-001")
 

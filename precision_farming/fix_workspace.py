@@ -37,6 +37,15 @@ def fix():
 						]
 					},
 					{
+						"label": "Biogas Management",
+						"doctypes": [
+							{"doctype": "Biogas Production Batch", "label": "Biogas Production", "icon": "biotech", "status_type": "Active"},
+							{"doctype": "Biogas Quality Check", "label": "Quality Check", "icon": "check", "status_type": "Active"},
+							{"doctype": "Biogas Storage Entry", "label": "Storage", "icon": "warehouse", "status_type": "Done"},
+							{"doctype": "Digestate Application", "label": "Digestate App.", "icon": "agriculture", "status_type": "Done"}
+						]
+					},
+					{
 						"label": "Fertilizer Management",
 						"doctypes": [
 							{"doctype": "Soil Analysis", "label": "Soil Test", "icon": "healthcare", "status_type": "Active"},
@@ -55,6 +64,17 @@ def fix():
 		{"id": "card3", "type": "card", "data": {"card_name": "Disposal & Recycling", "col": 3}},
 		{"id": "card7", "type": "card", "data": {"card_name": "Compliance & Records", "col": 3}},
 		{"id": "spacer2", "type": "spacer", "data": {"col": 12}},
+		{"id": "header4", "type": "header", "data": {"text": '<span class="h4"><b>Biogas Management</b></span>', "col": 12}},
+		{"id": "card9", "type": "card", "data": {"card_name": "Biogas Plants", "col": 3}},
+		{"id": "card10", "type": "card", "data": {"card_name": "Biogas Production", "col": 3}},
+		{"id": "card16", "type": "card", "data": {"card_name": "Biogas Batch", "col": 3}},
+		{"id": "card11", "type": "card", "data": {"card_name": "Digestate Application", "col": 3}},
+		{"id": "spacer5", "type": "spacer", "data": {"col": 12}},
+		{"id": "header5", "type": "header", "data": {"text": '<span class="h4"><b>Biogas Quality & Storage</b></span>', "col": 12}},
+		{"id": "card12", "type": "card", "data": {"card_name": "Quality Check", "col": 4}},
+		{"id": "card13", "type": "card", "data": {"card_name": "Storage Entry", "col": 4}},
+		{"id": "card14", "type": "card", "data": {"card_name": "Settings & Setup", "col": 4}},
+		{"id": "spacer3", "type": "spacer", "data": {"col": 12}},
 		{"id": "header3", "type": "header", "data": {"text": '<span class="h4"><b>Fertilizer Measurement</b></span>', "col": 12}},
 		{"id": "card4", "type": "card", "data": {"card_name": "Soil & Nutrient Analysis", "col": 3}},
 		{"id": "card5", "type": "card", "data": {"card_name": "Fertilizer Planning", "col": 3}},

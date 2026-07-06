@@ -14,6 +14,40 @@ frappe.ui.form.on('Biogas Production Batch', {
 			}, __('Actions'));
 		}
 		
+		// Add button to create Biogas Quality Check on digesting batches
+		if (frm.doc.docstatus === 0 && frm.doc.status === 'Digesting' && !frm.doc.quality_check) {
+			frm.add_custom_button(__('Create Quality Check'), function() {
+				frappe.new_doc('Biogas Quality Check', {
+					biogas_production_batch: frm.doc.name,
+					biogas_batch: frm.doc.biogas_batch,
+					check_date: frappe.datetime.get_today()
+				});
+			});
+		}
+		
+		// Add button to create Biogas Storage Entry
+		if (frm.doc.docstatus === 0 && frm.doc.status === 'Digesting') {
+			frm.add_custom_button(__('Create Storage Entry'), function() {
+				frappe.new_doc('Biogas Storage Entry', {
+					biogas_production_batch: frm.doc.name,
+					biogas_batch: frm.doc.biogas_batch,
+					storage_date: frappe.datetime.get_today(),
+					quantity_m3: frm.doc.output_biogas_volume
+				});
+			});
+		}
+		
+		// Add button to create/assign Biogas Batch
+		if (frm.doc.docstatus === 0 && !frm.doc.biogas_batch) {
+			frm.add_custom_button(__('Create Biogas Batch'), function() {
+				frappe.new_doc('Biogas Batch', {
+					batch_name: 'Batch from ' + frm.doc.name,
+					biogas_plant: frm.doc.biogas_plant,
+					start_date: frm.doc.start_date
+				});
+			});
+		}
+		
 		// Add button to create Digestate Application on completed batches
 		if (frm.doc.docstatus === 1 && frm.doc.status === 'Completed') {
 			frm.add_custom_button(__('Create Digestate Application'), function() {
@@ -23,6 +57,13 @@ frappe.ui.form.on('Biogas Production Batch', {
 					land_unit: frm.doc.land_unit
 				});
 			});
+			
+			// View quality check if exists
+			if (frm.doc.quality_check) {
+				frm.add_custom_button(__('View Quality Check'), function() {
+					frappe.set_route('Form', 'Biogas Quality Check', frm.doc.quality_check);
+				});
+			}
 		}
 	},
 	

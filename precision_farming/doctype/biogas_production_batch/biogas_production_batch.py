@@ -8,6 +8,18 @@ class BiogasProductionBatch(Document):
 		self.calculate_expected_quantities()
 		self.calculate_yield()
 		self.validate_waste_record_consumption()
+		self.update_biogas_batch_totals()
+
+	def update_biogas_batch_totals(self):
+		"""Trigger recalculation on the linked Biogas Batch."""
+		if self.biogas_batch:
+			try:
+				bb = frappe.get_doc("Biogas Batch", self.biogas_batch)
+				bb.calculate_totals()
+				bb.flags.ignore_permissions = True
+				bb.save()
+			except Exception:
+				pass
 
 	def calculate_total_input(self):
 		"""Sum all input entry quantities."""
@@ -125,6 +137,9 @@ def mark_completed(batch_name):
 		# Update Waste Record classification status
 		if batch.waste_record:
 			frappe.db.set_value("Waste Record", batch.waste_record, "classification_status", "Completed")
+
+		# Auto-create Biogas Storage Entry if enabled
+		_create_biogas_storage_entry(batch)
 
 		frappe.msgprint(f"Batch {batch_name} marked as Completed. Stock Entries created.")
 		return {"batch": batch_name, "completed": True}
@@ -256,3 +271,38 @@ def _create_stock_entry(item_code, qty, uom, warehouse_prefix):
 	se.insert()
 	se.submit()
 	return se
+
+
+def _create_biogas_storage_entry(batch):
+	"""Auto-create a Biogas Storage Entry when a batch is completed."""
+	settings = frappe.get_single("Biogas Production Settings")
+	if not settings.enable_auto_stock_entry:
+		return
+
+	if not batch.biogas_stock_entry:
+		return
+
+	# Get the warehouse from the stock entry
+	se = frappe.get_doc("Stock Entry", batch.biogas_stock_entry)
+	warehouse = None
+	for item in se.items:
+		if item.t_warehouse:
+			warehouse = item.t_warehouse
+			break
+
+	if not warehouse:
+		warehouse = settings.default_biogas_warehouse
+
+	if not warehouse:
+		return
+
+	storage_entry = frappe.new_doc("Biogas Storage Entry")
+	storage_entry.biogas_production_batch = batch.name
+	storage_entry.biogas_batch = batch.biogas_batch
+	storage_entry.storage_date = nowdate()
+	storage_entry.quantity_m3 = batch.output_biogas_volume
+	storage_entry.warehouse = warehouse
+	storage_entry.reference_stock_entry = batch.biogas_stock_entry
+	storage_entry.flags.ignore_permissions = True
+	storage_entry.insert()
+	frappe.msgprint(f"Biogas Storage Entry {storage_entry.name} auto-created.")

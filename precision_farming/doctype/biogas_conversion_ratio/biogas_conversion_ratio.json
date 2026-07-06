@@ -1,0 +1,118 @@
+{
+ "autoname": "format:BCR-{waste_type}-{###}",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "waste_type",
+  "waste_category",
+  "biogas_plant",
+  "conversion_ratio_m3_per_kg",
+  "digestate_factor",
+  "is_active",
+  "column_break_validity",
+  "effective_from",
+  "effective_to",
+  "section_break_notes",
+  "notes"
+ ],
+ "fields": [
+  {
+   "fieldname": "waste_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Waste Type",
+   "options": "Waste Type",
+   "reqd": 1
+  },
+  {
+   "fetch_from": "waste_type.waste_category",
+   "fieldname": "waste_category",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Waste Category",
+   "read_only": 1
+  },
+  {
+   "fieldname": "biogas_plant",
+   "fieldtype": "Link",
+   "label": "Biogas Plant",
+   "options": "Biogas Plant"
+  },
+  {
+   "fieldname": "conversion_ratio_m3_per_kg",
+   "fieldtype": "Float",
+   "in_list_view": 1,
+   "label": "Conversion Ratio (m\u00b3/kg)",
+   "precision": "4",
+   "reqd": 1,
+   "description": "m\u00b3 of biogas per kg of this waste type"
+  },
+  {
+   "fieldname": "digestate_factor",
+   "fieldtype": "Float",
+   "label": "Digestate Factor",
+   "precision": "2",
+   "default": "1.50",
+   "description": "Multiplier to estimate digestate from biogas volume"
+  },
+  {
+   "default": "1",
+   "fieldname": "is_active",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Is Active"
+  },
+  {
+   "fieldname": "column_break_validity",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "effective_from",
+   "fieldtype": "Date",
+   "label": "Effective From"
+  },
+  {
+   "fieldname": "effective_to",
+   "fieldtype": "Date",
+   "label": "Effective To"
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Conversion Ratio",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "role": "Agriculture User"
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

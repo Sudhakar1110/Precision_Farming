@@ -70,6 +70,7 @@ def create_biogas_master_data():
 	create_item_if_not_exists("Digestate", "Digestate", "Kg", "Organic Inputs", "31010000")
 	create_warehouse_if_not_exists("Biogas Storage")
 	create_warehouse_if_not_exists("Digestate Storage")
+	create_biogas_production_settings_if_not_exists()
 
 
 def create_uom_if_not_exists(uom_name):
@@ -146,5 +147,23 @@ def create_warehouse_if_not_exists(warehouse_name):
 			"warehouse_name": warehouse_name,
 			"company": company,
 		})
-		warehouse.insert(ignore_permissions=True)
-		frappe.db.commit()
+	warehouse.insert(ignore_permissions=True)
+	frappe.db.commit()
+
+
+def create_biogas_production_settings_if_not_exists():
+	"""Create the Biogas Production Settings singleton if not already present."""
+	if frappe.db.exists("Biogas Production Settings", "Biogas Production Settings"):
+		return
+	settings = frappe.get_doc({
+		"doctype": "Biogas Production Settings",
+		"setting_name": "Biogas Production Settings",
+		"default_conversion_ratio": 0.50,
+		"digestate_factor": 1.50,
+		"default_methane_threshold": 50.0,
+		"default_co2_threshold": 50.0,
+		"default_h2s_threshold": 1000,
+		"enable_auto_stock_entry": 1,
+	})
+	settings.insert(ignore_permissions=True)
+	frappe.db.commit()

@@ -1,0 +1,143 @@
+{
+ "autoname": "naming_series:BB-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "batch_name",
+  "biogas_plant",
+  "start_date",
+  "end_date",
+  "status",
+  "column_break_metrics",
+  "total_expected_biogas",
+  "total_produced_biogas",
+  "total_input_quantity",
+  "section_break_notes",
+  "notes",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BB-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "batch_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Batch Name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "biogas_plant",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Biogas Plant",
+   "options": "Biogas Plant",
+   "reqd": 1
+  },
+  {
+   "fieldname": "start_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Start Date",
+   "reqd": 1
+  },
+  {
+   "fieldname": "end_date",
+   "fieldtype": "Date",
+   "label": "End Date"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Active\nCompleted\nCancelled",
+   "reqd": 1,
+   "default": "Active"
+  },
+  {
+   "fieldname": "column_break_metrics",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "total_expected_biogas",
+   "fieldtype": "Float",
+   "label": "Total Expected Biogas (m\u00b3)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_produced_biogas",
+   "fieldtype": "Float",
+   "label": "Total Produced Biogas (m\u00b3)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "total_input_quantity",
+   "fieldtype": "Float",
+   "label": "Total Input Quantity (kg)",
+   "precision": "2",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_notes",
+   "fieldtype": "Section Break",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Notes"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Biogas Batch",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Batch",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

@@ -1,0 +1,170 @@
+{
+ "autoname": "naming_series:BQC-.YYYY.-.#####",
+ "creation": "2024-01-01 00:00:00",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "biogas_production_batch",
+  "biogas_batch",
+  "check_date",
+  "checked_by",
+  "status",
+  "column_break_results",
+  "methane_percentage",
+  "co2_percentage",
+  "h2s_ppm",
+  "moisture_percentage",
+  "temperature_celsius",
+  "ph_level",
+  "section_break_summary",
+  "overall_result",
+  "remarks",
+  "amended_from"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "BQC-.YYYY.-",
+   "reqd": 1
+  },
+  {
+   "fieldname": "biogas_production_batch",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Biogas Production Batch",
+   "options": "Biogas Production Batch",
+   "reqd": 1
+  },
+  {
+   "fieldname": "biogas_batch",
+   "fieldtype": "Link",
+   "label": "Biogas Batch",
+   "options": "Biogas Batch"
+  },
+  {
+   "fieldname": "check_date",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Check Date",
+   "reqd": 1,
+   "default": "Today"
+  },
+  {
+   "fieldname": "checked_by",
+   "fieldtype": "Link",
+   "label": "Checked By",
+   "options": "User"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Status",
+   "options": "Pending\nIn Progress\nCompleted",
+   "reqd": 1,
+   "default": "Pending"
+  },
+  {
+   "fieldname": "column_break_results",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "methane_percentage",
+   "fieldtype": "Percent",
+   "label": "Methane (CH\u2084) %",
+   "precision": "1"
+  },
+  {
+   "fieldname": "co2_percentage",
+   "fieldtype": "Percent",
+   "label": "Carbon Dioxide (CO\u2082) %",
+   "precision": "1"
+  },
+  {
+   "fieldname": "h2s_ppm",
+   "fieldtype": "Float",
+   "label": "Hydrogen Sulfide (H\u2082S) ppm",
+   "precision": "2"
+  },
+  {
+   "fieldname": "moisture_percentage",
+   "fieldtype": "Percent",
+   "label": "Moisture %",
+   "precision": "1"
+  },
+  {
+   "fieldname": "temperature_celsius",
+   "fieldtype": "Float",
+   "label": "Temperature (\u00b0C)",
+   "precision": "1"
+  },
+  {
+   "fieldname": "ph_level",
+   "fieldtype": "Float",
+   "label": "pH Level",
+   "precision": "1"
+  },
+  {
+   "fieldname": "section_break_summary",
+   "fieldtype": "Section Break",
+   "label": "Summary"
+  },
+  {
+   "fieldname": "overall_result",
+   "fieldtype": "Select",
+   "label": "Overall Result",
+   "options": "Pass\nConditional Pass\nFail",
+   "read_only": 1
+  },
+  {
+   "fieldname": "remarks",
+   "fieldtype": "Small Text",
+   "label": "Remarks"
+  },
+  {
+   "fieldname": "amended_from",
+   "fieldtype": "Link",
+   "label": "Amended From",
+   "no_copy": 1,
+   "options": "Biogas Quality Check",
+   "print_hide": 1,
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "modified": "2024-01-01 00:00:00",
+ "modified_by": "Administrator",
+ "module": "Precision Farming",
+ "name": "Biogas Quality Check",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Agriculture User",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "track_changes": 1
+}

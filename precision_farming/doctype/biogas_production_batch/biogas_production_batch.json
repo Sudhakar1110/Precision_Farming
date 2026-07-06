@@ -9,6 +9,7 @@
   "conversion_ratio",
   "waste_record",
   "land_unit",
+  "biogas_batch",
   "start_date",
   "end_date",
   "status",
@@ -22,6 +23,8 @@
   "output_biogas_volume",
   "output_digestate_quantity",
   "biogas_yield_m3_per_kg",
+  "section_break_quality",
+  "quality_check",
   "section_break_accounting",
   "biogas_stock_entry",
   "digestate_stock_entry",
@@ -63,6 +66,12 @@
    "fieldtype": "Link",
    "label": "Land Unit",
    "options": "Land Unit"
+  },
+  {
+   "fieldname": "biogas_batch",
+   "fieldtype": "Link",
+   "label": "Biogas Batch",
+   "options": "Biogas Batch"
   },
   {
    "fieldname": "start_date",
@@ -143,6 +152,18 @@
    "fieldtype": "Float",
    "label": "Yield (m\u00b3/kg)",
    "precision": "4",
+   "read_only": 1
+  },
+  {
+   "fieldname": "section_break_quality",
+   "fieldtype": "Section Break",
+   "label": "Quality"
+  },
+  {
+   "fieldname": "quality_check",
+   "fieldtype": "Link",
+   "label": "Biogas Quality Check",
+   "options": "Biogas Quality Check",
    "read_only": 1
   },
   {

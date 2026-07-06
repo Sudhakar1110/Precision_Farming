@@ -220,6 +220,11 @@ def create_biogas_management_workspace_if_not_exists():
 	# Use 'Precision Farming' (existing module) to avoid LinkValidationError
 	ws_data["module"] = "Precision Farming"
 
+	# Rename is_public → public for Frappe v15 (workspace sync maps this internally
+	# but frappe.get_doc() does not — the field is named 'public' in v15 Workspace DocType)
+	if "is_public" in ws_data:
+		ws_data["public"] = ws_data.pop("is_public")
+
 	workspace = frappe.get_doc(ws_data)
 	workspace.flags.ignore_permissions = True
 	workspace.flags.ignore_links = True

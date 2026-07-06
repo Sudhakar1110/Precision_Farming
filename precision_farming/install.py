@@ -170,37 +170,57 @@ def create_biogas_production_settings_if_not_exists():
 	frappe.db.commit()
 
 
-def create_biogas_management_workspace_if_not_exists():
-	"""Create the Biogas Management workspace if not already present.
+def create_biogas_management_module_def_if_not_exists():
+	"""Create the Biogas Management Module Def if not already present.
 
-	Reads the workspace layout from the JSON file at
-	workspace/biogas_management/biogas_management.json
-	to maintain a single source of truth for the visual layout.
-
-	Uses 'Precision Farming' module to avoid LinkValidationError during migration
-	(since 'Biogas Management' Module Def may not exist yet). Workspace still
-	appears as a separate 'Biogas Management' entry in the Desk.
+	Frappe auto-creates Module Defs when syncing DocTypes, but ONLY when the DocType
+	is first created. Since these DocTypes were created in a previous migration (when
+	their module field may have been different), the Module Def may not exist. We must
+	create it explicitly so the workspace and DocTypes are properly grouped.
 	"""
-	if frappe.db.exists("Workspace", "Biogas Management"):
+	if frappe.db.exists("Module Def", "Biogas Management"):
 		return
+	module_def = frappe.get_doc({
+		"doctype": "Module Def",
+		"module_name": "Biogas Management",
+		"app_name": "precision_farming",
+	})
+	module_def.insert(ignore_permissions=True)
+	frappe.db.commit()
 
+
+def create_biogas_management_workspace_if_not_exists():
+	"""Create the Biogas Management workspace from its JSON file.
+
+	Reads the full workspace layout from workspace/biogas_management/biogas_management.json
+	to maintain a single source of truth.
+
+	Uses 'Precision Farming' module to avoid LinkValidationError during migration.
+	Workspace still appears as 'Biogas Management' in the Desk.
+	"""
 	import json, os
+
 	ws_path = os.path.join(os.path.dirname(__file__), 'workspace', 'biogas_management', 'biogas_management.json')
 	with open(ws_path) as f:
 		ws_data = json.load(f)
 
-	workspace = frappe.get_doc({
-		"doctype": "Workspace",
-		"title": "Biogas Management",
-		"label": "Biogas Management",
-		"module": "Precision Farming",
-		"icon": "biotech",
-		"is_public": 1,
-		"is_hidden": 0,
-		"content": ws_data.get("content"),
-		"links": ws_data.get("links", []),
-		"shortcuts": ws_data.get("shortcuts", []),
-	})
+	# Ensure Module Def exists before workspace (Module Def is used by workspace sync)
+	create_biogas_management_module_def_if_not_exists()
+
+	# If workspace already exists (possibly from a previous partial/failed migration),
+	# delete it so we can re-create it cleanly from the JSON source of truth
+	if frappe.db.exists("Workspace", "Biogas Management"):
+		frappe.delete_doc("Workspace", "Biogas Management", ignore_permissions=True, force=True)
+		frappe.db.commit()
+
+	# Strip metadata keys that shouldn't be passed to frappe.get_doc() on insert
+	for meta_key in ("doctype", "name", "creation", "modified", "modified_by", "owner"):
+		ws_data.pop(meta_key, None)
+
+	# Use 'Precision Farming' (existing module) to avoid LinkValidationError
+	ws_data["module"] = "Precision Farming"
+
+	workspace = frappe.get_doc(ws_data)
 	workspace.flags.ignore_permissions = True
 	workspace.flags.ignore_links = True
 	workspace.insert()

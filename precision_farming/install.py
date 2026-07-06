@@ -71,7 +71,6 @@ def create_biogas_master_data():
 	create_warehouse_if_not_exists("Biogas Storage")
 	create_warehouse_if_not_exists("Digestate Storage")
 	create_biogas_production_settings_if_not_exists()
-	create_biogas_management_workspace_if_not_exists()
 
 
 def create_uom_if_not_exists(uom_name):

@@ -9,17 +9,6 @@
  "icon": "agriculture",
  "is_public": 1,
  "is_hidden": 0,
- "roles": [
-  {
-   "role": "Agriculture Manager"
-  },
-  {
-   "role": "Agriculture User"
-  },
-  {
-   "role": "System Manager"
-  }
- ],
  "label": "Precision Farming",
  "links": [
   {

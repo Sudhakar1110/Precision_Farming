@@ -173,12 +173,22 @@ def create_biogas_production_settings_if_not_exists():
 def create_biogas_management_workspace_if_not_exists():
 	"""Create the Biogas Management workspace if not already present.
 
+	Reads the workspace layout from the JSON file at
+	workspace/biogas_management/biogas_management.json
+	to maintain a single source of truth for the visual layout.
+
 	Uses 'Precision Farming' module to avoid LinkValidationError during migration
 	(since 'Biogas Management' Module Def may not exist yet). Workspace still
 	appears as a separate 'Biogas Management' entry in the Desk.
 	"""
 	if frappe.db.exists("Workspace", "Biogas Management"):
 		return
+
+	import json, os
+	ws_path = os.path.join(os.path.dirname(__file__), 'workspace', 'biogas_management', 'biogas_management.json')
+	with open(ws_path) as f:
+		ws_data = json.load(f)
+
 	workspace = frappe.get_doc({
 		"doctype": "Workspace",
 		"title": "Biogas Management",
@@ -187,20 +197,9 @@ def create_biogas_management_workspace_if_not_exists():
 		"icon": "biotech",
 		"is_public": 1,
 		"is_hidden": 0,
-		"content": '[{"id":"wo1","type":"workflow_overview","data":{"col":12,"workflows":[{"label":"Biogas Production","doctypes":[{"doctype":"Biogas Production","label":"Production","icon":"biotech","status_type":"Active"},{"doctype":"Biogas Quality Check","label":"Quality Check","icon":"check","status_type":"Active"},{"doctype":"Biogas Storage Entry","label":"Storage","icon":"warehouse","status_type":"Done"},{"doctype":"Digestate Application","label":"Digestate App.","icon":"agriculture","status_type":"Done"}]}]}},{"id":"spacer1","type":"spacer","data":{"col":12}},{"id":"header1","type":"header","data":{"text":"<span class=\\"h4\\"><b>Masters</b></span>","col":12}},{"id":"card1","type":"card","data":{"card_name":"Biogas Production Settings","col":4}},{"id":"card2","type":"card","data":{"card_name":"Biogas Conversion Ratio","col":4}},{"id":"spacer2","type":"spacer","data":{"col":12}},{"id":"header2","type":"header","data":{"text":"<span class=\\"h4\\"><b>Transactions</b></span>","col":12}},{"id":"card3","type":"card","data":{"card_name":"Biogas Production","col":3}},{"id":"card4","type":"card","data":{"card_name":"Biogas Batch","col":3}},{"id":"card5","type":"card","data":{"card_name":"Biogas Quality Check","col":3}},{"id":"card6","type":"card","data":{"card_name":"Biogas Storage Entry","col":3}},{"id":"spacer3","type":"spacer","data":{"col":12}},{"id":"card7","type":"card","data":{"card_name":"Biogas Consumption","col":3}},{"id":"card8","type":"card","data":{"card_name":"Digestate Production","col":3}},{"id":"card9","type":"card","data":{"card_name":"Digestate Application","col":3}}]',
-		"links": [
-			{"type": "Card Break", "label": "Masters"},
-			{"type": "Link", "label": "Biogas Production Settings", "link_to": "Biogas Production Settings", "link_type": "DocType", "onboard": 1},
-			{"type": "Link", "label": "Biogas Conversion Ratio", "link_to": "Biogas Conversion Ratio", "link_type": "DocType"},
-			{"type": "Card Break", "label": "Transactions"},
-			{"type": "Link", "label": "Biogas Production", "link_to": "Biogas Production", "link_type": "DocType", "onboard": 1},
-			{"type": "Link", "label": "Biogas Batch", "link_to": "Biogas Batch", "link_type": "DocType"},
-			{"type": "Link", "label": "Biogas Quality Check", "link_to": "Biogas Quality Check", "link_type": "DocType"},
-			{"type": "Link", "label": "Biogas Storage Entry", "link_to": "Biogas Storage Entry", "link_type": "DocType"},
-			{"type": "Link", "label": "Biogas Consumption", "link_to": "Biogas Consumption", "link_type": "DocType"},
-			{"type": "Link", "label": "Digestate Production", "link_to": "Digestate Production", "link_type": "DocType"},
-			{"type": "Link", "label": "Digestate Application", "link_to": "Digestate Application", "link_type": "DocType"}
-		],
+		"content": ws_data.get("content"),
+		"links": ws_data.get("links", []),
+		"shortcuts": ws_data.get("shortcuts", []),
 	})
 	workspace.flags.ignore_permissions = True
 	workspace.flags.ignore_links = True

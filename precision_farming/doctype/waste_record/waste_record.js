@@ -1,20 +1,37 @@
 frappe.ui.form.on('Waste Record', {
 	refresh: function(frm) {
 		if (frm.doc.docstatus === 1) {
-			if ((frm.doc.waste_category_type === 'Organic' || frm.doc.waste_category_type === 'Mixed') && !frm.doc.composting_batch) {
-				frm.add_custom_button(__('Create Composting Batch'), function() {
-					frappe.call({
-						method: 'precision_farming.doctype.waste_record.waste_record.create_composting_batch_from_waste',
-						args: {
-							waste_record_name: frm.doc.name
-						},
-						callback: function(r) {
-							if (r.message && r.message.batch) {
-								frappe.set_route('Form', 'Composting Batch', r.message.batch);
+			if (frm.doc.waste_category_type === 'Organic' || frm.doc.waste_category_type === 'Mixed') {
+				if (!frm.doc.composting_batch) {
+					frm.add_custom_button(__('Create Composting Batch'), function() {
+						frappe.call({
+							method: 'precision_farming.doctype.waste_record.waste_record.create_composting_batch_from_waste',
+							args: {
+								waste_record_name: frm.doc.name
+							},
+							callback: function(r) {
+								if (r.message && r.message.batch) {
+									frappe.set_route('Form', 'Composting Batch', r.message.batch);
+								}
 							}
-						}
+						});
 					});
-				});
+				}
+				if (!frm.doc.biogas_batch) {
+					frm.add_custom_button(__('Create Biogas Production Batch'), function() {
+						frappe.call({
+							method: 'precision_farming.doctype.waste_record.waste_record.create_biogas_batch_from_waste',
+							args: {
+								waste_record_name: frm.doc.name
+							},
+							callback: function(r) {
+								if (r.message && r.message.batch) {
+									frappe.set_route('Form', 'Biogas Production Batch', r.message.batch);
+								}
+							}
+						});
+					});
+				}
 			}
 			if (frm.doc.waste_category_type === 'Inorganic' && !frm.doc.recycling_record && !frm.doc.disposal_record) {
 				frm.add_custom_button(__('Create Recycling Record'), function() {

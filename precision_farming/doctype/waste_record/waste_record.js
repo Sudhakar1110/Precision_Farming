@@ -1,10 +1,14 @@
 frappe.ui.form.on('Waste Record', {
 	refresh: function(frm) {
 		if (frm.doc.docstatus === 1) {
-			if (frm.doc.waste_category_type === 'Organic' && !frm.doc.composting_batch) {
+			if ((frm.doc.waste_category_type === 'Organic' || frm.doc.waste_category_type === 'Mixed') && !frm.doc.composting_batch) {
 				frm.add_custom_button(__('Create Composting Batch'), function() {
-					frm.call('create_composting_batch').then(r => {
-						frm.refresh();
+					frappe.new_doc('Composting Batch', {
+						waste_record: frm.doc.name,
+						land_unit: frm.doc.land_unit,
+						batch_name: 'Batch from ' + frm.doc.name,
+						start_date: frappe.datetime.get_today(),
+						status: 'Active'
 					});
 				});
 			}

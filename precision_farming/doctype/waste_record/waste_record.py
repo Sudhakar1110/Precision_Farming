@@ -39,23 +39,16 @@ class WasteRecord(Document):
 		self.classification_status = "Classified"
 		# Auto-create a composting batch for organic/mixed waste
 		if self.waste_category_type in ("Organic", "Mixed") and self.total_organic_weight > 0:
-			self.create_composting_batch()
+			self._create_composting_batch()
 
 	def on_cancel(self):
 		self.classification_status = "Pending"
 
-	@frappe.whitelist()
-	def create_composting_batch(self):
-		"""Create a Composting Batch from organic waste items.
-
-		Called automatically on submit, or manually via the 'Create Composting Batch' button.
-		"""
+	def _create_composting_batch(self):
+		"""Create a Composting Batch from organic waste items (auto on submit)."""
 		if self.composting_batch:
-			frappe.msgprint(f"Composting Batch {self.composting_batch} already exists for this Waste Record.")
 			return
-
 		if self.total_organic_weight <= 0:
-			frappe.msgprint("No organic waste items to compost.")
 			return
 
 		batch = frappe.new_doc("Composting Batch")
@@ -81,5 +74,3 @@ class WasteRecord(Document):
 			batch.flags.ignore_permissions = True
 			batch.insert()
 			self.db_set("composting_batch", batch.name)
-			frappe.msgprint(f"Composting Batch {batch.name} created successfully.")
-		return batch.name

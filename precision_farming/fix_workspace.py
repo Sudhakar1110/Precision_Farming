@@ -76,9 +76,9 @@ def fix():
 	print("✅ Precision Farming workspace fixed!")
 	print("")
 	print("   Workflow sections now visible:")
-	print("   🌿 Waste Management (Waste Record → Composting Batch → Compost Application)")
-	print("   ♻️ Inorganic Waste (Waste Record → Recycling Record → Disposal Record)")
-	print("   🌾 Fertilizer Management (Soil Analysis → Nutrient Analysis → Fertilizer Rec. → Fertilizer Application)")
+	print("   - Waste Management (Waste Record -> Composting Batch -> Compost Application)")
+	print("   - Inorganic Waste (Waste Record -> Recycling Record -> Disposal Record)")
+	print("   - Fertilizer Management (Soil Analysis -> Nutrient Analysis -> Fertilizer Rec. -> Fertilizer Application)")
 	print("")
 	print("   8 Card sections:")
 	print("   Waste Collection | Composting | Disposal & Recycling | Compliance & Records")
@@ -92,26 +92,19 @@ def create_land_unit():
 	"""
 	expected_name = "Demo Farm"
 
-	# Check if it already exists with expected name
 	if frappe.db.exists("Land Unit", expected_name):
-		print(f"⏭️  Land Unit '{expected_name}' already exists")
+		print(f"  Land Unit '{expected_name}' already exists")
 		return
 
-	# Check if it was created with auto-generated naming (like 'LU-Demo Farm')
-	# If so, rename it to 'Demo Farm'
 	for existing in frappe.get_all("Land Unit", filters={"land_unit_name": "Demo Farm"}):
 		if existing.name != expected_name:
-			lu = frappe.get_doc("Land Unit", existing.name)
-			old_name = lu.name
-			lu.name = expected_name
-			lu.db_set("land_unit_name", expected_name)
+			old_name = existing.name
 			frappe.rename_doc("Land Unit", old_name, expected_name, force=True)
 			frappe.db.commit()
-			print(f"✅ Land Unit renamed from '{old_name}' to '{expected_name}'")
-			print(f"   You can now use '{expected_name}' in all Land Unit fields.")
+			print(f"  Land Unit renamed from '{old_name}' to '{expected_name}'")
+			print(f"  You can now use '{expected_name}' in all Land Unit fields.")
 			return
 
-	# Create a new Land Unit with explicit name
 	lu = frappe.get_doc({
 		"doctype": "Land Unit",
 		"land_unit_name": expected_name,
@@ -121,17 +114,85 @@ def create_land_unit():
 	lu.flags.ignore_links = True
 	lu.insert()
 
-	# If the autonaming generated a different name, rename it
 	if lu.name != expected_name:
 		generated_name = lu.name
 		frappe.rename_doc("Land Unit", generated_name, expected_name, force=True)
 		frappe.db.commit()
-		print(f"✅ Land Unit created as '{generated_name}', renamed to '{expected_name}'")
+		print(f"  Land Unit created as '{generated_name}', renamed to '{expected_name}'")
 	else:
 		frappe.db.commit()
-		print(f"✅ Land Unit '{expected_name}' created successfully!")
-	
-	print(f"   You can now use '{expected_name}' in all Land Unit fields.")
+		print(f"  Land Unit '{expected_name}' created successfully!")
+
+	print(f"  You can now use '{expected_name}' in all Land Unit fields.")
+
+
+def fix_all_references():
+	"""Rename all auto-generated demo records so cross-references work.
+
+	The demo data creates records with auto-generated names (FR-2026-00001)
+	but uses hardcoded names (DEMO-FR-001) in link fields. This renames
+	all records to DEMO-* names so links resolve properly on submit.
+
+	Run via: bench --site your-site execute precision_farming.fix_workspace.fix_all_references
+	"""
+	print("=" * 60)
+	print("Fixing demo record name references...")
+	print("=" * 60)
+
+	# Map of (doctype, actual_name, desired_name)
+	# Uses naming_series pattern to find records
+	renames = [
+		("Waste Record", "WR-2026-00001", "DEMO-WR-001"),
+		("Composting Batch", "CB-2026-00001", "DEMO-CB-001"),
+		("Compost Application", "CA-2026-00001", "DEMO-CA-001"),
+		("Soil Analysis", "SA-2026-00001", "DEMO-SA-001"),
+		("Nutrient Analysis", "NA-2026-00001", "DEMO-NA-001"),
+		("Fertilizer Recommendation", "FR-2026-00001", "DEMO-FR-001"),
+		("Fertilizer Application", "FA-2026-00001", "DEMO-FA-001"),
+		("Fertilizer Schedule", "FS-2026-00001", "DEMO-FS-001"),
+		("Recycling Record", "RR-2026-00001", "DEMO-RR-001"),
+		("Disposal Record", "DR-2026-00001", "DEMO-DR-001"),
+		("Collection Schedule", "CS-2026-00001", "DEMO-CS-001"),
+		("Compliance Record", "CR-2026-00001", "DEMO-CR-001"),
+		("Measurement Verification", "MV-2026-00001", "DEMO-MV-001"),
+	]
+
+	# Also try to find records by their naming series pattern if exact name not found
+	count = 0
+	for doctype, actual_name, desired_name in renames:
+		if frappe.db.exists(doctype, desired_name):
+			print(f"  {desired_name} already exists, skipping")
+			continue
+
+		if frappe.db.exists(doctype, actual_name):
+			frappe.rename_doc(doctype, actual_name, desired_name, force=True)
+			frappe.db.commit()
+			print(f"  Renamed: {actual_name} -> {desired_name}")
+			count += 1
+		else:
+			# Try to find any record with matching naming series pattern
+			records = frappe.get_all(doctype, filters={"name": ["like", f"{actual_name[:3]}%"]}, limit=1)
+			if records:
+				frappe.rename_doc(doctype, records[0].name, desired_name, force=True)
+				frappe.db.commit()
+				print(f"  Renamed: {records[0].name} -> {desired_name}")
+				count += 1
+			else:
+				print(f"  No record found for {doctype} matching '{actual_name}' or pattern")
+
+	# Also fix the Compost Quality Check which uses format naming
+	cq_records = frappe.get_all("Compost Quality Check", filters={
+		"composting_batch": "DEMO-CB-001"
+	}, limit=1)
+	if cq_records and cq_records[0].name != "DEMO-CQ-001":
+		if not frappe.db.exists("Compost Quality Check", "DEMO-CQ-001"):
+			frappe.rename_doc("Compost Quality Check", cq_records[0].name, "DEMO-CQ-001", force=True)
+			frappe.db.commit()
+			print(f"  Renamed: {cq_records[0].name} -> DEMO-CQ-001")
+			count += 1
+
+	print(f"\n  Total records renamed: {count}")
+	print("  All link references should now resolve correctly!")
 
 
 if __name__ == "__main__":
